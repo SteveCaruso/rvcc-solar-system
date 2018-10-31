@@ -68,11 +68,13 @@ var Animator = function() {
                     if (params.scale) {
                         obj.scale.set(params.scale);
                     }
+                    
+                    //Set alpha
+                    if (params.alpha) {
+                        obj.alpha = params.alpha;
+                    }
 
                     //etc.
-
-                    //Fire the callback if there is one
-                    if (params.then !== undefined) params.then();
 
                     //Stop!
                     pass("Animation complete.");
@@ -109,7 +111,12 @@ var Animator = function() {
 
                 //Animate Scale
                 if (params.scale !== undefined) {
-                    obj.scale.set(obj.scale.y = initialState.scale + ( (params.scale - initialState.scale) * ease(delta/time) ));
+                    obj.scale.set(initialState.scale + ( (params.scale - initialState.scale) * ease(delta/time) ));
+                }
+                
+                //Animate Alpha
+                if (params.alpha !== undefined) {
+                    obj.alpha = initialState.alpha + ( (params.alpha - initialState.alpha) * ease(delta/time) );
                 }
 
                 //etc.
