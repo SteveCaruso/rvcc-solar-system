@@ -18,6 +18,9 @@ Solar.currentScene = null;
 //Last Scene
 Solar.lastScene = null;
 
+//Incoming Scene
+Solar.incomingScene = null;
+
 //Scene Object
 //This is a modified PIXI Container.
 //Invoke it with -- var x = new Solar.Scene();
@@ -110,20 +113,20 @@ Solar.changeSceneTo = function(name) {
 			return;
 		}
 		
-        //Gran the incoming scene
-        var incomingScene = Solar.scenes[name];
+        //Grab the incoming scene
+        Solar.incomingScene = Solar.scenes[name];
         
         //transition out current scene
         Solar.currentScene.transitionOutPromise()
         //transition in this scene
-        .then(_=> incomingScene.transitionInPromise())
+        .then(Solar.incomingScene.transitionInPromise)
         //Change current and last scenes in memory
         .then(function() { 
             return new Promise (function(resolve,reject) {
                 //Move the former current scene to the last scene
                 Solar.lastScene = Solar.currentScene;
                 //Set the new scene as the current scene
-                Solar.currentScene = incomingScene;
+                Solar.currentScene = Solar.incomingScene;
                 //Resolve *this* code.
                 resolve();
             });
