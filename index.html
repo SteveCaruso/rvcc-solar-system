@@ -54,26 +54,17 @@
         solarSystem.addChild(theSun);
 
 
-				var planetsList = new PIXI.Container();
-						planetsList.x = app.view.width - 100;
+        var planetsList = new PIXI.Container();
+        planetsList.x = app.view.width - 100;
 
-				var mercuryList = PIXI.Sprite.fromImage("img/mercury.png");
+        var mercuryList = PIXI.Sprite.fromImage("img/mercury.png");
             mercuryList.width = 30;
             mercuryList.height = 30;
             mercuryList.anchor.set(0.5);
             mercuryList.x = 0;
-						mercuryList.y = 100;
+			mercuryList.y = 100;
 
-						planetsList.addChild(mercuryList);
-
-
-
-
-						//app.stage.addChild(planetsList);
-
-
-
-
+		planetsList.addChild(mercuryList);
 
         //Mercury
         var mercury = PIXI.Sprite.fromImage("img/mercury.png");
@@ -341,8 +332,11 @@
 
         //Base rate of orbit
         var base = .0005;
-
+        var orbiting = false;
+        
         function orbit() {
+            
+            orbiting = true;
 
             //Get the planets spinning
             Animate.loop(mercuryOrbit,function(delta) {
@@ -397,6 +391,8 @@
         }
 
         function lineup() {
+            
+            orbiting = false;
 
             //Line up the planets
             Animate.to(mercuryOrbit,3000,{rotation:0,easing:Easing.easeInOut});
@@ -423,8 +419,9 @@
         theSun.interactive = true;
 
         theSun.on('click',function() {
-                lineup();
-                setTimeout(orbit,10000);
+                if (orbiting) lineup();
+                else orbit();
+                //setTimeout(orbit,10000);
         });
 
 
