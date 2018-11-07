@@ -1,0 +1,578 @@
+<!doctype html>
+<html>
+<head>
+    <title>Orbiting Planets</title>
+    
+    <!-- Import Pixi.js from the main website or local. -->
+	<script src="js/pixi.min.js"></script>
+    <!-- <script src="https://pixijs.download/dev/pixi.min.js"></script>-->
+</head>
+<body>
+    <!-- Where our Pixi code is going. -->
+    <script>
+        
+        //Set up the app
+        var app = new PIXI.Application(800, 600, {backgroundColor : 0x000000});
+        document.body.appendChild(app.view);
+        
+        //Center coordinates for the stage
+        var centerX = app.view.width/2;
+        var centerY = app.view.height/2;
+        
+        //The Solar System - Our scene container
+        var solarSystem = new PIXI.Container();
+            solarSystem.x = centerX;
+            solarSystem.y = centerY;
+        
+        //Add the Solar System to the Stage
+        app.stage.addChild(solarSystem);
+        
+        //The Sun
+        var theSun = PIXI.Sprite.fromImage("img/sun.png");
+            theSun.width = 200;
+            theSun.height = 200;
+            theSun.anchor.set(0.5);
+        
+        //Add the Sun to the Solar System
+        solarSystem.addChild(theSun);
+        
+        //Earth
+        var earth = PIXI.Sprite.fromImage("img/earth.png");
+            earth.width = 50;
+            earth.height = 50;
+            earth.anchor.set(0.5);
+            earth.x = 300;
+        
+        //Earth's Orbit
+        var earthOrbit = new PIXI.Container();
+        
+        //Add Earth to Earth's Orbit (duh...)
+        earthOrbit.addChild(earth);
+        
+        //Add Earth's orbit to the Solar System
+        solarSystem.addChild(earthOrbit);
+        
+        
+        
+        //Mercury
+        var mercury = PIXI.Sprite.fromImage("img/mercury.png");
+            mercury.width = 30;
+            mercury.height = 30;
+            mercury.anchor.set(0.5);
+            mercury.x = 150;
+        
+        //Mercury's Orbit
+        var mercuryOrbit = new PIXI.Container();
+        
+        //Add Mercury to Mercury's Orbit (duh...)
+        mercuryOrbit.addChild(mercury);
+        
+        //Add Mercury's orbit to the Solar System
+        solarSystem.addChild(mercuryOrbit);
+        
+        
+        
+        
+        //Easing functions
+        var Easing = {
+          
+            //No easing... kinda a cheat.
+            linear: function (x) { 
+                return x 
+            },
+            
+            //Accelerate into it, using a quadratic function
+            easeIn: function (x) { 
+                return x*x 
+            },
+            
+            //Decelerate out of it, using a quadratic function
+            easeOut: function (x) { 
+                return x*(2-x) 
+            },
+            
+            //Accelerate for the first half, decelerate for the second half.
+            easeInOut: function (x) { 
+                if (x < 0.5) {
+                    return 2*x*x;
+                }
+                else {
+                    return -1+(4-2*x)*x;
+                } 
+            }
+            
+        };
+        
+        
+        
+        
+        //Create our Animator object...
+        var Animator = function() {
+            
+            //This function will take three arguments:
+            //  1) A Pixi object
+            //  2) A time
+            //  3) A set of parameters
+            this.to = function(obj, time, params, callback) {
+                
+                //Check if the animation loop id is set, if not make it
+                if (obj.animatorTimeout == undefined) obj.animatorTimeout = null;
+                
+                //Stop what's already going on
+                this.stop(obj);
+                
+                //Take note of the object's initial state
+                 var initialState = {
+                    x: obj.x,
+                    y: obj.y,
+                    alpha: obj.alpha,
+                    rotation: obj.rotation,
+                    width: obj.width,
+                    height: obj.height
+                };
+                
+                //Get the start time in milliseconds
+                var startTime = new Date().getTime();
+                
+                //Set up a function to act as the loop
+                var loop = function() {
+                    
+                    //Get the delta (how many milliseconds have elapsed)
+                    var delta =  (new Date().getTime() - startTime);
+                    
+                    //If its done, it's done. Snap to the end.
+                    if(delta >= time) {
+                        
+                        //Set x,y
+                        if (params.x !== undefined) obj.x = params.x;
+                        if (params.y !== undefined) obj.y = params.y;
+                        
+                        //Set rotation
+                        if (params.rotation !== undefined) obj.rotation = params.rotation;
+                        
+                        //Stop!
+                        callback();
+                        return;
+                        
+                    }
+                    
+                    //Animate all the things!
+                    
+                    //Set the easing
+                    var ease = Easing.linear;
+                    
+                    if (params.easing !== undefined) ease = params.easing;
+                    
+                    //Animate x and y coordinates
+                    if (params.x !== undefined) {                
+                        obj.x = initialState.x + ( (params.x - initialState.x) * ease(delta/time) );
+                    }
+                    if (params.y !== undefined) {
+                        obj.y = initialState.y + ( (params.y - initialState.y) * ease(delta/time) );
+                    }
+                    
+                    //Animate Rotation
+                    if (params.rotation !== undefined) {
+                        obj.rotation = initialState.rotation + ( (params.rotation - initialState.rotation) * ease(delta/time) );
+                    }
+                    
+                    //Set up the next loop
+                    obj.animatorTimeout = requestAnimationFrame(loop);
+                    
+                };
+                
+                //Start the loop!
+                loop();
+                
+            };
+            
+            //This function acts as an animation loop for the object until it's stopped
+            this.loop = function(obj, func) {
+                
+                //Stop whatever is happening now
+                this.stop(obj);
+                
+                //Get the start time in milliseconds
+                var startTime = new Date().getTime();
+                
+                //Build the animaton loop
+                var loop = function() {
+                    
+                    //Get the delta time from the start
+                    var delta =  (new Date().getTime() - startTime);
+                    
+                    //Call the function for the loop, passing it that delta
+                    func(delta);
+                    
+                    //Request the next animation frame
+                    obj.animatorTimeout = requestAnimationFrame(loop);
+                    
+                };
+                
+                //Start the loop
+                loop();
+                
+                
+            };
+            
+            //This function will stop a Pixi object from animating dead in its tracks
+            this.stop = function(obj) {
+                
+                //Cancel the animation frame loop
+                cancelAnimationFrame(obj.animatorTimeout);
+                
+                //Clear the timeout id
+                obj.animatorTimeout = null;
+                
+            };
+            
+        }
+        
+        var Animate = new Animator();
+        
+        
+        //Base rate of orbit
+        var base = .0005;
+        
+        function orbit() {
+            
+            //Get the planets spinning
+            Animate.loop(earthOrbit,function(delta) {
+                earthOrbit.rotation = (base * delta) % (2*Math.PI);
+            });
+            
+            Animate.loop(mercuryOrbit,function(delta) {
+                mercuryOrbit.rotation = (base / (176/365.25) * delta) % (2*Math.PI);
+            });
+            
+            //Move the solar system to the center
+            Animate.to(solarSystem,10000,{x:centerX,y:centerY, easing:Easing.easeInOut});
+            
+        }
+        
+        function lineup() {
+            
+            //Line up the planets
+            Animate.to(earthOrbit,3000,{rotation:0, easing:Easing.easeInOut});
+            Animate.to(mercuryOrbit,3000,{rotation:0, easing:Easing.easeInOut});
+            
+            //Move the solar system to the left
+            Animate.to(solarSystem,3000,{x:100,y:centerY, easing:Easing.easeInOut});
+            
+        }
+        
+        
+        //Multiple stops
+        Animate.to(earth,2000,{x:0,y:0});
+        
+        setTimeout(function() {
+            Animate.to(earth,2000,{x:0,y:-300});
+        }, 1000);
+        
+        setTimeout(function() {
+            Animate.to(earth,2000,{x:300,y:0});
+        },4000);
+        
+        
+        
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+    <title>Orbiting Planets</title>
+    
+    <!-- Import Pixi.js from the main website or local. -->
+	<script src="js/pixi.min.js"></script>
+    <!-- <script src="https://pixijs.download/dev/pixi.min.js"></script>-->
+</head>
+<body>
+    <!-- Where our Pixi code is going. -->
+    <script>
+        
+        //Set up the app
+        var app = new PIXI.Application(800, 600, {backgroundColor : 0x000000});
+        document.body.appendChild(app.view);
+        
+        //Center coordinates for the stage
+        var centerX = app.view.width/2;
+        var centerY = app.view.height/2;
+        
+        //The Solar System - Our scene container
+        var solarSystem = new PIXI.Container();
+            solarSystem.x = centerX;
+            solarSystem.y = centerY;
+        
+        //Add the Solar System to the Stage
+        app.stage.addChild(solarSystem);
+        
+        //The Sun
+        var theSun = PIXI.Sprite.fromImage("img/sun.png");
+            theSun.width = 200;
+            theSun.height = 200;
+            theSun.anchor.set(0.5);
+        
+        //Add the Sun to the Solar System
+        solarSystem.addChild(theSun);
+        
+        //Earth
+        var earth = PIXI.Sprite.fromImage("img/earth.png");
+            earth.width = 50;
+            earth.height = 50;
+            earth.anchor.set(0.5);
+            earth.x = 300;
+        
+        //Earth's Orbit
+        var earthOrbit = new PIXI.Container();
+        
+        //Add Earth to Earth's Orbit (duh...)
+        earthOrbit.addChild(earth);
+        
+        //Add Earth's orbit to the Solar System
+        solarSystem.addChild(earthOrbit);
+        
+        
+        
+        //Mercury
+        var mercury = PIXI.Sprite.fromImage("img/mercury.png");
+            mercury.width = 30;
+            mercury.height = 30;
+            mercury.anchor.set(0.5);
+            mercury.x = 150;
+        
+        //Mercury's Orbit
+        var mercuryOrbit = new PIXI.Container();
+        
+        //Add Mercury to Mercury's Orbit (duh...)
+        mercuryOrbit.addChild(mercury);
+        
+        //Add Mercury's orbit to the Solar System
+        solarSystem.addChild(mercuryOrbit);
+        
+        
+        
+        
+        //Easing functions
+        var Easing = {
+          
+            //No easing... kinda a cheat.
+            linear: function (x) { 
+                return x 
+            },
+            
+            //Accelerate into it, using a quadratic function
+            easeIn: function (x) { 
+                return x*x 
+            },
+            
+            //Decelerate out of it, using a quadratic function
+            easeOut: function (x) { 
+                return x*(2-x) 
+            },
+            
+            //Accelerate for the first half, decelerate for the second half.
+            easeInOut: function (x) { 
+                if (x < 0.5) {
+                    return 2*x*x;
+                }
+                else {
+                    return -1+(4-2*x)*x;
+                } 
+            }
+            
+        };
+        
+        
+        
+        
+        //Create our Animator object...
+        var Animator = function() {
+            
+            //This function will take three arguments:
+            //  1) A Pixi object
+            //  2) A time
+            //  3) A set of parameters
+            this.to = function(obj, time, params, callback) {
+                
+                //Check if the animation loop id is set, if not make it
+                if (obj.animatorTimeout == undefined) obj.animatorTimeout = null;
+                
+                //Stop what's already going on
+                this.stop(obj);
+                
+                //Take note of the object's initial state
+                 var initialState = {
+                    x: obj.x,
+                    y: obj.y,
+                    alpha: obj.alpha,
+                    rotation: obj.rotation,
+                    width: obj.width,
+                    height: obj.height
+                };
+                
+                //Get the start time in milliseconds
+                var startTime = new Date().getTime();
+                
+                //Set up a function to act as the loop
+                var loop = function() {
+                    
+                    //Get the delta (how many milliseconds have elapsed)
+                    var delta =  (new Date().getTime() - startTime);
+                    
+                    //If its done, it's done. Snap to the end.
+                    if(delta >= time) {
+                        
+                        //Set x,y
+                        if (params.x !== undefined) obj.x = params.x;
+                        if (params.y !== undefined) obj.y = params.y;
+                        
+                        //Set rotation
+                        if (params.rotation !== undefined) obj.rotation = params.rotation;
+                        
+                        //Stop!
+                        callback();
+                        return;
+                        
+                    }
+                    
+                    //Animate all the things!
+                    
+                    //Set the easing
+                    var ease = Easing.linear;
+                    
+                    if (params.easing !== undefined) ease = params.easing;
+                    
+                    //Animate x and y coordinates
+                    if (params.x !== undefined) {                
+                        obj.x = initialState.x + ( (params.x - initialState.x) * ease(delta/time) );
+                    }
+                    if (params.y !== undefined) {
+                        obj.y = initialState.y + ( (params.y - initialState.y) * ease(delta/time) );
+                    }
+                    
+                    //Animate Rotation
+                    if (params.rotation !== undefined) {
+                        obj.rotation = initialState.rotation + ( (params.rotation - initialState.rotation) * ease(delta/time) );
+                    }
+                    
+                    //Set up the next loop
+                    obj.animatorTimeout = requestAnimationFrame(loop);
+                    
+                };
+                
+                //Start the loop!
+                loop();
+                
+            };
+            
+            //This function acts as an animation loop for the object until it's stopped
+            this.loop = function(obj, func) {
+                
+                //Stop whatever is happening now
+                this.stop(obj);
+                
+                //Get the start time in milliseconds
+                var startTime = new Date().getTime();
+                
+                //Build the animaton loop
+                var loop = function() {
+                    
+                    //Get the delta time from the start
+                    var delta =  (new Date().getTime() - startTime);
+                    
+                    //Call the function for the loop, passing it that delta
+                    func(delta);
+                    
+                    //Request the next animation frame
+                    obj.animatorTimeout = requestAnimationFrame(loop);
+                    
+                };
+                
+                //Start the loop
+                loop();
+                
+                
+            };
+            
+            //This function will stop a Pixi object from animating dead in its tracks
+            this.stop = function(obj) {
+                
+                //Cancel the animation frame loop
+                cancelAnimationFrame(obj.animatorTimeout);
+                
+                //Clear the timeout id
+                obj.animatorTimeout = null;
+                
+            };
+            
+        }
+        
+        var Animate = new Animator();
+        
+        
+        //Base rate of orbit
+        var base = .0005;
+        
+        function orbit() {
+            
+            //Get the planets spinning
+            Animate.loop(earthOrbit,function(delta) {
+                earthOrbit.rotation = (base * delta) % (2*Math.PI);
+            });
+            
+            Animate.loop(mercuryOrbit,function(delta) {
+                mercuryOrbit.rotation = (base / (176/365.25) * delta) % (2*Math.PI);
+            });
+            
+            //Move the solar system to the center
+            Animate.to(solarSystem,10000,{x:centerX,y:centerY, easing:Easing.easeInOut});
+            
+        }
+        
+        function lineup() {
+            
+            //Line up the planets
+            Animate.to(earthOrbit,3000,{rotation:0, easing:Easing.easeInOut});
+            Animate.to(mercuryOrbit,3000,{rotation:0, easing:Easing.easeInOut});
+            
+            //Move the solar system to the left
+            Animate.to(solarSystem,3000,{x:100,y:centerY, easing:Easing.easeInOut});
+            
+        }
+        
+        
+        //Multiple stops
+        Animate.to(earth,2000,{x:0,y:0});
+        
+        setTimeout(function() {
+            Animate.to(earth,2000,{x:0,y:-300});
+        }, 1000);
+        
+        setTimeout(function() {
+            Animate.to(earth,2000,{x:300,y:0});
+        },4000);
+        
+        
+        
+        
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

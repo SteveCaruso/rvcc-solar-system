@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+	<title>Pixi.js Sound &amp; Buttons</title>
+
+    <!-- Import Pixi.js from the main website. -->
+	<script src="js/pixi.min.js"></script>
+    <!-- <script src="https://pixijs.download/dev/pixi.min.js"></script>-->
+
+    <!-- Import the Pixi.js sound module. -->
+	<!--<script src="https://pixijs.io/pixi-sound/dist/pixi-sound.js"></script>-->
+
+    <!-- Import Easing -->
+    <script src="js/easing.js"></script>
+
+    <!-- Import Animator -->
+    <script src="js/animate.js"></script>
+    
+    <!-- Import Solar -->
+    <script src="js/solar.js"></script>
+</head>
+<body>
+    <!-- Where our Pixi code is going. -->
+    <script>
+      var app = new PIXI.Application(2000, 1000, {backgroundColor : 0x1099bb});
+document.body.appendChild(app.view);
+       
+        
+        // halo
+var halo = new PIXI.Graphics();
+        
+        
+halo.beginFill(0xFFFF0B, 0.5);
+halo.drawCircle(470, 90,60);
+halo.endFill();
+
+        
+        
+        //LINE for time Line 
+        var graphics = new PIXI.Graphics();
+        
+        graphics.beginFill(0xFF3300);
+graphics.lineStyle(4, 0xffd900, 1);
+
+// draw a shape
+graphics.moveTo(1900,500);
+graphics.lineTo(50,500);
+graphics.endFill();
+        
+        app.stage.addChild(graphics);
+
+// create a texture from an image path
+var texture = PIXI.Texture.fromImage("img/spaaace.png");
+
+// Scale mode for pixelation
+//texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
+
+for (var i = 0; i < 1; i++) {
+    createBunny(
+        Math.floor(Math.random() * app.screen.width),
+        Math.floor(Math.random() * app.screen.height)
+    );
+}
+
+function createBunny(x, y) {
+
+    // create our little bunny friend..
+    var bunny = new PIXI.Sprite(texture);
+
+    // enable the bunny to be interactive... this will allow it to respond to mouse and touch events
+    bunny.interactive = true;
+
+    // this button mode will mean the hand cursor appears when you roll over the bunny with your mouse
+    bunny.buttonMode = true;
+
+    // center the bunny's anchor point
+    bunny.anchor.set(0.5);
+
+    // make it a bit bigger, so it's easier to grab
+    bunny.scale.set(3);
+
+    // setup events for mouse + touch using
+    // the pointer events
+    bunny
+        .on('pointerdown', onDragStart)
+        .on('pointerup', onDragEnd)
+        .on('pointerupoutside', onDragEnd)
+        .on('pointermove', onDragMove);
+
+        // For mouse-only events
+        // .on('mousedown', onDragStart)
+        // .on('mouseup', onDragEnd)
+        // .on('mouseupoutside', onDragEnd)
+        // .on('mousemove', onDragMove);
+
+        // For touch-only events
+        // .on('touchstart', onDragStart)
+        // .on('touchend', onDragEnd)
+        // .on('touchendoutside', onDragEnd)
+        // .on('touchmove', onDragMove);
+
+    // move the sprite to its designated position
+    bunny.x = 500;
+    bunny.y = 500;
+    
+    bunny.width=200;
+    bunny.height =200;
+
+    // add it to the stage
+    app.stage.addChild(bunny);
+}
+
+function onDragStart(event) {
+    // store a reference to the data
+    // the reason for this is because of multitouch
+    // we want to track the movement of this particular touch
+    this.data = event.data;
+    this.alpha = 0.5;
+    this.dragging = true;
+}
+
+function onDragEnd() {
+    this.alpha = 1;
+    this.dragging = false;
+    
+    
+    // set the interaction data to null
+    this.data = null;
+   
+}
+
+function onDragMove() {
+    if (this.dragging) {
+        var newPosition = this.data.getLocalPosition(this.parent);
+        this.x = newPosition.x;
+        this.y =500;
+        
+      
+        
+    }
+    if(this.x>1800 )
+        {
+          this.x = 1800;
+        }
+    
+    if(this.x<75)
+        {
+            this.x=75;
+        }
+
+    if(this.x =>1000)
+    {
+     app.stage.addChild(halo);
+    }
+   
+       
+}
+       
+        
+
+    </script>
+</body>
+</html>
