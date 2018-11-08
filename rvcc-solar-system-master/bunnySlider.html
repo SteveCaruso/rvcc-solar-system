@@ -148,10 +148,19 @@ function onDragMove() {
             this.x=75;
         }
 
-    if(this.x =>1000)
+    if(newPosition.x =1700)
     {
-     app.stage.addChild(halo);
+        this.dragging = true;
+        app.stage.addChild(halo);
+     halo.x=1000;
+     halo.y = 500;
+    
     }
+    else if(newPosition.x !=1700)
+    {
+        app.stage.removeChild(halo);
+    }
+    
    
        
 }
