@@ -19,6 +19,9 @@
     <!-- Import Solar -->
     <script src="js/solar.js"></script>
     
+    <!-- Import Slider -->
+    <script src="js/slider.js"></script>
+    
     <!-- Import Test Scene -->
     <script src="js/test.js"></script>
 </head>
@@ -426,9 +429,11 @@
                 else orbit();
                 //setTimeout(orbit,10000);
         });
-
+        
+        var testScene = new Solar.Scene("test");
         
         
+        addSlider();
         
         
 
