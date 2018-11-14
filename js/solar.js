@@ -97,6 +97,9 @@ Solar.Scene = function(name) {
     if (Solar.lastScene === null) {
         Solar.lastScene = sc;
     }
+    if (Solar.incomingScene === null) {
+        Solar.incomingScene = sc;
+    }
 	
 	return sc;
 
@@ -137,6 +140,40 @@ Solar.changeSceneTo = function(name) {
 	});
 	
 }
+
+//Start at the specified scene (i.e. transition in without transitioning out)
+Solar.startScene = function(name) {
+    
+    return new Promise(function(resolve,reject) {
+	
+		//If there is no such scene, fail
+		if (Solar.scenes[name] === undefined) {
+			reject("No such scene to change to!");
+			return;
+		}
+		
+        //Grab the incoming scene
+        Solar.incomingScene = Solar.scenes[name];
+        
+        Solar.incomingScene.transitionInPromise()
+        //Change current and last scenes in memory
+        .then(function() { 
+            return new Promise (function(resolve,reject) {
+                //Move the former current scene to the last scene
+                Solar.lastScene = Solar.currentScene;
+                //Set the new scene as the current scene
+                Solar.currentScene = Solar.incomingScene;
+                //Resolve *this* code.
+                resolve();
+            });
+        })
+        //And then resolve the whole thing.
+        .then(resolve);
+	
+	});
+    
+}
+
 
 /*
  * Resource Management
