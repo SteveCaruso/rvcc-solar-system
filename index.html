@@ -44,7 +44,7 @@
             solarSystem.y = centerY;
 
         //Add the Solar System to the Stage
-        app.stage.addChild(solarSystem);
+        //app.stage.addChild(solarSystem);
 
         //The Sun
         var theSun = PIXI.Sprite.fromImage("img/sun.png");
@@ -332,7 +332,8 @@
 				plutoOrbit.addChild(pluto);
 
 				solarSystem.addChild(plutoOrbit);
-
+        
+        
         //Base rate of orbit
         var base = .0005;
         var orbiting = false;
@@ -428,8 +429,8 @@
         });
 
         
-        
-        
+        //Begin everything
+        Solar.startScene("idle");
         
 
     </script>
