@@ -24,17 +24,19 @@
     
     <!-- Import Test Scene -->
     <script src="js/test.js"></script>
+    
+    <!-- peng is messing around -->
+    <script src="js/ds-test.js"></script>
 </head>
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
     
         //Set up the app
-        var app = new PIXI.Application(1920, 1080,
-                    {
-                        backgroundColor : 0x000000,
-                        antialias: true
-                    });
+        var app = new PIXI.Application(1920, 1080, {
+            backgroundColor : 0x000000,
+            antialias: true
+        });
         document.body.appendChild(app.view);
         
         // style for the text
@@ -43,7 +45,9 @@
             fontSize: 36,
             fontWeight: 'bold',
             fill: ['#ffffff']
-            });
+        });
+        
+        doSolarDS();
 
         //Center coordinates for the stage
         var centerX = app.view.width/2;
