@@ -27,7 +27,8 @@ Solar.incomingScene = null;
 Solar.Scene = function(name) {
     
     //Check if the scene name exists
-    if (Solar.scenes[name] !== undefined) throw("Whoops! A Scene with that name exists.");
+    if (Solar.scenes[name] !== undefined) 
+    	throw "Whoops! A Scene with that name exists.";
     
     //This is a modified Container
 	var sc = new PIXI.Container();
@@ -35,62 +36,42 @@ Solar.Scene = function(name) {
     //Set name
     sc.name = name;
     
-    //Default Transition Out
-    sc.defaultTransitionOut = function(resolve, reject) {
-        //Fade out
-        Animate.to(sc,500,{alpha:0})
-        //Remove from stage
-		.then(_=> app.stage.removeChild(sc))
-        //Set alpha back to full
-		.then(_=> sc.alpha = 1)
-        //Resolve
-        .then(resolve);
-    }
-    
-    //Trigger the default transition out.
-    //This can be overridden, so long as when the transition is over resolve() is called.
-    sc.transitionOut = function(resolve,reject) {
-        
-        sc.defaultTransitionOut(resolve,reject);
-        
-    }
-    
-    //Wrap the transition in a Promise
-    sc.transitionOutPromise = function() {
-        return new Promise(function(resolve,reject) {
-            sc.transitionOut(resolve,reject);
-        });
-    }
-    
-    //Default Transition In
-    sc.defaultTransitionIn = function(resolve, reject) {
-        //Set alpha to zero
+    //Default transition in
+    sc.defaultTransition = async function() {
+    	//Transition out current scene
+    	await Solar.currentScene.transitionOut();
+    	//Set alpha to zero
         sc.alpha = 0;
         //Add to stage
         app.stage.addChild(sc);
         //Fade in
-        Animate.to(sc,500,{alpha:1})
-        //Resolve
-        .then(resolve);
+        await Animate.to(sc,500,{alpha:1});
     }
     
-    //Trigger the default transition in. 
-    //This can be overridden, so long as when the transition is over resolve() is called.
-    sc.transitionIn = function(resolve,reject) {
-        
-        sc.defaultTransitionIn(resolve,reject);
-        
+    //Transition function to be overwritten
+    sc.transition = async function() {
+    	await sc.defaultTransition();
     }
     
-    //Wrap the transition in a Promise
-    sc.transitionInPromise = function() {
-        return new Promise(function(resolve,reject) {
-            sc.transitionIn(resolve,reject);
-        });
+    //Default transition out
+    sc.defaultTransitionOut = async function() {
+    	//Fade out
+        await Animate.to(sc,500,{alpha:0});
+        //Remove from stage
+		app.stage.removeChild(sc);
+        //Set alpha back to full
+		sc.alpha = 1;
     }
     
+    //Transition out function to be overwritten
+    sc.transitionOut = async function() {
+    	await sc.defaultTransitionOut();
+    }
+    
+    //Add the scene to the scenes array
     Solar.scenes[name] = sc;
     
+    //Set defaults for current, last, and incoming
     if (Solar.currentScene === null) {
         Solar.currentScene = sc;
     }
@@ -100,78 +81,51 @@ Solar.Scene = function(name) {
     if (Solar.incomingScene === null) {
         Solar.incomingScene = sc;
     }
-	
+    
 	return sc;
 
 };
 
-//Change The Scene, as a Promise
-Solar.changeSceneTo = function(name) {
-	
-	return new Promise(function(resolve,reject) {
-	
-		//If there is no such scene, fail
-		if (Solar.scenes[name] === undefined) {
-			reject("No such scene to change to!");
-			return;
-		}
-		
-        //Grab the incoming scene
-        Solar.incomingScene = Solar.scenes[name];
-        
-        //transition out current scene
-        Solar.currentScene.transitionOutPromise()
-        //transition in this scene
-        .then(Solar.incomingScene.transitionInPromise)
-        //Change current and last scenes in memory
-        .then(function() { 
-            return new Promise (function(resolve,reject) {
-                //Move the former current scene to the last scene
-                Solar.lastScene = Solar.currentScene;
-                //Set the new scene as the current scene
-                Solar.currentScene = Solar.incomingScene;
-                //Resolve *this* code.
-                resolve();
-            });
-        })
-        //And then resolve the whole thing.
-        .then(resolve);
-	
-	});
-	
+//Change to the named scene and provoke its transition
+Solar.changeSceneTo = async function(name) {
+
+	if (Solar.scenes[name] === undefined)
+		throw "So such scene.";
+
+	//Set the incoming scene
+	Solar.incomingScene = Solar.scenes[name];
+
+	//Trigger the transition
+	await Solar.incomingScene.transition();
+
+	//Set the last scene as the current scene
+	Solar.lastScene = Solar.currentScene;
+	//Set the incoming scene as the current scene
+	Solar.currentScene = Solar.incomingScene;
 }
 
-//Start at the specified scene (i.e. transition in without transitioning out)
-Solar.startScene = function(name) {
-    
-    return new Promise(function(resolve,reject) {
+Solar.startScene = async function(name) {
+
+	if (Solar.scenes[name] === undefined)
+		throw "So such scene.";
 	
-		//If there is no such scene, fail
-		if (Solar.scenes[name] === undefined) {
-			reject("No such scene to change to!");
-			return;
-		}
-		
-        //Grab the incoming scene
-        Solar.incomingScene = Solar.scenes[name];
-        
-        Solar.incomingScene.transitionInPromise()
-        //Change current and last scenes in memory
-        .then(function() { 
-            return new Promise (function(resolve,reject) {
-                //Move the former current scene to the last scene
-                Solar.lastScene = Solar.currentScene;
-                //Set the new scene as the current scene
-                Solar.currentScene = Solar.incomingScene;
-                //Resolve *this* code.
-                resolve();
-            });
-        })
-        //And then resolve the whole thing.
-        .then(resolve);
+	//Set the incoming scene
+	Solar.incomingScene = Solar.scenes[name];
+
+	//Set alpha to zero
+	Solar.incomingScene.alpha = 0;
+	//Add to stage
+	app.stage.addChild(Solar.incomingScene);
+	//Fade in
+	await Animate.to(Solar.incomingScene,2000,{alpha:1});
+
+	//Set the last scene as the current scene
+	Solar.lastScene = Solar.scenes[name];
+	//Set the incoming scene as the current scene
+	Solar.currentScene = Solar.scenes[name];
 	
-	});
-    
+	console.log("We're a go.");
+	
 }
 
 
@@ -181,7 +135,28 @@ Solar.startScene = function(name) {
 
 //Loader pass-through
 Solar.loader = PIXI.loader;
-Solar.loaders = PIXI.loaders;
+
+//Simple loading screen
+var loading = new PIXI.Text("Loading... ", new PIXI.TextStyle({
+		fontFamily: 'Constantina',
+		fontSize: 36,
+		fill: ['#ffffff']
+	}));
+	loading.x = 0;
+	loading.y = 0;
+	
+	app.stage.addChild(loading);
+
+Solar.loader.on('progress',function (loader,res) {
+	loading.text = "Loading... " + Math.round(loader.progress) + "%";
+});
+
+Solar.loader.on('complete', function() {
+	loading.text = "Loaded!";
+	setTimeout(function() {
+		app.stage.removeChild(loading);
+	},1000);
+});
 
 /*
  * Interface Management
