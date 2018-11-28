@@ -17,6 +17,7 @@ Solar.loader
 	//	.add("moon","img/moon.png")		//The Moon
 	.add("mars","img/mars.png")			//Mars
 	//We need some real asteroids here
+    .add("spaaace","img/spaaace.png")	//spaaace
 	.add("jupiter","img/jupiter.png")	//Jupiter
 	.add("saturn","img/saturn.png")		//Saturn
 	.add("uranus","img/uranus.png")		//That Planet
@@ -40,6 +41,7 @@ var theSun,
 	theMoonOrbit, 	theMoon,
 	marsOrbit, 		mars,
 	asterOrbit,
+    spaaaceOrbit,
 	jupiterOrbit, 	jupiter,
 	saturnOrbit, 	saturn,
 	uranusOrbit,	uranus,
@@ -242,7 +244,16 @@ Solar.loader.on('complete', function(loader, resources) {
 
 	solarSystem.addChild(asterOrbit);
 
-
+    // this is very important
+    spaaace = new PIXI.Sprite(resources.spaaace.texture);
+    spaaace.width = 12;
+    spaaace.height = 12;
+    spaaace.anchor.set(0.5);
+    spaaace.x = 420;
+    
+    spaaaceOrbit = new PIXI.Container();
+	spaaaceOrbit.addChild(spaaace);
+	solarSystem.addChild(spaaaceOrbit);
 
 	//Jupiter
 	// Coriander
@@ -426,6 +437,9 @@ Solar.loader.on('complete', function(loader, resources) {
 			});
 			Animate.loop(asterOrbit,function(delta) {
 				asterOrbit.rotation = (base / (1000/365.25) * delta) % (2*Math.PI);
+			});
+            Animate.loop(spaaaceOrbit,function(delta) {
+				spaaaceOrbit.rotation = -(base / (1000/365.25) * delta) % (2*Math.PI);
 			});
 			Animate.loop(jupiterOrbit,function(delta) {
 				jupiterOrbit.rotation = (base / (4332/365.25) * delta) % (2*Math.PI);
