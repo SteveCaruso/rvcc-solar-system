@@ -17,6 +17,7 @@ Solar.loader.on('complete',function(loader,resources) {
     //Add the scrim to the scene
     earthScreen.addChild(scrim);
     
+    //Info box
     var infobox = new PIXI.Sprite(resources.infobox.texture);
         infobox.width = 750;
         infobox.height = 1000;
@@ -24,6 +25,31 @@ Solar.loader.on('complete',function(loader,resources) {
         infobox.y = 50;
     
     earthScreen.addChild(infobox);
+    
+    
+    
+    //Content container
+    var content = new PIXI.Container();
+        content.alpha = 0;
+    
+    //Info box title
+    var title = new PIXI.Text("Earth",titleStyle);
+        title.x = 1200;
+        title.y = 100;
+    
+    //Add to content
+    content.addChild(title);
+            
+    //Info box text
+    var text = new PIXI.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at sapien a lorem imperdiet ultricies sit amet a urna. Aenean ultrices vel ligula sit amet convallis. Cras rhoncus neque sollicitudin mollis placerat. Cras aliquet velit vitae pulvinar tristique. Quisque id volutpat purus, eu ultricies metus. Nullam laoreet varius nulla, tincidunt gravida ipsum lobortis at. Morbi lacinia consectetur magna, eu maximus ipsum aliquet non. Sed finibus urna vitae arcu gravida sodales.",textStyle);
+        text.x = 1200;
+        text.y = 180;
+    
+    //Add to content
+    content.addChild(text);
+    
+    //Add the content container to the scene
+    earthScreen.addChild(content);
     
     var backbutton = new PIXI.Sprite(resources.backbutton.texture);
         backbutton.width = 120;
@@ -81,6 +107,8 @@ Solar.loader.on('complete',function(loader,resources) {
                                               alpha:0});
             await Animate.to(infobox,3000,{x:1150,y:50,easing:Easing.easeInOut});
             
+            await Animate.to(content,1000,{alpha:1,easing:Easing.easeInOut});
+        
             await Animate.to(backbutton,500,{alpha:1});
             backbutton.interactive = true;
             
@@ -108,7 +136,15 @@ Solar.loader.on('complete',function(loader,resources) {
         Animate.to(backbutton,500,{alpha:0,
                                    easing:Easing.easeInOut});
         
-        await Animate.to(infobox,3000,{x:2000,y:50,easing:Easing.easeInOut});
+        await Animate.to(content,500,{alpha:0,easing:Easing.easeInOut});
+        
+        
+        await Animate.to(infobox,1500,{x:2000,y:50,easing:Easing.easeInOut});
+        
+        //Animate solar system back in
+        solarSystem.alpha = 0;
+        app.stage.addChildAt(solarSystem,0);
+        Animate.to(solarSystem,3000,{alpha:1,easing:Easing.easeInOut});
         
         //Animate the earth back.
         await Animate.to(ourEarth,3000,{    x:earthPos.x,

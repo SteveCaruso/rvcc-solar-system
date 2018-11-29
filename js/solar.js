@@ -3,6 +3,28 @@
  */
 const Solar = {};
 
+/*
+ * Global Variables
+ */
+//Text styles
+var titleStyle = new PIXI.TextStyle({
+    fontFamily:     "Perpetua",
+    fontSize:       70,
+    fontWeight:     "bold",
+    align:          "center",
+    fill:           0x000000,
+    wordWrap:       true,
+    wordWrapWidth:  675
+});
+
+var textStyle = new PIXI.TextStyle({
+    fontFamily:     "Constantia (Headings)",
+    fontSize:       24,
+    fill:           0x000000,
+    wordWrap:       true,
+    wordWrapWidth:  675
+});
+
 
 /*
  * Scene Management
