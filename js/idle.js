@@ -412,10 +412,10 @@ Solar.loader.on('complete', function(loader, resources) {
 	var base = .0005;
 	var orbiting = false;
 
-	orbit = function () {
+	orbit = async function () {
 	
 		orbiting = true;
-	
+	       
 		//getting rid of name text
 		Animate.to(mercuryText,500,{alpha:0});
 		Animate.to(venusText,500,{alpha:0});
@@ -425,72 +425,99 @@ Solar.loader.on('complete', function(loader, resources) {
 		Animate.to(saturnText,500,{alpha:0});
 		Animate.to(uranusText,500,{alpha:0});
 		Animate.to(neptuneText,500,{alpha:0});
-		Animate.to(plutoText,500,{alpha:0});
-
+		await Animate.to(plutoText,500,{alpha:0});
+        
+        //Bring back to normal size
+        var line = {
+            rotation:0,
+            easing:Easing.easeInOut,
+            scale:1
+        };
+        var linetime = 3000;
+        
+        Animate.to(mercuryOrbit,linetime,line);
+		Animate.to(venusOrbit,linetime,line);
+		Animate.to(earthOrbit,linetime,line);
+			Animate.to(theMoonOrbit,3000,{rotation:Math.PI/2,easing:Easing.easeInOut});
+		Animate.to(marsOrbit,linetime,line);
+        Animate.to(asterOrbit,linetime,line);
+		Animate.to(jupiterOrbit,linetime,line);
+		Animate.to(saturnOrbit,linetime,line);
+		Animate.to(uranusOrbit,linetime,line);
+		Animate.to(neptuneOrbit,linetime,line);
+		Animate.to(plutoOrbit,linetime,line);
+        
+        Animate.to(theSun,linetime,{width:200, height:200, x:0, easing:Easing.easeInOut});
+        
+        //Move the solar system to the center
+        await Animate.to(solarSystem,linetime,{x:centerX, y:centerY, easing:Easing.easeInOut});
+        
 		//Get the planets spinning
-		setTimeout(function() {
-			Animate.loop(mercuryOrbit,function(delta) {
-				mercuryOrbit.rotation = (base / (176/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(venusOrbit,function(delta) {
-				venusOrbit.rotation = (base / (225/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(earthOrbit,function(delta) {
-				earthOrbit.rotation = (base * delta) % (2*Math.PI);
-			});
-				Animate.loop(theMoonOrbit, function(delta) {
-					theMoonOrbit.rotation = ( (base / (28/365.25) * delta) % (2*Math.PI) ) + Math.PI/2;
-				});
-			Animate.loop(marsOrbit,function(delta) {
-				marsOrbit.rotation = (base / (687/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(asterOrbit,function(delta) {
-				asterOrbit.rotation = (base / (1000/365.25) * delta) % (2*Math.PI);
-			});
-            Animate.loop(spaaaceOrbit,function(delta) {
-				spaaaceOrbit.rotation = -(base / (1000/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(jupiterOrbit,function(delta) {
-				jupiterOrbit.rotation = (base / (4332/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(saturnOrbit, function(delta) {
-				saturnOrbit.rotation = (base / (10759/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(uranusOrbit, function(delta){
-				uranusOrbit.rotation = (base/ (42718/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(neptuneOrbit,function(delta) {
-				neptuneOrbit.rotation = (base / (60182/365.25) * delta) % (2*Math.PI);
-			});
-			Animate.loop(plutoOrbit,function(delta) {
-				plutoOrbit.rotation = (base / (90400/365.25) * delta) % (2*Math.PI);
-			});
-			//Move the solar system to the center
-			Animate.to(solarSystem,3000,{x:centerX,y:centerY,easing:Easing.easeInOut});
-			Animate.to(theSun,3000,{width:200,height:200,x:0,easing:Easing.easeInOut})
-				.then(_ => Animate.loop(theSun,function(delta) {
-					theSun.width = 200 + ( Math.sin(delta/1000) * 3 );
-					theSun.height = 200 + ( Math.cos(delta/1000) * 3 );
-				}));
-	
-		},500);
-
-	}
+        Animate.loop(mercuryOrbit,function(delta) {
+            mercuryOrbit.rotation = (base / (176/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(venusOrbit,function(delta) {
+            venusOrbit.rotation = (base / (225/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(earthOrbit,function(delta) {
+            earthOrbit.rotation = (base * delta) % (2*Math.PI);
+        });
+            Animate.loop(theMoonOrbit, function(delta) {
+                theMoonOrbit.rotation = ( (base / (28/365.25) * delta) % (2*Math.PI) ) + Math.PI/2;
+            });
+        Animate.loop(marsOrbit,function(delta) {
+            marsOrbit.rotation = (base / (687/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(asterOrbit,function(delta) {
+            asterOrbit.rotation = (base / (1000/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(spaaaceOrbit,function(delta) {
+            spaaaceOrbit.rotation = -(base / (1000/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(jupiterOrbit,function(delta) {
+            jupiterOrbit.rotation = (base / (4332/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(saturnOrbit, function(delta) {
+            saturnOrbit.rotation = (base / (10759/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(uranusOrbit, function(delta){
+            uranusOrbit.rotation = (base/ (42718/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(neptuneOrbit,function(delta) {
+            neptuneOrbit.rotation = (base / (60182/365.25) * delta) % (2*Math.PI);
+        });
+        Animate.loop(plutoOrbit,function(delta) {
+            plutoOrbit.rotation = (base / (90400/365.25) * delta) % (2*Math.PI);
+        });
+        
+        Animate.loop(theSun,function(delta) {
+                theSun.width = 200 + ( Math.sin(delta/1000) * 3 );
+                theSun.height = 200 + ( Math.cos(delta/1000) * 3 );
+        
+	    });
+    }
 
 	lineup = function() {
-	
+	   
+        var line = {
+            rotation:.5,
+            easing:Easing.easeInOut,
+            scale:1.8
+        };
+        
 		orbiting = false;
 		//Line up the planets
-		Animate.to(mercuryOrbit,3000,{rotation:0,easing:Easing.easeInOut});
-		Animate.to(venusOrbit,3000,{rotation:0,easing:Easing.easeInOut});
-		Animate.to(earthOrbit,3000,{rotation:0,easing:Easing.easeInOut});
+        Animate.to(mercuryOrbit,3000,line);
+		Animate.to(venusOrbit,3000,line);
+		Animate.to(earthOrbit,3000,line);
 			Animate.to(theMoonOrbit,3000,{rotation:Math.PI/2,easing:Easing.easeInOut});
-		Animate.to(marsOrbit,3000,{rotation:0,easing:Easing.easeInOut});
-		Animate.to(jupiterOrbit,3000,{rotation:0,easing:Easing.easeInOut});
-		Animate.to(saturnOrbit,3000,{rotation:0,easing:Easing.easeInOut});
-		Animate.to(uranusOrbit,3000,{rotation:0,easing:Easing.easeInOut});
-		Animate.to(neptuneOrbit,3000,{rotation:0,easing:Easing.easeInOut});
-		Animate.to(plutoOrbit,3000,{rotation:0,easing:Easing.easeInOut});
+		Animate.to(marsOrbit,3000,line);
+        Animate.to(asterOrbit,3000,line);
+		Animate.to(jupiterOrbit,3000,line);
+		Animate.to(saturnOrbit,3000,line);
+		Animate.to(uranusOrbit,3000,line);
+		Animate.to(neptuneOrbit,3000,line);
+		Animate.to(plutoOrbit,3000,line);
 		//Move the solar system to the left
 		Animate.to(solarSystem,3000,{x:100,y:centerY,easing:Easing.easeInOut});
 		//Make the sun BIG
@@ -512,26 +539,25 @@ Solar.loader.on('complete', function(loader, resources) {
 		},3000);
 
 		//Move the solar system to the left
-		Animate.to(solarSystem,3000,{x:100,y:centerY,easing:Easing.easeInOut});
+		Animate.to(solarSystem,3000,{x:200,y:200,easing:Easing.easeInOut});
 
 		//Make the sun BIG
 		Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
 
-	}
-
-	orbit();
+    }
 
 	theSun.interactive = true;
 
-	theSun.on('click',function() {
+	theSun.on('click', function() {
 			if (orbiting) lineup();
 			else orbit();
 			//setTimeout(orbit,10000);
 	});
 
 	//Begin everything
-	setTimeout(function() {
-		Solar.startScene("idle")
+	setTimeout(async function() {
+        await orbit();
+		Solar.startScene("idle");
 	},1000);
 
 	//addSlider();
