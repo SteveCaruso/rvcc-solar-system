@@ -54,7 +54,16 @@ var theSun,
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete', function(loader, resources) {
-
+    
+    solarSystem.transition = async function() {
+        if (Solar.incomingScene.name == "earth") {
+            //Do nothing
+        }
+        else {
+            solarSystem.defaultTransition();
+        }
+    };
+    
 	//The Sun
 	theSun = new PIXI.Sprite(resources.sun.texture);
 		theSun.width = 200;
