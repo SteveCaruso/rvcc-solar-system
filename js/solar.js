@@ -1,5 +1,21 @@
+//Text styles
+var titleStyle = new PIXI.TextStyle({
+    fontFamily:     "Perpetua",
+    fontSize:       70,
+    fontWeight:     "bold",
+    align:          "center",
+    fill:           0x000000,
+    wordWrap:       true,
+    wordWrapWidth:  675
+});
 
-
+var textStyle = new PIXI.TextStyle({
+    fontFamily:     "Constantia (Headings)",
+    fontSize:       24,
+    fill:           0x000000,
+    wordWrap:       true,
+    wordWrapWidth:  675
+});
 
 /*
  * Our Solar Object
@@ -100,11 +116,13 @@ Solar.changeSceneTo = async function(name) {
 
 	//Trigger the transition
 	await Solar.incomingScene.transition();
-
+    
 	//Set the last scene as the current scene
 	Solar.lastScene = Solar.currentScene;
 	//Set the incoming scene as the current scene
 	Solar.currentScene = Solar.incomingScene;
+    
+    console.log("new scene: "+name);
 }
 
 Solar.changeSceneDiscardCurrent=async function(name){

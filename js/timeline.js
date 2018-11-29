@@ -2,7 +2,7 @@
  * Timeline frames
  */
 
-TIMELINE_TIME=1000;
+const TIMELINE_TIME=1000;
 
 //Create our scene
 var timeline1Bang = new Solar.Scene("timeline: big bang");
@@ -46,28 +46,60 @@ Solar.loader.on('complete', function(loader, resources) {
     
     timeline.addChild(nineslice);*/
     
-    assignTLTransitionIn(timeline1Bang);
-    assignTLTransitionOut(timeline1Bang);
-    
-    assignTLTransitionIn(timeline2Dust);
-    assignTLTransitionOut(timeline2Dust);
-    
-    assignTLTransitionIn(timeline3Disk);
-    assignTLTransitionOut(timeline3Disk);
-    
-    assignTLTransitionIn(timeline5Giant);
-    assignTLTransitionOut(timeline5Giant);
-    
-    assignTLTransitionIn(timeline6Dwarf);
-    assignTLTransitionOut(timeline6Dwarf);
-    
-    assignTLTransitionIn(timeline7Death);
-    assignTLTransitionOut(timeline7Death);
+    initTimeline(timeline1Bang, "Big Bang", resources);
+    initTimeline(timeline2Dust, "Stellar Dust", resources);
+    initTimeline(timeline3Disk, "Accretion Disk", resources);
+    initTimeline(timeline5Giant, "Red Giant", resources);
+    initTimeline(timeline6Dwarf, "Red Dwarf", resources);
+    initTimeline(timeline7Death, "Death", resources);
 });
+
+function initTimeline(timeline, name, resources){
+    assignTLTransitionIn(timeline);
+    assignTLTransitionOut(timeline);
+    
+    // good to remember: Timelines (and all Solar.Scenes) are just Containers
+    var infobox = new PIXI.Sprite(resources.infobox.texture);
+        infobox.width = 750;
+        infobox.height = 1000;
+        infobox.x = 2000;
+        infobox.y = 50;
+    
+    timeline.addChild(infobox);
+    
+    //Info box title
+    var title = new PIXI.Text(name, titleStyle);
+        title.x = 1200;
+        title.y = 100;
+    
+    timeline.addChild(title);
+            
+    //Info box text
+    var text = new PIXI.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at sapien a lorem imperdiet ultricies sit amet a urna. Aenean ultrices vel ligula sit amet convallis. Cras rhoncus neque sollicitudin mollis placerat. Cras aliquet velit vitae pulvinar tristique. Quisque id volutpat purus, eu ultricies metus. Nullam laoreet varius nulla, tincidunt gravida ipsum lobortis at. Morbi lacinia consectetur magna, eu maximus ipsum aliquet non. Sed finibus urna vitae arcu gravida sodales.",textStyle);
+        text.x = 1200;
+        text.y = 180;
+    
+    //Add to content
+    timeline.addChild(text);
+    
+    // todo nothing's appearing on the new screens except for this,
+    // if you uncomment it. also it's appearing over the top of the slider
+    // so that ought to be dealt with if you want it to work more than once.
+    
+    /*var scrim = new PIXI.Graphics();
+        scrim.beginFill(0x00ff00);
+        scrim.drawRect(0,0,app.view.width,app.view.height);
+        scrim.alpha = 1;
+    
+    //Add the scrim to the scene
+    timeline.addChild(scrim);*/
+}
 
 function assignTLTransitionIn(timeline){
     timeline.transition=async function(){
         app.stage.addChild(timeline);
+        timeline.alpha=0;
+        resetSlider();
         await Animate.to(timeline, TIMELINE_TIME, tlDataIn);
     }
 }

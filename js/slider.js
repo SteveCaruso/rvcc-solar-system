@@ -217,6 +217,8 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     var container=new PIXI.Container();
     app.stage.addChild(container);
     
+    container.name="slider";
+    
     container.xorigin=xorigin;
     container.yorigin=yorigin;
     container.xoffscreen=xoffscreen;
@@ -317,4 +319,10 @@ function showSlider(delay){
     setTimeout(function() {
 		Animate.to(sliderSlider.container, ANIMATE_TIME, data);
 	}, delay);
+}
+
+function resetSlider(){
+    // todo z indexing is a pain
+    slider.container.removeChild(slider.picture);
+    slider.container.addChild(slider.picture);
 }
