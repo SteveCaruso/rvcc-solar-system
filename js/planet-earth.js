@@ -2,7 +2,8 @@
 var earthScreen = new Solar.Scene("earth");
 
 //Queue up our files we'll need
-//But for this one we don't need any
+Solar.loader.add('infobox',"img/ui/infobox.png");
+Solar.loader.add('backbutton',"img/ui/backbutton.png");
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -15,6 +16,25 @@ Solar.loader.on('complete',function(loader,resources) {
     
     //Add the scrim to the scene
     earthScreen.addChild(scrim);
+    
+    var infobox = new PIXI.Sprite(resources.infobox.texture);
+        infobox.width = 750;
+        infobox.height = 1000;
+        infobox.x = 2000;
+        infobox.y = 50;
+    
+    earthScreen.addChild(infobox);
+    
+    var backbutton = new PIXI.Sprite(resources.backbutton.texture);
+        backbutton.width = 120;
+        backbutton.height = 120;
+        backbutton.x = 0;
+        backbutton.y = 960;
+        backbutton.alpha = 0;
+    
+    earthScreen.addChild(backbutton);
+    
+    
     
     //Create our copy of the earth
     var ourEarth = new PIXI.Sprite(resources.earth.texture);
@@ -32,7 +52,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	earthScreen.transition = async function() {
 		
 		//If it's from the idle scene, we do something special
-		if (Solar.currentScene.name == "idle") {
+		//if (Solar.currentScene.name == "idle") {
             
             //While the real earth is on the stage, let's grab its coordinates
             var earthPos = earth.getGlobalPosition();
@@ -50,13 +70,19 @@ Solar.loader.on('complete',function(loader,resources) {
             
             //Then let's animate the planet growing and filling the screen while we fade out
             //the solar system
-            Animate.to(ourEarth,3000,{      x:centerX,
+            Animate.to(ourEarth,3000,{      x:540,
                                             y:centerY,
                                             width:1080,
                                             height:1080,
                                             easing:Easing.easeInOut
                                      });
-            await Animate.to(solarSystem,3000,{   alpha:0});
+            
+            Animate.to(solarSystem,3000,{easing:Easing.easeInOut,
+                                              alpha:0});
+            await Animate.to(infobox,3000,{x:1150,y:50,easing:Easing.easeInOut});
+            
+            await Animate.to(backbutton,500,{alpha:1});
+            backbutton.interactive = true;
             
             //Remove the previous scene from the stage and reset it
             app.stage.removeChild(solarSystem);
@@ -64,20 +90,9 @@ Solar.loader.on('complete',function(loader,resources) {
             
             
 			
-		}
+		//}
 		//Otherwise we do something boring
-		else {
-			
-			//Center up
-			spaaace.width = 200;
-			spaaace.height = 200;
-			spaaace.x = centerX;
-			spaaace.y = centerY;
-			
-			//Fade in
-			await testScene.defaultTransition();
-			
-		}
+		
 		
 	}
 	
@@ -85,8 +100,15 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the transition out.
 	earthScreen.transitionOut = async function() {
 		
+        backbutton.interactive = false;
+        
         //While the real earth is on the stage, let's grab its coordinates
         var earthPos = earth.getGlobalPosition();
+        
+        Animate.to(backbutton,500,{alpha:0,
+                                   easing:Easing.easeInOut});
+        
+        await Animate.to(infobox,3000,{x:2000,y:50,easing:Easing.easeInOut});
         
         //Animate the earth back.
         await Animate.to(ourEarth,3000,{    x:earthPos.x,
@@ -100,6 +122,8 @@ Solar.loader.on('complete',function(loader,resources) {
         await Animate.to(earthScreen,1000,{ alpha:0,
                                             easing:Easing.easeInOut});
         
+        
+        
         //Remove it from the stage
         app.stage.removeChild(earthScreen);
         
@@ -112,8 +136,8 @@ Solar.loader.on('complete',function(loader,resources) {
 	});
 	
 	//When done, head back
-    ourEarth.interactive = true;
-	ourEarth.on('click', function() {
+    backbutton.interactive = false;
+	backbutton.on('click', function() {
 		Solar.changeSceneTo('idle');
 	});
 	
