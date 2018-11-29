@@ -2,8 +2,7 @@
 var earthScreen = new Solar.Scene("earth");
 
 //Queue up our files we'll need
-Solar.loader.add('infobox',"img/ui/infobox.png");
-Solar.loader.add('backbutton',"img/ui/backbutton.png");
+//None!
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
