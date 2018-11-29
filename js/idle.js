@@ -49,7 +49,9 @@ var theSun,
 	plutoOrbit,		pluto,
 	
 	orbit,
-	lineup;
+	lineup,
+    
+    slider;
 
 
 //When things are loaded, do the stuff necessary to make it work
@@ -257,7 +259,7 @@ Solar.loader.on('complete', function(loader, resources) {
 
 	//Jupiter
 	// Coriander
-	var jupiter = new PIXI.Sprite(resources.jupiter.texture);
+	jupiter = new PIXI.Sprite(resources.jupiter.texture);
 		jupiter.width = 100;
 		jupiter.height = 100;
 		jupiter.anchor.set(0.5);
@@ -402,9 +404,10 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Base rate of orbit
 	var base = .0005;
 	var orbiting = false;
-
+    
 	orbit = function () {
-	
+        showSlider(3000);
+        
 		orbiting = true;
 	
 		//getting rid of name text
@@ -469,7 +472,8 @@ Solar.loader.on('complete', function(loader, resources) {
 	}
 
 	lineup = function() {
-	
+        hideSlider();
+        
 		orbiting = false;
 		//Line up the planets
 		Animate.to(mercuryOrbit,3000,{rotation:0,easing:Easing.easeInOut});
@@ -509,22 +513,26 @@ Solar.loader.on('complete', function(loader, resources) {
 		Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
 
 	}
-
+    
+    // slider and timeline frames
+    slider=addSlider(64, app.view.height-128, 64, app.view.height);
+    
+    // final setup
 	orbit();
 
 	theSun.interactive = true;
 
 	theSun.on('click',function() {
-			if (orbiting) lineup();
-			else orbit();
+			if (orbiting){
+                lineup();
+            } else {
+                orbit();
+            }
 			//setTimeout(orbit,10000);
 	});
 
 	//Begin everything
 	setTimeout(function() {
-		Solar.startScene("idle")
+		Solar.startScene("idle");
 	},1000);
-
-	//addSlider();
-
 });

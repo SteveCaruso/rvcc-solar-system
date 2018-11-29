@@ -1,18 +1,17 @@
-var sliderContainer;
+var sliderSlider=null;
+const ANIMATE_TIME=1000;
 
-function addSlider() {
+/*
+ * Hey, listen!
+ *
+ * the Node/Slider icons are 64x64 and centered. The first node is positioned
+ * at 64, 64 and each subsequent node is 192 after it. Therefore, the size of
+ * the Container is effectively 128+192*n, 128.
+ */
+
+function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     const LINE_WIDTH=4;
     const LINE_COLOR=0xffffff;
-    const ANIMATE_TIME=1000;
-
-    /*
-    //Set up the app
-    var app = new PIXI.Application(64+192*3+64, 128, {
-        backgroundColor : 0x000000,
-        antialias: true
-    });
-    document.body.appendChild(app.view);
-    */
 
     //Center coordinates for the stage
     var centerX = app.view.width/2;
@@ -60,7 +59,7 @@ function addSlider() {
             this.picture.on("pointerup", function(e){
                 deactivateAll();
                 this.base.activate();
-                slider.moveTo(this.base);
+                sliderSlider.moveTo(this.base);
             });
 
             this.deactivate();
@@ -205,43 +204,115 @@ function addSlider() {
         }
 
         distance(node){
-        return this.pdistance(this.picture.position.x, this.picture.position.y, node.x, node.y);
+            return this.pdistance(this.picture.position.x, this.picture.position.y, node.x, node.y);
+        }
     }
+
+    function deactivateAll(){
+        node1.deactivateNext();
+    }
+
+    var container=new PIXI.Container();
+    app.stage.addChild(container);
+    
+    container.xorigin=xorigin;
+    container.yorigin=yorigin;
+    container.xoffscreen=xoffscreen;
+    container.yoffscreen=yoffscreen;
+    
+    container.x=xoffscreen;
+    container.y=yoffscreen;
+    
+    container.alpha=0;
+    
+    var node1=new Node(64, 64, container, "Big Bang");
+    var node2=new Node(64+192, 64, container, "Stellar Dust");
+    var node3=new Node(64+2*192, 64, container, "Accretion Disk");
+    var node4=new Node(64+3*192, 64, container, "Now");
+    var node5=new Node(64+4*192, 64, container, "Red Giant");
+    var node6=new Node(64+5*192, 64, container, "White Dwarf");
+    var node7=new Node(64+6*192, 64, container, "Heat Death");
+    
+    node1.onSelect = function() {
+        Solar.changeSceneTo("timeline: big bang");
+    }
+    
+    node2.onSelect = function() {
+        Solar.changeSceneTo("timeline: stellar dust");
+    }
+    
+    node3.onSelect = function() {
+        Solar.changeSceneTo("timeline: accretion disk");
+    }
+    
+    node4.onSelect = function() {
+        Solar.changeSceneTo("idle");
+    }
+    
+    node5.onSelect = function() {
+        Solar.changeSceneTo("timeline: red giant");
+    }
+    
+    node6.onSelect = function() {
+        Solar.changeSceneTo("timeline: white dwarf");
+    }
+    
+    node7.onSelect = function() {
+        Solar.changeSceneTo("timeline: death");
+    }
+
+    node1.setNext(node2);
+    node2.setPrevious(node1);
+    
+    node2.setNext(node3);
+    node3.setPrevious(node2);
+    
+    node3.setNext(node4);
+    node4.setPrevious(node3);
+    
+    node4.setNext(node5);
+    node5.setPrevious(node4);
+    
+    node5.setNext(node6);
+    node6.setPrevious(node5);
+    
+    node6.setNext(node7);
+    node7.setPrevious(node6);
+    
+    sliderSlider=new Slider(node4, container);
+    return sliderSlider;
 }
 
-function deactivateAll(){
-    first.deactivateNext();
+function hideSlider(delay){
+    if (typeof delay==="undefined"){
+        delay=0;
+    }
+    
+    var data={
+        x: sliderSlider.container.xoffscreen,
+        y: sliderSlider.container.yoffscreen,
+        alpha: 0,
+        easing: Easing.easeOut
+    };
+    
+    setTimeout(function() {
+		Animate.to(sliderSlider.container, ANIMATE_TIME, data);
+	}, delay);
 }
 
-var container=new PIXI.Container();
-app.stage.addChild(container);
-    
-sliderContainer = container;
-
-var first=new Node(64, 64, container, "first");
-    first.onSelect = function() {
-        Solar.changeSceneTo('test');
+function showSlider(delay){
+    if (typeof delay==="undefined"){
+        delay=0;
     }
-var second=new Node(64+192, 64, container, "second");
-    second.onSelect = function() {
-        Solar.changeSceneTo('idle');
-    }
-var third=new Node(64+192*2, 64, container, "third");
-var fourth=new Node(64+192*3, 64, container, "fourth");
-
-var fifth = new Node(64+192*4, 64, container,"fifth");
     
-first.setNext(second);
-second.setPrevious(first);
+    var data={
+        x: sliderSlider.container.xorigin,
+        y: sliderSlider.container.yorigin,
+        alpha: 1,
+        easing: Easing.easeInOut
+    };
 
-second.setNext(third);
-third.setPrevious(second);
-
-third.setNext(fourth);
-fourth.setPrevious(third);
-    
-fourth.setNext(fifth);
-fifth.setPrevious(fourth);
-
-var slider=new Slider(second, container);   
+    setTimeout(function() {
+		Animate.to(sliderSlider.container, ANIMATE_TIME, data);
+	}, delay);
 }

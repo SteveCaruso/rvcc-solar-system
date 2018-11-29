@@ -10,7 +10,7 @@ var spaaace;
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
     
-    //Create the Space Core
+    //Create the Space Core 
     spaaace = new PIXI.Sprite(resources.spaceCore.texture);
         spaaace.width = 200;
         spaaace.height = 200;
