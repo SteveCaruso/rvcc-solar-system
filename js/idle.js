@@ -266,7 +266,7 @@ Solar.loader.on('complete', function(loader, resources) {
 
 	//Jupiter
 	// Coriander
-	var jupiter = new PIXI.Sprite(resources.jupiter.texture);
+	jupiter = new PIXI.Sprite(resources.jupiter.texture);
 		jupiter.width = 100;
 		jupiter.height = 100;
 		jupiter.anchor.set(0.5);
