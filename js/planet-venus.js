@@ -1,15 +1,15 @@
 //Create our scene
-var earthScreen = new Solar.Scene("earth");
+var venusScreen = new Solar.Scene("venus");
 
 //Queue up our files we'll need
-//None!
+
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = earthScreen;
-    var targetPlanet = earth;
+    var scene = venusScreen;
+    var targetPlanet = venus;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();
@@ -36,7 +36,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("Earth",titleStyle);
+    var title = new PIXI.Text("Venus",titleStyle);
         title.x = 1200;
         title.y = 100;
     
@@ -65,8 +65,8 @@ Solar.loader.on('complete',function(loader,resources) {
     
     
     
-    //Create our copy of the earth
-    var planet = new PIXI.Sprite(resources.earth.texture);
+    //Create our copy of the venus
+    var planet = new PIXI.Sprite(resources.venus.texture);
         planet.width = 200;
         planet.height = 200;
         planet.anchor.set(0.5);
@@ -83,14 +83,13 @@ Solar.loader.on('complete',function(loader,resources) {
 		//If it's from the idle scene, we do something special
 		//if (Solar.currentScene.name == "idle") {
             
-            //While the real earth is on the stage, let's grab its coordinates
+            //While the real venus is on the stage, let's grab its coordinates
             var planetPos = targetPlanet.getGlobalPosition();
-            var planetBounds = targetPlanet.getBounds();
-            //And set our earth to them
+            //And set our venus to them
             planet.x = planetPos.x;
             planet.y = planetPos.y;
-            planet.width = planet.width * planet.parent.scale.x;
-            planet.height = planet.width * planet.parent.scale.y;
+            planet.width = targetPlanet.width;
+            planet.height = targetPlanet.height;
             
             //Let's fade in our scene over the idle screen
             scene.alpha = 0;
@@ -134,7 +133,7 @@ Solar.loader.on('complete',function(loader,resources) {
 		
         backbutton.interactive = false;
         
-        //While the real earth is on the stage, let's grab its coordinates
+        //While the real venus is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();
         
         Animate.to(backbutton,500,{alpha:0,
@@ -150,7 +149,7 @@ Solar.loader.on('complete',function(loader,resources) {
         app.stage.addChildAt(solarSystem,0);
         Animate.to(solarSystem,3000,{alpha:1,easing:Easing.easeInOut});
         
-        //Animate the earth back.
+        //Animate the venus back.
         await Animate.to(planet,3000,{    x:planetPos.x,
                                             y:planetPos.y,
                                             width:targetPlanet.width,
@@ -172,7 +171,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Set the event listeners
 	targetPlanet.interactive = true;
     targetPlanet.on('click', function() {
-		Solar.changeSceneTo("earth");
+		Solar.changeSceneTo("venus");
 	});
 	
 	//When done, head back
