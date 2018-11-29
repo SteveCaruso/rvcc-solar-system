@@ -1,0 +1,13 @@
+Asteroid Belt
+	surface temperature: N/A
+	core temperature: N/A
+	1 day on Asteroid Belt: N/A
+	1 year on Asteroid Belt: N/A
+	lies between the orbits of Mars and Jupiter
+	actually is mostly lots of empty space
+	total mass of the belt is about 1/25 of our Moon's mass
+	the four largest asteroids take up about half of that; Ceres, Vesta, Pallas, and Hygeia
+	Ceres: Discovered in 1801, contains about 1/3 of all the Asteroid Belt's mass
+	Vesta: Discovered in 1807, contains a bit less than 1/10 of all the Asteroid Belt's mass
+	Pallas: Discovered in 1802, is a bit smaller than Vesta
+	Hygeia: Discovered in 1849, is about half the size of Pallas
