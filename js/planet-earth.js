@@ -2,8 +2,7 @@
 var earthScreen = new Solar.Scene("earth");
 
 //Queue up our files we'll need
-Solar.loader.add('infobox',"img/ui/infobox.png");
-Solar.loader.add('backbutton',"img/ui/backbutton.png");
+//None!
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -86,11 +85,12 @@ Solar.loader.on('complete',function(loader,resources) {
             
             //While the real earth is on the stage, let's grab its coordinates
             var planetPos = targetPlanet.getGlobalPosition();
+            var planetBounds = targetPlanet.getBounds();
             //And set our earth to them
             planet.x = planetPos.x;
             planet.y = planetPos.y;
-            planet.width = targetPlanet.width;
-            planet.height = targetPlanet.height;
+            planet.width = planet.width * planet.parent.scale.x;
+            planet.height = planet.width * planet.parent.scale.y;
             
             //Let's fade in our scene over the idle screen
             scene.alpha = 0;
