@@ -91,9 +91,9 @@ Solar.Scene = function(name) {
 
 //Change to the named scene and provoke its transition
 Solar.changeSceneTo = async function(name) {
-
-	if (Solar.scenes[name] === undefined)
-		throw "So such scene.";
+    if (Solar.scenes[name] === undefined){
+        throw "No such scene: "+name;
+    }
 
 	//Set the incoming scene
 	Solar.incomingScene = Solar.scenes[name];
@@ -107,10 +107,22 @@ Solar.changeSceneTo = async function(name) {
 	Solar.currentScene = Solar.incomingScene;
 }
 
-Solar.startScene = async function(name) {
+Solar.changeSceneDiscardCurrent=async function(name){
+    await Solar.discardCurrentScene();
+    await Solar.changeSceneTo(name);
+}
 
-	if (Solar.scenes[name] === undefined)
-		throw "So such scene.";
+Solar.discardCurrentScene=async function(){
+    //Trigger the transition
+    if (Solar.currentScene!==undefined){
+        await Solar.currentScene.transitionOut();
+    }
+}
+
+Solar.startScene = async function(name) {
+    if (Solar.scenes[name] === undefined){
+        throw "No such scene: "+name;
+    }
 	
 	//Set the incoming scene
 	Solar.incomingScene = Solar.scenes[name];

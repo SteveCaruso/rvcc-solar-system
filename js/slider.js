@@ -196,7 +196,9 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
                 easing: Easing.easeOut
             };
 
-            Animate.to(this.picture, ANIMATE_TIME, how).then(node.onSelect);
+            Animate.to(this.picture, ANIMATE_TIME, how).then(function(){
+                node.onSelect();
+            });
         }
 
         pdistance(x, y, x2, y2){
@@ -234,31 +236,31 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     var node7=new Node(64+6*192, 64, container, "Heat Death");
     
     node1.onSelect = function() {
-        Solar.changeSceneTo("timeline: big bang");
+        Solar.changeSceneDiscardCurrent("timeline: big bang");
     }
     
     node2.onSelect = function() {
-        Solar.changeSceneTo("timeline: stellar dust");
+        Solar.changeSceneDiscardCurrent("timeline: stellar dust");
     }
     
     node3.onSelect = function() {
-        Solar.changeSceneTo("timeline: accretion disk");
+        Solar.changeSceneDiscardCurrent("timeline: accretion disk");
     }
     
     node4.onSelect = function() {
-        Solar.changeSceneTo("idle");
+        Solar.changeSceneDiscardCurrent("idle");
     }
     
     node5.onSelect = function() {
-        Solar.changeSceneTo("timeline: red giant");
+        Solar.changeSceneDiscardCurrent("timeline: red giant");
     }
     
     node6.onSelect = function() {
-        Solar.changeSceneTo("timeline: white dwarf");
+        Solar.changeSceneDiscardCurrent("timeline: white dwarf");
     }
     
     node7.onSelect = function() {
-        Solar.changeSceneTo("timeline: death");
+        Solar.changeSceneDiscardCurrent("timeline: death");
     }
 
     node1.setNext(node2);

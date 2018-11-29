@@ -2,13 +2,15 @@
  * Timeline frames
  */
 
+TIMELINE_TIME=1000;
+
 //Create our scene
 var timeline1Bang = new Solar.Scene("timeline: big bang");
 var timeline2Dust = new Solar.Scene("timeline: stellar dust");
-var timeline1Disk = new Solar.Scene("timeline: accretion disk");
-var timeline1Giant = new Solar.Scene("timeline: red giant");
-var timeline1Dwarf = new Solar.Scene("timeline: white dwarf");
-var timeline1Death = new Solar.Scene("timeline: death");
+var timeline3Disk = new Solar.Scene("timeline: accretion disk");
+var timeline5Giant = new Solar.Scene("timeline: red giant");
+var timeline6Dwarf = new Solar.Scene("timeline: white dwarf");
+var timeline7Death = new Solar.Scene("timeline: death");
 
 //Queue up our files we'll need
 /*Solar.loader
@@ -23,6 +25,16 @@ var tlStyle = new PIXI.TextStyle({
 	fill: ['#ffffff']
 });
 
+var tlDataIn={
+    alpha: 1,
+    easing: Easing.EaseInOut
+}
+
+var tlDataOut={
+    alpha: 0,
+    easing: Easing.EaseInOut
+}
+
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete', function(loader, resources) {
     /*var nineslice=new PIXI.mesh.NineSlicePlane(loader.resources.nineslice.texture, 16, 16, 16, 16);
@@ -34,24 +46,35 @@ Solar.loader.on('complete', function(loader, resources) {
     
     timeline.addChild(nineslice);*/
     
-    var dataIn={
-        alpha: 1,
-        easing: Easing.EaseInOut
-    }
+    assignTLTransitionIn(timeline1Bang);
+    assignTLTransitionOut(timeline1Bang);
     
-    var dataOut={
-        alpha: 0,
-        easing: Easing.EaseInOut
-    }
+    assignTLTransitionIn(timeline2Dust);
+    assignTLTransitionOut(timeline2Dust);
     
-    timeline1Bang.transition = async function() {
-        app.stage.addChild(timeline1Bang);
-		await Animate.to(timeline1Bang,500, dataIn);
-	}
-	
-	timeline1Bang.transitionOut = async function() {
-        await Animate.to(timeline1Bang,500, dataOut);
-        app.stage.removeChild(timeline1Bang);
-        
-	}
+    assignTLTransitionIn(timeline3Disk);
+    assignTLTransitionOut(timeline3Disk);
+    
+    assignTLTransitionIn(timeline5Giant);
+    assignTLTransitionOut(timeline5Giant);
+    
+    assignTLTransitionIn(timeline6Dwarf);
+    assignTLTransitionOut(timeline6Dwarf);
+    
+    assignTLTransitionIn(timeline7Death);
+    assignTLTransitionOut(timeline7Death);
 });
+
+function assignTLTransitionIn(timeline){
+    timeline.transition=async function(){
+        app.stage.addChild(timeline);
+        await Animate.to(timeline, TIMELINE_TIME, tlDataIn);
+    }
+}
+
+async function assignTLTransitionOut(timeline){
+    timeline.transitionOut=async function(){
+        await Animate.to(timeline, TIMELINE_TIME, tlDataOut);
+        app.stage.removeChild(timeline);
+    }
+}
