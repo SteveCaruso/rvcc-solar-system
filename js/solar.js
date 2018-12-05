@@ -19,7 +19,7 @@ var titleStyle = new PIXI.TextStyle({
 
 var textStyle = new PIXI.TextStyle({
     fontFamily:     "Constantia (Headings)",
-    fontSize:       24,
+    fontSize:       48,
     fill:           0x000000,
     wordWrap:       true,
     wordWrapWidth:  675
