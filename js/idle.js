@@ -33,6 +33,10 @@ var style = new PIXI.TextStyle({
 	fill: ['#ffffff']
 	});
 
+var textHeight = -75;
+
+var textRotate = -.5;
+
 //Expose the variables that we'll need public
 var theSun,
 	mercuryOrbit, 	mercury,
@@ -89,8 +93,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Mercury's text
 	var mercuryText = new PIXI.Text('Mercury', style);
 		mercuryText.x = mercury.x;
-		mercuryText.y = (mercury.y - ((mercury.height/2) + style.fontSize));
+		mercuryText.y = textHeight;
 		mercuryText.alpha = 0;
+        mercuryText.rotation = textRotate;
 
 	//Mercury's Orbit
 	mercuryOrbit = new PIXI.Container();
@@ -120,8 +125,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Venus's text
 	var venusText = new PIXI.Text('Venus', style);
 		venusText.x = venus.x;
-		venusText.y = (venus.y - ((venus.height/2) + style.fontSize));
+		venusText.y = textHeight;
 		venusText.alpha = 0;
+        venusText.rotation = textRotate;
 
 	//Venus's Orbit
 	venusOrbit = new PIXI.Container();
@@ -151,8 +157,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Earth's text
 	var earthText = new PIXI.Text('Earth', style);
 		earthText.x = earth.x;
-		earthText.y = (earth.y - ((earth.height/2) + style.fontSize));
+		earthText.y = textHeight;
 		earthText.alpha = 0;
+        earthText.rotation = textRotate;
 
 	//Earth's Orbit
 	earthOrbit = new PIXI.Container();
@@ -206,8 +213,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Mars's text
 	var marsText = new PIXI.Text('Mars', style);
 		marsText.x = mars.x;
-		marsText.y = (mars.y - ((mars.height/2) + style.fontSize));
+		marsText.y = textHeight;
 		marsText.alpha = 0;
+        marsText.rotation = textRotate;
 
 	//Mars's Orbit
 	marsOrbit = new PIXI.Container();
@@ -281,8 +289,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Jupiter's text
 	var jupiterText = new PIXI.Text('Jupiter', style);
 		jupiterText.x = jupiter.x;
-		jupiterText.y = (jupiter.y - ((jupiter.height/2) + jupiterText.style.fontSize));
+		jupiterText.y = textHeight;
 		jupiterText.alpha = 0;
+        jupiterText.rotation = textRotate;
 
 	//Jupiter's Orbit
 	var jupiterOrbit = new PIXI.Container();
@@ -312,8 +321,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Saturn's text
 	var saturnText = new PIXI.Text('Saturn', style);
 		saturnText.x = saturn.x;
-		saturnText.y = (saturn.y - ((saturn.height/2) + style.fontSize));
+		saturnText.y = textHeight;
 		saturnText.alpha = 0;
+        saturnText.rotation = textRotate;
 
 	saturnOrbit = new PIXI.Container();
 		saturnOrbit.addChild(saturnRing, saturn, saturnText);
@@ -338,8 +348,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Uranus's text
 	var uranusText = new PIXI.Text('Uranus', style);
 		uranusText.x = uranus.x;
-		uranusText.y = (uranus.y - ((uranus.height/2) + style.fontSize));
+		uranusText.y = textHeight;
 		uranusText.alpha = 0;
+        uranusText.rotation = textRotate;
 
 	//uranus's Orbit
 	uranusOrbit = new PIXI.Container();
@@ -369,8 +380,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Neptune's text
 	var neptuneText = new PIXI.Text('Neptune', style);
 		neptuneText.x = neptune.x;
-		neptuneText.y = (neptune.y - ((neptune.height/2) + style.fontSize));
+		neptuneText.y = textHeight;
 		neptuneText.alpha = 0;
+        neptuneText.rotation = textRotate;
 
 	neptuneOrbit=new PIXI.Container();
 
@@ -397,8 +409,9 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Pluto's text
 	var plutoText = new PIXI.Text('Pluto', style);
 		plutoText.x = pluto.x;
-		plutoText.y = (pluto.y - ((pluto.height/2) + style.fontSize));
+		plutoText.y = textHeight;
 		plutoText.alpha = 0;
+        plutoText.rotation = textRotate;
 
 	plutoOrbit=new PIXI.Container();
 
