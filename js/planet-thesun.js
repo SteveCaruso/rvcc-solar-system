@@ -8,8 +8,8 @@ var thesunScreen = new Solar.Scene("thesun");
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = thesunScreen;
-    var targetPlanet = thesun;
+    var scene = theSunScreen;
+    var targetPlanet = theSun;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();

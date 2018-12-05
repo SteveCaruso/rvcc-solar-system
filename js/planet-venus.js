@@ -88,8 +88,8 @@ Solar.loader.on('complete',function(loader,resources) {
             //And set our venus to them
             planet.x = planetPos.x;
             planet.y = planetPos.y;
-            planet.width = targetPlanet.width;
-            planet.height = targetPlanet.height;
+            planet.width  = targetPlanet.width * targetPlanet.parent.scale.x;
+            planet.height = targetPlanet.height * targetPlanet.parent.scale.y;
             
             //Let's fade in our scene over the idle screen
             scene.alpha = 0;
@@ -152,8 +152,8 @@ Solar.loader.on('complete',function(loader,resources) {
         //Animate the venus back.
         await Animate.to(planet,3000,{    x:planetPos.x,
                                             y:planetPos.y,
-                                            width:targetPlanet.width,
-                                            height:targetPlanet.height,
+                                            width:targetPlanet.width * targetPlanet.parent.scale.x,
+                                            height:targetPlanet.width * targetPlanet.parent.scale.y,
                                             easing:Easing.easeInOut
                                      });
         
