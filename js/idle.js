@@ -16,7 +16,7 @@ Solar.loader
 	.add("earth","img/earth.png")		//Earth
 	//	.add("moon","img/moon.png")		//The Moon
 	.add("mars","img/mars.png")			//Mars
-	//We need some real asteroids here
+	.add("asteroid","img/asteroidVesta.png")			//Asteroids
     .add("spaaace","img/spaaace.png")	//spaaace
 	.add("jupiter","img/jupiter.png")	//Jupiter
 	.add("saturn","img/saturn.png")		//Saturn
@@ -243,7 +243,7 @@ Solar.loader.on('complete', function(loader, resources) {
 	//asterOrbit.addChild(asterRing);
 
 	for (var i=0; i<asterCount; i++){
-		var asteroid=new PIXI.Sprite(resources.mars.texture); // add an asteroid picture later
+		var asteroid=new PIXI.Sprite(resources.asteroid.texture); // add an asteroid picture later
 			asteroid.width=Math.floor(Math.random()*4+4);
 			asteroid.height=Math.floor(Math.random()*4+4);
 		// if you want them to be round just set asteriod.height = asteriod.width
