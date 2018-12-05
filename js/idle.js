@@ -14,7 +14,7 @@ Solar.loader
 	.add("mercury","img/mercury.png")	//Mercury
 	.add("venus","img/venus.png")		//Venus
 	.add("earth","img/earth.png")		//Earth
-	//	.add("moon","img/moon.png")		//The Moon
+	.add("moon","img/moon.png")		//The Moon
 	.add("mars","img/mars.png")			//Mars
 	.add("asteroid","img/asteroidVesta.png")			//Asteroids
     .add("spaaace","img/spaaace.png")	//spaaace
@@ -173,7 +173,7 @@ Solar.loader.on('complete', function(loader, resources) {
 	solarSystem.addChild(earthOrbit);
 
 		//The Moon's Orbit
-		theMoon = new PIXI.Sprite(resources.mercury.texture);
+		theMoon = new PIXI.Sprite(resources.moon.texture);
 		theMoon.width = 20;
 		theMoon.height = 20;
 		theMoon.anchor.set(0.5);
