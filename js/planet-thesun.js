@@ -44,8 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("The Sun:
-                             864,000 miles in diameter.109 times the size of earthRotation period at equator is 27 days.Surface temperature 10000 degreesCore Temperature: 27 million degrees.Mostly Hydrogen and Helium. Constant explosions",textStyle);
+    var text = new PIXI.Text("The Sun:864,000 miles in diameter.109 times the size of earthRotation period at equator is 27 days.Surface temperature 10000 degreesCore Temperature: 27 million degrees.Mostly Hydrogen and Helium. Constant explosions",textStyle);
         text.x = 1200;
         text.y = 180;
     

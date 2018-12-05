@@ -43,15 +43,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Mercury:
-                                        Day: 59 Earth Days
-                                        Year: 88 Earth Days
-                                        1st Planet
-                                        3000 miles in Diameter. Less than half of earth
-                                        Covered in craters due to minimal atmosphere
-                                        36 million miles from the sun
-                                        No Moons
-                                        -279 degrees at night, 801 degrees during the day",textStyle);
+    var text = new PIXI.Text("Mercury: Day: 59 Earth Days Year: 88 Earth Days 1st Planet 3000 miles in Diameter. Less than half of earth Covered in craters due to minimal atmosphere 36 million miles from the sun No Moons-279 degrees at night, 801 degrees during the day",textStyle);
         text.x = 1200;
         text.y = 180;
     
