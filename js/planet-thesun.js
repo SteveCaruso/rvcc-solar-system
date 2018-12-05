@@ -1,5 +1,5 @@
 //Create our scene
-var earthScreen = new Solar.Scene("earth");
+var thesunScreen = new Solar.Scene("thesun");
 
 //Queue up our files we'll need
 //None!
@@ -8,8 +8,8 @@ var earthScreen = new Solar.Scene("earth");
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = earthScreen;
-    var targetPlanet = earth;
+    var scene = thesunScreen;
+    var targetPlanet = thesun;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();
@@ -36,7 +36,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("Earth",titleStyle);
+    var title = new PIXI.Text("thesun",titleStyle);
         title.x = 1200;
         title.y = 100;
     
@@ -44,15 +44,8 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Earth:
-                                    Day: 23.9 hours
-                                    Year: 365.25 Days
-                                    One moon
-                                    3rd planet
-                                    93 million miles from the sun
-                                    7918 miles in diameter
-                                    Temperature: 57 degrees
-                                    Atmosphere: mostly nitrogen, oxygen, argon",textStyle);
+    var text = new PIXI.Text("The Sun:
+                             864,000 miles in diameter.109 times the size of earthRotation period at equator is 27 days.Surface temperature 10000 degreesCore Temperature: 27 million degrees.Mostly Hydrogen and Helium. Constant explosions",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -73,15 +66,15 @@ Solar.loader.on('complete',function(loader,resources) {
     
     
     
-    //Create our copy of the earth
-    var planet = new PIXI.Sprite(resources.earth.texture);
+    //Create our copy of the thesun
+    var planet = new PIXI.Sprite(resources.thesun.texture);
         planet.width = 200;
         planet.height = 200;
         planet.anchor.set(0.5);
 		planet.x = 0;
 		planet.y = 0;
 	
-	//Add our Earth to the scene
+	//Add our thesun to the scene
     scene.addChild(planet);
 	
     
@@ -91,10 +84,10 @@ Solar.loader.on('complete',function(loader,resources) {
 		//If it's from the idle scene, we do something special
 		//if (Solar.currentScene.name == "idle") {
             
-            //While the real earth is on the stage, let's grab its coordinates
+            //While the real thesun is on the stage, let's grab its coordinates
             var planetPos = targetPlanet.getGlobalPosition();
             var planetBounds = targetPlanet.getBounds();
-            //And set our earth to them
+            //And set our thesun to them
             planet.x = planetPos.x;
             planet.y = planetPos.y;
             planet.width = planet.width * planet.parent.scale.x;
@@ -142,7 +135,7 @@ Solar.loader.on('complete',function(loader,resources) {
 		
         backbutton.interactive = false;
         
-        //While the real earth is on the stage, let's grab its coordinates
+        //While the real thesun is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();
         
         Animate.to(backbutton,500,{alpha:0,
@@ -158,7 +151,7 @@ Solar.loader.on('complete',function(loader,resources) {
         app.stage.addChildAt(solarSystem,0);
         Animate.to(solarSystem,3000,{alpha:1,easing:Easing.easeInOut});
         
-        //Animate the earth back.
+        //Animate the thesun back.
         await Animate.to(planet,3000,{    x:planetPos.x,
                                             y:planetPos.y,
                                             width:targetPlanet.width,
@@ -180,7 +173,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Set the event listeners
 	targetPlanet.interactive = true;
     targetPlanet.on('click', function() {
-		Solar.changeSceneTo("earth");
+		Solar.changeSceneTo("thesun");
 	});
 	
 	//When done, head back

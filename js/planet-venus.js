@@ -44,7 +44,16 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at sapien a lorem imperdiet ultricies sit amet a urna. Aenean ultrices vel ligula sit amet convallis. Cras rhoncus neque sollicitudin mollis placerat. Cras aliquet velit vitae pulvinar tristique. Quisque id volutpat purus, eu ultricies metus. Nullam laoreet varius nulla, tincidunt gravida ipsum lobortis at. Morbi lacinia consectetur magna, eu maximus ipsum aliquet non. Sed finibus urna vitae arcu gravida sodales.",textStyle);
+    var text = new PIXI.Text("Venus:
+                                    Day: 243 earth days
+                                    Year: 225 earth days
+                                    2nd planet
+                                    About the size of Earth
+                                    67 million miles from the sun
+                                    Covered in high volcanic mountains. hurricane like winds
+                                    No moons
+                                    surface temperature is about 900 degrees.
+                                    Atmosphere: Carbon Dioxide, Nitrogen",textStyle);
         text.x = 1200;
         text.y = 180;
     
