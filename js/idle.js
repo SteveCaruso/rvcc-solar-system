@@ -24,6 +24,7 @@ Solar.loader
 	.add("neptune","img/neptune.png")	//Neptune
 	.add("pluto","img/pluto.png")		//Pluto
 	
+    .add("milkyway","img/milkyway.jpg") //Background image
 
 // A style for the text
 var style = new PIXI.TextStyle({
@@ -55,9 +56,51 @@ var theSun,
 	orbit,
 	lineup;
 
+function activatePlanets() {
+    theSun.interactive = true;
+    mercury.interactive = true;
+    venus.interactive = true;
+    earth.interactive = true;
+    mars.interactive = true;
+
+    jupiter.interactive = true;
+    saturn.interactive = true;
+    uranus.interactive = true;
+    neptune.interactive = true;
+    pluto.interactive = true;
+}
+
+function deactivatePlanets() {
+    theSun.interactive = false;
+    mercury.interactive = false;
+    venus.interactive = false;
+    earth.interactive = false;
+    mars.interactive = false;
+
+    jupiter.interactive = false;
+    saturn.interactive = false;
+    uranus.interactive = false;
+    neptune.interactive = false;
+    pluto.interactive = false;
+}
+
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete', function(loader, resources) {
+    
+    var background = new PIXI.Sprite(resources.milkyway.texture);
+        var bgheight = Math.sqrt(app.view.width * app.view.width + app.view.height * app.view.height);
+        background.height = bgheight;
+        background.scale.x = background.scale.y;
+        background.anchor.set(0.5);
+        background.x = centerX;
+        background.y = centerY;
+        background.tint = 0x666666;
+        app.stage.addChild(background);
+    
+        Animate.loop(background,function(delta) {
+            background.rotation = (-base / 100 * delta) % (2*Math.PI);
+        });
     
     solarSystem.transition = async function() {
         if (Solar.incomingScene.name == "earth") {
@@ -239,7 +282,8 @@ Solar.loader.on('complete', function(loader, resources) {
 		asterRing.drawCircle(0, 0, asterRadius);
 		asterRing.alpha=0.25;
 
-	asterOrbit=new PIXI.Container;
+	asterOrbit=new PIXI.Container();
+    var asterTwist = new PIXI.Container();
 	//asterOrbit.addChild(asterRing);
 
 	for (var i=0; i<asterCount; i++){
@@ -256,8 +300,14 @@ Solar.loader.on('complete', function(loader, resources) {
 			asteroid.x = xx;
 			asteroid.y = yy;
 
-			asterOrbit.addChild(asteroid);
+			asterTwist.addChild(asteroid);
 		}
+    
+    asterOrbit.addChild(asterTwist);
+    
+    Animate.loop(asterTwist,function(delta) {
+        asterTwist.rotation = (base / (1000/365.25) * delta) % (2*Math.PI);
+    });
 
 	solarSystem.addChild(asterOrbit);
 
@@ -269,7 +319,17 @@ Solar.loader.on('complete', function(loader, resources) {
     spaaace.x = 420;
     
     spaaaceOrbit = new PIXI.Container();
-	spaaaceOrbit.addChild(spaaace);
+    var spaaaceTwist = new PIXI.Container();
+    
+    
+    Animate.loop(spaaaceTwist,function(delta) {
+        spaaaceTwist.rotation = (base / (1200/365.25) * delta) % (2*Math.PI);
+    });
+    
+    spaaaceTwist.addChild(spaaace);
+    
+	spaaaceOrbit.addChild(spaaaceTwist);
+    
 	solarSystem.addChild(spaaaceOrbit);
 
 	//Jupiter
@@ -421,23 +481,36 @@ Solar.loader.on('complete', function(loader, resources) {
 
 		solarSystem.addChild(plutoOrbit);
 
+    
+    //Title, etc.
+    var titleText = new PIXI.Text('The Solar System', {
+                                                        fontFamily: 'Constantina',
+                                                        fontSize: 75,
+                                                        fontWeight: 'bold',
+                                                        fill: ['#ffffff']
+                                                        });
+        titleText.x = centerX - titleText.width - 40;
+        titleText.y = -centerY + 20;
+    
+        solarSystem.addChild(titleText);
+    
+    var subtitleText = new PIXI.Text('Tap To Interact',{
+                                                        fontFamily: 'Constantina',
+                                                        fontSize: 50,
+                                                        fill: ['#ffffff']
+                                                        });
+        subtitleText.x = centerX - subtitleText.width - 40;
+        subtitleText.y = -centerY + 20 + titleText.height;
+        solarSystem.addChild(subtitleText);
+    
+    
 	//Base rate of orbit
 	var base = .0005;
 	var orbiting = false;
 
 	orbit = async function () {
         
-        theSun.interactive = false;
-        mercury.interactive = false;
-        venus.interactive = false;
-        earth.interactive = false;
-        mars.interactive = false;
-        
-        jupiter.interactive = false;
-        saturn.interactive = false;
-        uranus.interactive = false;
-        neptune.interactive = false;
-        pluto.interactive = false;
+        deactivatePlanets();
 	
 		orbiting = true;
 	       
@@ -465,7 +538,14 @@ Solar.loader.on('complete', function(loader, resources) {
 		Animate.to(earthOrbit,linetime,line);
 			Animate.to(theMoonOrbit,3000,{rotation:Math.PI/2,easing:Easing.easeInOut});
 		Animate.to(marsOrbit,linetime,line);
-        Animate.to(asterOrbit,linetime,line);
+        Animate.to(asterOrbit,linetime,{
+            easing:Easing.easeInOut,
+            scale:1
+        });
+        Animate.to(spaaaceOrbit,linetime,{
+            easing:Easing.easeInOut,
+            scale:1
+        });
 		Animate.to(jupiterOrbit,linetime,line);
 		Animate.to(saturnOrbit,linetime,line);
 		Animate.to(uranusOrbit,linetime,line);
@@ -493,12 +573,6 @@ Solar.loader.on('complete', function(loader, resources) {
         Animate.loop(marsOrbit,function(delta) {
             marsOrbit.rotation = (base / (687/365.25) * delta) % (2*Math.PI);
         });
-        Animate.loop(asterOrbit,function(delta) {
-            asterOrbit.rotation = (base / (1000/365.25) * delta) % (2*Math.PI);
-        });
-        Animate.loop(spaaaceOrbit,function(delta) {
-            spaaaceOrbit.rotation = -(base / (1000/365.25) * delta) % (2*Math.PI);
-        });
         Animate.loop(jupiterOrbit,function(delta) {
             jupiterOrbit.rotation = (base / (4332/365.25) * delta) % (2*Math.PI);
         });
@@ -522,7 +596,7 @@ Solar.loader.on('complete', function(loader, resources) {
 	    });
     }
 
-	lineup = function() {
+	lineup = async function() {
 	   
         var line = {
             rotation:.5,
@@ -537,7 +611,14 @@ Solar.loader.on('complete', function(loader, resources) {
 		Animate.to(earthOrbit,3000,line);
 			Animate.to(theMoonOrbit,3000,{rotation:Math.PI/2,easing:Easing.easeInOut});
 		Animate.to(marsOrbit,3000,line);
-        Animate.to(asterOrbit,3000,line);
+        Animate.to(asterOrbit,3000,{
+            easing:Easing.easeInOut,
+            scale:1.8
+        });
+        Animate.to(spaaaceOrbit,3000,{
+            easing:Easing.easeInOut,
+            scale:1.8
+        });
 		Animate.to(jupiterOrbit,3000,line);
 		Animate.to(saturnOrbit,3000,line);
 		Animate.to(uranusOrbit,3000,line);
@@ -547,41 +628,26 @@ Solar.loader.on('complete', function(loader, resources) {
 		Animate.to(solarSystem,3000,{x:100,y:centerY,easing:Easing.easeInOut});
 		//Make the sun BIG
 		Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
-	
-		var speed = 250;
-
-		setTimeout(function() {
-			// adding the name text
-			Animate.to(mercuryText,speed,{alpha:1})
-				.then( _=> Animate.to(venusText,speed,{alpha:1}))
-				.then( _=> Animate.to(earthText,speed,{alpha:1}))
-				.then( _=> Animate.to(marsText,speed,{alpha:1}))
-				.then( _=> Animate.to(jupiterText,speed,{alpha:1}))
-				.then( _=> Animate.to(saturnText,speed,{alpha:1}))
-				.then( _=> Animate.to(uranusText,speed,{alpha:1}))
-				.then( _=> Animate.to(neptuneText,speed,{alpha:1}))
-				.then( _=> Animate.to(plutoText,speed,{alpha:1}));
-		},3000);
 
 		//Move the solar system to the left
 		Animate.to(solarSystem,3000,{x:200,y:200,easing:Easing.easeInOut});
 
 		//Make the sun BIG
-		Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
+		await Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
         
-        theSun.interactive = true;
-        mercury.interactive = true;
-        venus.interactive = true;
-        earth.interactive = true;
-        mars.interactive = true;
+        var speed = 250;
         
-        jupiter.interactive = true;
-        saturn.interactive = true;
-        uranus.interactive = true;
-        neptune.interactive = true;
-        pluto.interactive = true;
+        Animate.to(mercuryText,speed,{alpha:1})
+            .then( _=> Animate.to(venusText,speed,{alpha:1}))
+            .then( _=> Animate.to(earthText,speed,{alpha:1}))
+            .then( _=> Animate.to(marsText,speed,{alpha:1}))
+            .then( _=> Animate.to(jupiterText,speed,{alpha:1}))
+            .then( _=> Animate.to(saturnText,speed,{alpha:1}))
+            .then( _=> Animate.to(uranusText,speed,{alpha:1}))
+            .then( _=> Animate.to(neptuneText,speed,{alpha:1}))
+            .then( _=> Animate.to(plutoText,speed,{alpha:1}));
         
-        countdownToOrbit();
+        activatePlanets();
     }
     
     /*

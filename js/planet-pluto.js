@@ -145,7 +145,7 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //Animate solar system back in
         solarSystem.alpha = 0;
-        app.stage.addChildAt(solarSystem,0);
+        app.stage.addChildAt(solarSystem,1);
         Animate.to(solarSystem,3000,{alpha:1,easing:Easing.easeInOut});
         
         //Animate the pluto back.
