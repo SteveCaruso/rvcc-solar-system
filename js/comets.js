@@ -8,13 +8,13 @@ app.stage.addChild(cometContainer);
 var resources=null;
 
 const cometPeriods=[
-    8, 16, 24, 60
+    30, 60, 120, 600
 ]
 
 const COMET_RADIUS=16;
 
 const COMET_TRAVEL_TIME=[
-    3, 6, 12, 30
+    12, 24, 120, 300
 ]
 
 //Queue up our files we'll need
@@ -26,8 +26,8 @@ Solar.loader.on('complete', function(loader, loadedResources) {
     setTimeout(function(){
         setInterval(function(){
             spawnComet();
-        }, 1000/*randomElementFromArray(cometPeriods)*1000/4*/);
-    }, 1000/*10000*/);
+        }, randomElementFromArray(cometPeriods)*1000/4);
+    }, 1000);
 });
 
 function spawnComet(){
