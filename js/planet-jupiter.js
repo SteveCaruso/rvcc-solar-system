@@ -73,8 +73,20 @@ Solar.loader.on('complete',function(loader,resources) {
 		planet.y = 0;
 	
 	//Add our Jupiter to the scene
-    scene.addChild(planet);
+    scene.addChildAt(planet,1);
 	
+    
+    //Jupiter's moons
+    var jmoon = new PIXI.Sprite(resources.moon.texture);
+        jmoon.width = 400;
+        jmoon.height = 400;
+        jmoon.anchor.set(0.5);
+        jmoon.x = 200;
+        jmoon.y = 200;
+    
+    content.addChild(jmoon);
+    
+    
     
 	//Change the default transition
 	scene.transition = async function() {

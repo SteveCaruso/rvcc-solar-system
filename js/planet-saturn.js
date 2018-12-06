@@ -73,7 +73,7 @@ Solar.loader.on('complete',function(loader,resources) {
 		planet.y = 0;
 	
 	//Add our Saturn to the scene
-    scene.addChild(planet);
+    scene.addChildAt(planet,1);
 	
     
 	//Change the default transition
@@ -100,7 +100,7 @@ Solar.loader.on('complete',function(loader,resources) {
             //the solar system
             Animate.to(planet,3000,{      x:540,
                                             y:centerY,
-                                            width:1080,
+                                            width:2160,
                                             height:1080,
                                             easing:Easing.easeInOut
                                      });

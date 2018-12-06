@@ -24,6 +24,7 @@ Solar.loader
 	.add("neptune","img/neptune.png")	//Neptune
 	.add("pluto","img/pluto.png")		//Pluto
 	
+    .add("milkyway","img/milkyway.jpg") //Background image
 
 // A style for the text
 var style = new PIXI.TextStyle({
@@ -55,9 +56,51 @@ var theSun,
 	orbit,
 	lineup;
 
+function activatePlanets() {
+    theSun.interactive = true;
+    mercury.interactive = true;
+    venus.interactive = true;
+    earth.interactive = true;
+    mars.interactive = true;
+
+    jupiter.interactive = true;
+    saturn.interactive = true;
+    uranus.interactive = true;
+    neptune.interactive = true;
+    pluto.interactive = true;
+}
+
+function deactivatePlanets() {
+    theSun.interactive = false;
+    mercury.interactive = false;
+    venus.interactive = false;
+    earth.interactive = false;
+    mars.interactive = false;
+
+    jupiter.interactive = false;
+    saturn.interactive = false;
+    uranus.interactive = false;
+    neptune.interactive = false;
+    pluto.interactive = false;
+}
+
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete', function(loader, resources) {
+    
+    var background = new PIXI.Sprite(resources.milkyway.texture);
+        var bgwidth = Math.sqrt(app.view.width * app.view.width + app.view.height * app.view.height);
+        background.width = bgwidth;
+        background.scale.y = background.scale.x;
+        background.anchor.set(0.5);
+        background.x = centerX;
+        background.y = centerY;
+        background.tint = 0x666666;
+        app.stage.addChild(background);
+    
+        Animate.loop(background,function(delta) {
+            background.rotation = (-base / 100 * delta) % (2*Math.PI);
+        });
     
     solarSystem.transition = async function() {
         if (Solar.incomingScene.name == "earth") {
@@ -427,17 +470,7 @@ Solar.loader.on('complete', function(loader, resources) {
 
 	orbit = async function () {
         
-        theSun.interactive = false;
-        mercury.interactive = false;
-        venus.interactive = false;
-        earth.interactive = false;
-        mars.interactive = false;
-        
-        jupiter.interactive = false;
-        saturn.interactive = false;
-        uranus.interactive = false;
-        neptune.interactive = false;
-        pluto.interactive = false;
+        deactivatePlanets();
 	
 		orbiting = true;
 	       
@@ -569,19 +602,7 @@ Solar.loader.on('complete', function(loader, resources) {
 		//Make the sun BIG
 		Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
         
-        theSun.interactive = true;
-        mercury.interactive = true;
-        venus.interactive = true;
-        earth.interactive = true;
-        mars.interactive = true;
-        
-        jupiter.interactive = true;
-        saturn.interactive = true;
-        uranus.interactive = true;
-        neptune.interactive = true;
-        pluto.interactive = true;
-        
-        countdownToOrbit();
+        activatePlanets();
     }
     
     /*
