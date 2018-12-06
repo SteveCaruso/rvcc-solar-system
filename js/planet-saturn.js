@@ -1,14 +1,14 @@
 //Create our scene
-var jupiterScreen = new Solar.Scene("jupiter");
+var saturnScreen = new Solar.Scene("saturn");
 
-//Queue up our files we'll need
+
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = jupiterScreen;
-    var targetPlanet = jupiter;
+    var scene = saturnScreen;
+    var targetPlanet = saturn;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();
@@ -35,7 +35,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("Jupiter",titleStyle);
+    var title = new PIXI.Text("Saturn",titleStyle);
         title.x = 1200;
         title.y = 100;
     
@@ -43,7 +43,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("surface temperature: -145 degrees Celsius\ncore temperature:  about 24,000 Celsius\n1 day on Jupiter: just under 10 Earth hours\n1 year on Jupiter: 12 Earth years\n484 million miles from the sun\nradius of about 43,441 miles\nhas 79 moons as of 2018\nfour largest moons are; Io, Europa, Ganymede, and Callisto\nthere is a big red spot that is actually a massive storm that is about 10,159 miles across",textStyle);
+    var text = new PIXI.Text("Saturn: Day: 59 Earth Days Year: 88 Earth Days 1st Planet 3000 miles in Diameter. Less than half of earth Covered in craters due to minimal atmosphere 36 million miles from the sun No Moons-279 degrees at night, 801 degrees during the day",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -64,15 +64,15 @@ Solar.loader.on('complete',function(loader,resources) {
     
     
     
-    //Create our copy of the jupter
-    var planet = new PIXI.Sprite(resources.jupiter.texture);
+    //Create our copy of the saturn
+    var planet = new PIXI.Sprite(resources.saturn.texture);
         planet.width = 200;
         planet.height = 200;
         planet.anchor.set(0.5);
 		planet.x = 0;
 		planet.y = 0;
 	
-	//Add our Jupiter to the scene
+	//Add our Saturn to the scene
     scene.addChild(planet);
 	
     
@@ -82,9 +82,9 @@ Solar.loader.on('complete',function(loader,resources) {
 		//If it's from the idle scene, we do something special
 		//if (Solar.currentScene.name == "idle") {
             
-            //While the real jupiter is on the stage, let's grab its coordinates
+            //While the real saturn is on the stage, let's grab its coordinates
             var planetPos = targetPlanet.getGlobalPosition();
-            //And set our jupiter to them
+            //And set our saturn to them
             planet.x = planetPos.x;
             planet.y = planetPos.y;
             planet.width = targetPlanet.width * targetPlanet.parent.scale.x;
@@ -132,7 +132,7 @@ Solar.loader.on('complete',function(loader,resources) {
 		
         backbutton.interactive = false;
         
-        //While the real jupiter is on the stage, let's grab its coordinates
+        //While the real saturn is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();
         
         Animate.to(backbutton,500,{alpha:0,
@@ -148,7 +148,7 @@ Solar.loader.on('complete',function(loader,resources) {
         app.stage.addChildAt(solarSystem,0);
         Animate.to(solarSystem,3000,{alpha:1,easing:Easing.easeInOut});
         
-        //Animate the jupiter back.
+        //Animate the saturn back.
         await Animate.to(planet,3000,{    x:planetPos.x,
                                             y:planetPos.y,
                                             width:targetPlanet.width * targetPlanet.parent.scale.x,
@@ -170,7 +170,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Set the event listeners
 	targetPlanet.interactive = true;
     targetPlanet.on('click', function() {
-		Solar.changeSceneTo("jupiter");
+		Solar.changeSceneTo("saturn");
 	});
 	
 	//When done, head back

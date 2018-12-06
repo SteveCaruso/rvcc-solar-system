@@ -87,7 +87,7 @@ Solar.loader.on('complete',function(loader,resources) {
             //And set our mercury to them
             planet.x = planetPos.x;
             planet.y = planetPos.y;
-            planet.width  = targetPlanet.width * targetPlanet.parent.scale.x;
+            planet.width = targetPlanet.width * targetPlanet.parent.scale.x;
             planet.height = targetPlanet.height * targetPlanet.parent.scale.y;
             
             //Let's fade in our scene over the idle screen
@@ -152,7 +152,7 @@ Solar.loader.on('complete',function(loader,resources) {
         await Animate.to(planet,3000,{    x:planetPos.x,
                                             y:planetPos.y,
                                             width:targetPlanet.width * targetPlanet.parent.scale.x,
-                                            height:targetPlanet.width * targetPlanet.parent.scale.y,
+                                            height:targetPlanet.height * targetPlanet.parent.scale.y,
                                             easing:Easing.easeInOut
                                      });
         
