@@ -7,22 +7,33 @@ const TIMELINE_TIME=1000;
 //Create our scene
 var timeline1Bang = new Solar.Scene("timeline: big bang");
 var timeline2Dust = new Solar.Scene("timeline: stellar dust");
-var timeline3Disk = new Solar.Scene("timeline: accretion disk");
+var timeline3Disk = new Solar.Scene("timeline: disk");
 var timeline5Giant = new Solar.Scene("timeline: red giant");
 var timeline6Dwarf = new Solar.Scene("timeline: white dwarf");
 var timeline7Death = new Solar.Scene("timeline: death");
 
-//Queue up our files we'll need
-/*Solar.loader
-	.add("nineslice","img/ui/nineslice.png")*/;
-	
+var ipsum={
+    "Big Bang": `Egg rooster pecking order beak nest hatch hen. Incubation coop poultry hackles barnyard. Roost pullet crest hen chick chicken wattles broody scratch crest fowl. Hen comb coop broody hen. Hatch clutch hackles bantam hackles wattles hen hatch clutch wattles scratch. Rooster chicken incubation egg incubation. Egg free range rooster hen wattles crest clutch. Hatch comb bantam hackles comb pecking order.`,
+    
+    "Stellar Dust": `Bantam hatch wattles barnyard fowl hen barnyard coop roost pullet. Crest hackles hen chicken broody incubation. Scratch perch poultry roost rooster. Fowl chicken beak coop hen crest clutch free range roost. Free range hatch chick pullet bantam chicken.`,
+    
+    "Accretion Disk": `Wattles chick bantam nest. Broody hen clutch chicken coop rooster. Coop nest incubation nest egg. Beak pecking order poultry egg scratch pullet barnyard fowl hatch free range.`,
+    
+    "Red Giant": `Broody hen hackles nest broody crest beak. Hackles comb fowl pecking order. Scratch barnyard chicken clutch egg crest comb fowl egg pecking order. Nest clutch bantam hackles pullet. Bantam wattles pullet hackles comb pecking order chick hen pullet hackles hen. Poultry chick chicken wattles nest coop beak chick. Poultry comb coop pullet broody clutch pullet roost poultry nest pecking order.`,
+    
+    "Red Dwarf": ` Hackles perch hen scratch clutch wattles comb. Scratch pecking order hatch crest egg barnyard nest roost perch. Free range pullet incubation broody perch hatch hackles clutch. Incubation hen chicken perch beak.`,
+    
+    "Death": `Barnyard rooster perch pecking order barnyard broody hen. Perch clutch comb rooster pullet incubation. Pullet hen chicken hen chick clutch. Comb incubation nest pecking order pullet scratch coop rooster hen coop. Bantam egg wattles clutch rooster clutch comb perch clutch.`,
+}
 
 // A style for the text
 var tlStyle = new PIXI.TextStyle({
 	fontFamily: 'Constantina',
 	fontSize: 36,
 	fontWeight: 'bold',
-	fill: ['#ffffff']
+	fill: ['#ffffff'],
+    wordWrap: true,
+    wordWrapWidth: 920
 });
 
 var tlDataIn={
@@ -37,18 +48,10 @@ var tlDataOut={
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete', function(loader, resources) {
-    /*var nineslice=new PIXI.mesh.NineSlicePlane(loader.resources.nineslice.texture, 16, 16, 16, 16);
-    nineslice.x=32;
-    nineslice.y=32;
-    nineslice.width=480;
-    nineslice.height=480;
-    nineslice.alpha=0;
-    
-    timeline.addChild(nineslice);*/
-    
     initTimeline(timeline1Bang, "Big Bang", resources);
     initTimeline(timeline2Dust, "Stellar Dust", resources);
     initTimeline(timeline3Disk, "Accretion Disk", resources);
+    // timeline: now is elsewhere
     initTimeline(timeline5Giant, "Red Giant", resources);
     initTimeline(timeline6Dwarf, "Red Dwarf", resources);
     initTimeline(timeline7Death, "Death", resources);
@@ -68,15 +71,15 @@ function initTimeline(timeline, name, resources){
     timeline.addChild(infobox);
     
     //Info box title
-    var title = new PIXI.Text(name, titleStyle);
-        title.x = 1200;
+    var title = new PIXI.Text(name, tlStyle);
+        title.x = 960;
         title.y = 100;
     
     timeline.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at sapien a lorem imperdiet ultricies sit amet a urna. Aenean ultrices vel ligula sit amet convallis. Cras rhoncus neque sollicitudin mollis placerat. Cras aliquet velit vitae pulvinar tristique. Quisque id volutpat purus, eu ultricies metus. Nullam laoreet varius nulla, tincidunt gravida ipsum lobortis at. Morbi lacinia consectetur magna, eu maximus ipsum aliquet non. Sed finibus urna vitae arcu gravida sodales.",textStyle);
-        text.x = 1200;
+    var text = new PIXI.Text(ipsum[name], tlStyle);
+        text.x = 960;
         text.y = 180;
     
     //Add to content

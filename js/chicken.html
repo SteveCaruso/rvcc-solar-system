@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+	<title>better placeholder text</title>
+    <script src="chicken.js"></script>
+</head>
+<body>
+    <form><p>How many of thing:</p>
+        <input id="value-input" type="text" value="5"/>
+        <p>Thing type:</p>
+        <input id="thing-input-0" type="radio" name="gender" value="0" checked> Words<br/>
+        <input id="thing-input-1" type="radio" name="gender" value="1"> Sentences<br/>
+        <input id="thing-input-2" type="radio" name="gender" value="2"> Paragraphs<br/>
+        <p>Click this button to make interesting things happen:</p>
+        <input id="button" type="button" value="generate chicken" onclick="chickenIpsum();" />
+    </form>
+    <p id="output"><i>your chickens will appear here</i></p>
+</body>
+</html>

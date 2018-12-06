@@ -1,5 +1,8 @@
 var sliderSlider=null;
-const ANIMATE_TIME=1000;
+// there's a way to make the linter shut up but it's a pain in the neck so in
+// the meantime if brackets tells you there's something wrong with this line
+// just pretend that it isn't
+const ANIMATE_TIME=500;
 
 /*
  * Hey, listen!
@@ -231,7 +234,7 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     
     var node1=new Node(64, 64, container, "Big Bang");
     var node2=new Node(64+192, 64, container, "Stellar Dust");
-    var node3=new Node(64+2*192, 64, container, "Accretion Disk");
+    var node3=new Node(64+2*192, 64, container, "Disk");
     var node4=new Node(64+3*192, 64, container, "Now");
     var node5=new Node(64+4*192, 64, container, "Red Giant");
     var node6=new Node(64+5*192, 64, container, "White Dwarf");
@@ -246,7 +249,7 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     }
     
     node3.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: accretion disk");
+        Solar.changeSceneDiscardCurrent("timeline: disk");
     }
     
     node4.onSelect = function() {
