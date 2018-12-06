@@ -43,7 +43,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Saturn: Day: 59 Earth Days Year: 88 Earth Days 1st Planet 3000 miles in Diameter. Less than half of earth Covered in craters due to minimal atmosphere 36 million miles from the sun No Moons-279 degrees at night, 801 degrees during the day",textStyle);
+    var text = new PIXI.Text("• Day: 10 hours 42 minutes Earth Days \n\n• Year: 29 years \n\n• Size: 74897 miles is diameter \n\n• Distance from sun: 8.905 billion miles \n\n• Average temperature: -288.4f \n\n• The atmosphere is made mostly of hydrogen. \n\n• Moons: 62",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -145,7 +145,7 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //Animate solar system back in
         solarSystem.alpha = 0;
-        app.stage.addChildAt(solarSystem,0);
+        app.stage.addChildAt(solarSystem,1);
         Animate.to(solarSystem,3000,{alpha:1,easing:Easing.easeInOut});
         
         //Animate the saturn back.
