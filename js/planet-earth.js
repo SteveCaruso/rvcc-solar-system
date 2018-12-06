@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Earth: Day: 23.9 hours \nYear: 365.25 Days One moon 3rd planet 93 million miles from the sun: 7918 miles in diameter: Temperature: 57 degrees Atmosphere: mostly nitrogen, oxygen, argon",textStyle);
+    var text = new PIXI.Text("• Day: 23.9 hours \n\n• Year: 365.25 Days\n\n• Size: 7918 miles in diameter\n\n• Distance from sun: 93 million miles\n\n• Avg.Temperature: 57 degrees\n\n• Atmosphere: mostly nitrogen, oxygen, argon\n\n• Moons: 1 moon",textStyle);
         text.x = 1200;
         text.y = 180;
     
