@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Venus:Day: 243 earth days Year: 225 earth days 2nd planet About the size of Earth 67 million miles from the sun Covered in high volcanic mountains. hurricane like winds No moons. The surface temperature is about 900 degrees. Atmosphere: Carbon Dioxide, Nitrogen",textStyle);
+    var text = new PIXI.Text("• Day: 243 Earth days \n\n• Year: 225 Earth days \n\n• Size: About the same as Earth \n\n• Distance from the Sun: 67 million miles\n\n• Covered in high volcanic mountains\n  with hurricane like winds \n\n• Avg Temperature: \n  about 900 degrees \n\n• Atmosphere: Carbon Dioxide, Nitrogen \n\n• Moons: None",textStyle);
         text.x = 1200;
         text.y = 180;
     
