@@ -42,7 +42,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Pluto: Day: 24.6 hours Year: 687 Earth Days142 million miles from the sun 4th planet Rocky, volcanoes, impact craters, and winds Atmosphere: Carbon Dioxide, argon, nitrogen, low oxygen, and low water vapor two moons: Phobos, Deimos Temperature: -81 degrees average",textStyle);
+    var text = new PIXI.Text("• Day: 153 Hours \n\n• Year: 248 Earth Years \n\n• Size: 1,430 miles in diameter \n\n• Distance from Sun: 3.7 billion miles \n\n• Avg.  Temperature: about -385 degrees \n\n• Atmosphere: Nitrogen, Methane,\n  Carbon Monoxide \n\n• Moons: Charon, Styx, Nix, \n  Kerberos, Hydra",textStyle);
         text.x = 1200;
         text.y = 180;
     
