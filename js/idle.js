@@ -426,6 +426,18 @@ Solar.loader.on('complete', function(loader, resources) {
 	var orbiting = false;
 
 	orbit = async function () {
+        
+        theSun.interactive = false;
+        mercury.interactive = false;
+        venus.interactive = false;
+        earth.interactive = false;
+        mars.interactive = false;
+        
+        jupiter.interactive = false;
+        saturn.interactive = false;
+        uranus.interactive = false;
+        neptune.interactive = false;
+        pluto.interactive = false;
 	
 		orbiting = true;
 	       
@@ -556,23 +568,68 @@ Solar.loader.on('complete', function(loader, resources) {
 
 		//Make the sun BIG
 		Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
-
+        
+        theSun.interactive = true;
+        mercury.interactive = true;
+        venus.interactive = true;
+        earth.interactive = true;
+        mars.interactive = true;
+        
+        jupiter.interactive = true;
+        saturn.interactive = true;
+        uranus.interactive = true;
+        neptune.interactive = true;
+        pluto.interactive = true;
+        
+        countdownToOrbit();
     }
-
+    
+    /*
 	theSun.interactive = true;
 
 	theSun.on('click', function() {
 			if (orbiting) lineup();
 			else orbit();
 			//setTimeout(orbit,10000);
-	});
+	});*/
 
 	//Begin everything
 	setTimeout(async function() {
         await orbit();
 		Solar.startScene("idle");
-	},1000);
+	},500);
+    
+    app.view.addEventListener('click', function() {
+        console.log("Clicked!");
+        if (orbiting) {
+            lineup();
+        }
+        
+    });
+    
+    var finalCountDown = 30;
+    var finalCountDownTimer = finalCountDown;
+    
+    setInterval(function() {
+        if (Solar.currentScene.name == "idle" 
+            && Solar.incomingScene.name == "idle" 
+            && !orbiting) {
+            
+            finalCountDownTimer--;
+            console.log('Countdown until idle: ' + finalCountDownTimer);
+            if (finalCountDownTimer <= 0) orbit();
+            
+        }
+        else finalCountDownTimer = finalCountDown;
+    },1000);
+    
+    solarSystem.transition = async function() {
+        
+        Solar.currentScene.transitionOut();
+        
+    }
 
+    
 	//addSlider();
 
 });
