@@ -43,7 +43,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Neptune: Day: 24.6 hours Year: 687 Earth Days142 million miles from the sun 4th planet Rocky, volcanoes, impact craters, and winds Atmosphere: Carbon Dioxide, argon, nitrogen, low oxygen, and low water vapor two moons: Phobos, Deimos Temperature: -81 degrees average",textStyle);
+    var text = new PIXI.Text("• Day: 16 hours \n\n• Year: 165 years\n\n• Size: 30,598.8 miles in diameter\n\n• Distance from sun: 2.8 billion miles\n\n• Avg.Temperature: -290 degrees\n\n• Atmosphere: mostly hyrogen and helium\n\n• Moons: Triton(largest), 12 others(smaller) ",textStyle);
         text.x = 1200;
         text.y = 180;
     
