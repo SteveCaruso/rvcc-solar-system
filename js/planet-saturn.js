@@ -43,7 +43,8 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 10 hours 42 minutes Earth Days \n\n• Year: 29 years \n\n• Size: 74897 miles is diameter \n\n• Distance from sun: 8.905 billion miles \n\n• Average temperature: -288.4f \n\n• The atmosphere is made mostly of hydrogen. \n\n• Moons: 62",textStyle);
+    var text = new PIXI.Text("Saturn:
+                             ("• Day: 10 hours 42 minutes Earth Days \n\n• Year: 29 years \n\n• Size: 74897 miles is diameter \n\n• Distance from sun: 8.905 billion miles \n\n• Average temperature: -288.4f \n\n• The atmosphere is made mostly of hydrogen. \n\n• Moons: 62,textStyle);
         text.x = 1200;
         text.y = 180;
     
