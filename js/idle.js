@@ -408,7 +408,7 @@ Solar.loader.on('complete', function(loader, resources) {
 	var orbiting = false;
     
 	orbit = function () {
-        showSlider(LINEUP_TIME);
+        hideSlider(LINEUP_TIME);
         
 		orbiting = true;
 	
@@ -474,7 +474,7 @@ Solar.loader.on('complete', function(loader, resources) {
 	}
 
 	lineup = function() {
-        hideSlider();
+        showSlider();
         
 		orbiting = false;
 		//Line up the planets
@@ -517,7 +517,8 @@ Solar.loader.on('complete', function(loader, resources) {
 	}
     
     // slider and timeline frames
-    slider=addSlider(64, app.view.height-128, 64, app.view.height);
+    slider=addSlider(64, app.view.height-128, 64, app.view.height, resources);
+    hideSlider(0);
     
     // final setup
 	orbit();

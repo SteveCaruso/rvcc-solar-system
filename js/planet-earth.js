@@ -137,8 +137,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	
 	//When done, head back
     backbutton.interactive = false;
-	backbutton.on('click', function() {
-		Solar.changeSceneTo('idle');
+	backbutton.on('click', async function() {
+		await Solar.changeSceneTo('idle');
+        showSlider();
 	});
 	
 	

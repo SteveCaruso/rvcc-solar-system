@@ -12,7 +12,12 @@ const ANIMATE_TIME=500;
  * the Container is effectively 128+192*n, 128.
  */
 
-function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
+Solar.loader.add("ui-node","img/ui/node.png")
+	.add("ui-node-active","img/ui/node-active.png")
+	.add("ui-node-hover","img/ui/node-hover.png")
+    .add("ui-slider","img/ui/slider.png");
+
+function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
     const LINE_WIDTH=4;
     const LINE_COLOR=0xffffff;
 
@@ -21,25 +26,28 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     var centerY = app.view.height/2;
 
     class Node {
-        constructor(x, y, container, name){
+        constructor(x, y, container, name, resources){
             // you don't need these actually
             this.x=x;
             this.y=y;
             this.name=name;
 
-            this.picture=new PIXI.Sprite.fromImage("./img/ui/node.png")
+            this.picture=new PIXI.Sprite(resources["ui-node"].texture);
             this.picture.anchor.set(0.5);
             this.picture.position.set(x, y);
             this.picture.base=this;
 
-            // this didn't end up being used
-            this.picture_hover=new PIXI.Sprite.fromImage("./img/ui/node-hover.png")
-            this.picture_hover.anchor.set(0.5);
-            this.picture_hover.position.set(x, y);
-            this.picture_hover.base=this;
-            this.picture_hover.visible=false;
+            // this didn't end up being used because it turns out that touch
+            // screens don't know when you're hovering
+            /*
+                this.picture_hover=new PIXI.Sprite(resources["ui-node-hover"].texture);
+                this.picture_hover.anchor.set(0.5);
+                this.picture_hover.position.set(x, y);
+                this.picture_hover.base=this;
+                this.picture_hover.visible=false;
+            */
 
-            this.picture_active=new PIXI.Sprite.fromImage("./img/ui/node-active.png");
+            this.picture_active=new PIXI.Sprite(resources["ui-node-active"].texture);
             this.picture_active.anchor.set(0.5);
             this.picture_active.position.set(x, y);
             this.picture_active.base=this;
@@ -51,7 +59,7 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
             this.container=container;
             container.addChild(this.picture);
             container.addChild(this.picture_active);
-            container.addChild(this.picture_hover);
+            //container.addChild(this.picture_hover);
 
             this.picture.interactive=true;
 
@@ -123,8 +131,8 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     }
 
     class Slider {
-        constructor(node, container){
-            this.picture=new PIXI.Sprite.fromImage("./img/ui/slider.png");
+        constructor(node, container, resources){
+            this.picture=new PIXI.Sprite(resources["ui-slider"].texture);
             this.picture.anchor.set(0.5);
             this.picture.position.set(node.x, node.y);
             this.picture.base=this;
@@ -232,40 +240,40 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     
     container.alpha=0;
     
-    var node1=new Node(64, 64, container, "Big Bang");
-    var node2=new Node(64+192, 64, container, "Stellar Dust");
-    var node3=new Node(64+2*192, 64, container, "Disk");
-    var node4=new Node(64+3*192, 64, container, "Now");
-    var node5=new Node(64+4*192, 64, container, "Red Giant");
-    var node6=new Node(64+5*192, 64, container, "White Dwarf");
-    var node7=new Node(64+6*192, 64, container, "Heat Death");
+    var node1=new Node(64, 64, container, "Big Bang", resources);
+    var node2=new Node(64+192, 64, container, "Stellar Dust", resources);
+    var node3=new Node(64+2*192, 64, container, "Disk", resources);
+    var node4=new Node(64+3*192, 64, container, "Now", resources);
+    var node5=new Node(64+4*192, 64, container, "Red Giant", resources);
+    var node6=new Node(64+5*192, 64, container, "White Dwarf", resources);
+    var node7=new Node(64+6*192, 64, container, "Heat Death", resources);
     
     node1.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: big bang");
+        Solar.changeSceneDiscardCurrent("timeline: big bang", true);
     }
     
     node2.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: stellar dust");
+        Solar.changeSceneDiscardCurrent("timeline: stellar dust", true);
     }
     
     node3.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: disk");
+        Solar.changeSceneDiscardCurrent("timeline: disk", true);
     }
     
     node4.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("idle");
+        Solar.changeSceneDiscardCurrent("idle", true);
     }
     
     node5.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: red giant");
+        Solar.changeSceneDiscardCurrent("timeline: red giant", true);
     }
     
     node6.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: white dwarf");
+        Solar.changeSceneDiscardCurrent("timeline: white dwarf", true);
     }
     
     node7.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: death");
+        Solar.changeSceneDiscardCurrent("timeline: death", true);
     }
 
     node1.setNext(node2);
@@ -286,7 +294,7 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen) {
     node6.setNext(node7);
     node7.setPrevious(node6);
     
-    sliderSlider=new Slider(node4, container);
+    sliderSlider=new Slider(node4, container, resources);
     return sliderSlider;
 }
 
