@@ -36,7 +36,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("mars",titleStyle);
+    var title = new PIXI.Text("Mars",titleStyle);
         title.x = 1200;
         title.y = 100;
     
@@ -89,7 +89,7 @@ Solar.loader.on('complete',function(loader,resources) {
             //And set our mars to them
             planet.x = planetPos.x;
             planet.y = planetPos.y;
-            planet.width  = targetPlanet.width * targetPlanet.parent.scale.x;
+            planet.width = targetPlanet.width * targetPlanet.parent.scale.x;
             planet.height = targetPlanet.height * targetPlanet.parent.scale.y;
             
             //Let's fade in our scene over the idle screen
@@ -154,7 +154,7 @@ Solar.loader.on('complete',function(loader,resources) {
         await Animate.to(planet,3000,{    x:planetPos.x,
                                             y:planetPos.y,
                                             width:targetPlanet.width * targetPlanet.parent.scale.x,
-                                            height:targetPlanet.width * targetPlanet.parent.scale.y,
+                                            height:targetPlanet.height * targetPlanet.parent.scale.y,
                                             easing:Easing.easeInOut
                                      });
         
