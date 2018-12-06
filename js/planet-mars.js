@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Mars: Day: 24.6 hours Year: 687 Earth Days142 million miles from the sun 4th planet Rocky, volcanoes, impact craters, and winds Atmosphere: Carbon Dioxide, argon, nitrogen, low oxygen, and low water vapor two moons: Phobos, Deimos Temperature: -81 degrees average",textStyle);
+    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
         text.x = 1200;
         text.y = 180;
     
