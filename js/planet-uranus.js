@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Uranus: Day: 24.6 hours Year: 687 Earth Days142 million miles from the sun 4th planet Rocky, volcanoes, impact craters, and winds Atmosphere: Carbon Dioxide, argon, nitrogen, low oxygen, and low water vapor two moons: Phobos, Deimos Temperature: -81 degrees average",textStyle);
+    var text = new PIXI.Text("• Day: 17 hours 14 minutes Earth Days \n\n• Year: 84 years \n\n• Size: 31763 miles is diameter \n\n• Distance from sun: 1.786 billion miles \n\n• Average temperature: -356.8f \n\n• Uranus hits the coldest temperatures of any planet. \n\n• Moons: 27",textStyle);
         text.x = 1200;
         text.y = 180;
     
