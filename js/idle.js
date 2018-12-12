@@ -511,6 +511,8 @@ Solar.loader.on('complete', function(loader, resources) {
 	orbit = async function () {
         
         deactivatePlanets();
+        
+        hideSlider(1000);
 	
 		orbiting = true;
 	       
@@ -648,6 +650,8 @@ Solar.loader.on('complete', function(loader, resources) {
             .then( _=> Animate.to(plutoText,speed,{alpha:1}));
         
         activatePlanets();
+        
+        showSlider(1000);
     }
     
     /*
