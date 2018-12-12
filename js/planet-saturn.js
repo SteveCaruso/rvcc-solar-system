@@ -43,7 +43,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 10 hours 42 minutes Earth Days \n\n• Year: 29 years \n\n• Size: 74897 miles is diameter \n\n• Distance from sun: 8.905 billion miles \n\n• Average temperature: -288.4f \n\n• The atmosphere is made mostly of hydrogen. \n\n• Moons: 62",textStyle);
+    var text = new PIXI.Text("• Day: 10.7 Earth Days \n\n• Year: 29 Earth Years \n\n• Size: 74,897 miles is diameter \n\n• Distance from Sun: 886 million miles \n\n• Avg. Temperature:\n  about -288 degrees \n\n• Atmosphere: Hydrogen, Helium \n\n• The rings are mostly made of\n  ice and rock \n\n• Moons: 62",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -79,6 +79,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the default transition
 	scene.transition = async function() {
 		
+        //Stop clickability
+        deactivatePlanets();
+        
 		//If it's from the idle scene, we do something special
 		//if (Solar.currentScene.name == "idle") {
             
@@ -164,6 +167,9 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //Remove it from the stage
         app.stage.removeChild(scene);
+        
+        //Make them clickable again
+        activatePlanets();
         
 	}
 	

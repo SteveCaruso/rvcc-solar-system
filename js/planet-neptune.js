@@ -43,7 +43,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 16 hours \n\n• Year: 165 years\n\n• Size: 30,598.8 miles in diameter\n\n• Distance from sun: 2.8 billion miles\n\n• Avg.Temperature: -290 degrees\n\n• Atmosphere: mostly hyrogen and helium\n\n• Moons: Triton(largest), 12 others(smaller) ",textStyle);
+    var text = new PIXI.Text("• Day: 16 Earth Hours \n\n• Year: 165 Earth Years\n\n• Size: 30,598.8 miles in diameter\n\n• Distance from Sun: 2.8 billion miles\n\n• Avg.Temperature: -290 degrees\n\n• Atmosphere: mostly Hyrogen, \n  Helium, Methane\n\n• Moons: Triton(largest),\n  12 others(smaller) ",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -79,6 +79,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the default transition
 	scene.transition = async function() {
 		
+        //Stop clickability
+        deactivatePlanets();
+        
 		//If it's from the idle scene, we do something special
 		//if (Solar.currentScene.name == "idle") {
             
@@ -167,6 +170,9 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //Remove it from the stage
         app.stage.removeChild(scene);
+        
+        //Make them clickable again
+        activatePlanets();
         
 	}
 	

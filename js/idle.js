@@ -19,6 +19,7 @@ Solar.loader
 	.add("asteroid","img/asteroidVesta.png")			//Asteroids
     .add("spaaace","img/spaaace.png")	//spaaace
 	.add("jupiter","img/jupiter.png")	//Jupiter
+    .add("jMoon","img/jupiterMoons.png")  // Jupiter's moons
 	.add("saturn","img/saturn.png")		//Saturn
 	.add("uranus","img/uranus.png")		//That Planet
 	.add("neptune","img/neptune.png")	//Neptune
