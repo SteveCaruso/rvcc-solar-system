@@ -77,9 +77,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	
     
     //Jupiter's moons
-    var jmoon = new PIXI.Sprite(resources.moon.texture);
-        jmoon.width = 400;
-        jmoon.height = 400;
+    var jmoon = new PIXI.Sprite(resources.jupiterMoons.texture);
+        jmoon.width = 600;
+        jmoon.height = 200;
         jmoon.anchor.set(0.5);
         jmoon.x = 200;
         jmoon.y = 200;
@@ -91,6 +91,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the default transition
 	scene.transition = async function() {
 		
+        //Stop clickability
+        deactivatePlanets();
+        
 		//If it's from the idle scene, we do something special
 		//if (Solar.currentScene.name == "idle") {
             
@@ -176,6 +179,9 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //Remove it from the stage
         app.stage.removeChild(scene);
+        
+        //Make them clickable again
+        activatePlanets();
         
 	}
 	
