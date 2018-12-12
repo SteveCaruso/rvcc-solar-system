@@ -77,7 +77,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	
     
     //Jupiter's moons
-    var jmoon = new PIXI.Sprite(resources.jupiterMoons.texture);
+    var jmoon = new PIXI.Sprite(resources.jMoon.texture);
         jmoon.width = 600;
         jmoon.height = 200;
         jmoon.anchor.set(0.5);
