@@ -43,7 +43,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("surface temperature: -145 degrees Celsius\ncore temperature:  about 24,000 Celsius\n1 day on Jupiter: just under 10 Earth hours\n1 year on Jupiter: 12 Earth years\n484 million miles from the sun\nradius of about 43,441 miles\nhas 79 moons as of 2018\nfour largest moons are; Io, Europa, Ganymede, and Callisto\nthere is a big red spot that is actually a massive storm that is about 10,159 miles across",textStyle);
+    var text = new PIXI.Text("• Day: Just under 10 Earth hours\n\n• Year: 12 Earth Years\n\n• Distance from Sun: 484 million miles \n\n• Size: 86,882 miles in diameter \n\n• Temperatures depend more on the layer \n  of Jupiter's atmosphere: \n  -260 degrees to 1,340 degrees  \n\n• Moons: 79 as of 2018\n  Four largest moons in picture order; Io,\n  Europa, Ganymede, and Callisto\n\n• The big red spot is actually a massive \n  storm that is about 10,159 miles across",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -77,11 +77,11 @@ Solar.loader.on('complete',function(loader,resources) {
 	
     
     //Jupiter's moons
-    var jmoon = new PIXI.Sprite(resources.moon.texture);
-        jmoon.width = 400;
-        jmoon.height = 400;
+    var jmoon = new PIXI.Sprite(resources.jMoon.texture);
+        jmoon.width = 900;
+        jmoon.height = 300;
         jmoon.anchor.set(0.5);
-        jmoon.x = 200;
+        jmoon.x = 450;
         jmoon.y = 200;
     
     content.addChild(jmoon);
