@@ -31,9 +31,7 @@ Solar.loader.add("particle","img/particles/particle.png");
 Solar.loader.on('complete', function(loader, loadedResources) {
     resources=loadedResources;
     setTimeout(function(){
-        setInterval(function(){
-            spawnComet();
-        }, randomElementFromArray(COMET_PERIODS)*1000/4);
+        spawnComet();
     }, 1000);
 });
 
@@ -72,6 +70,11 @@ function spawnComet(){
         xto=randomRange(minx, maxx);
     }
     
+    // do it again
+    setTimeout(function(){
+        spawnComet();
+    }, randomElementFromArray(COMET_PERIODS)*1000/4);
+    
     return new Comet(x, y, xto, yto);
 }
 
@@ -102,6 +105,8 @@ class Comet {
 
 app.ticker.add(function(delta){
     cometContainer.children.forEach(function(element){
+        // if you dont check if element is root you'll have one of those
+        // fork bomb things and your computer will be very upset with you
         if (element.root){
             var particle=new PIXI.Sprite(resources.particle.texture);
             particle.x=element.x;
@@ -119,6 +124,10 @@ app.ticker.add(function(delta){
                 cometContainer.removeChild(particle);
                 particle.destroy();
             });
+            
+            // really wanted to make comets follow the sun's gravitational well
+            // but it's 2 am on the day this is due and i really dont feel like
+            // taking apart animate.js to see how it works anyway
         }
     });
 });
