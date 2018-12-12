@@ -1,3 +1,7 @@
+/*
+ * Becaues I get tired of rewriting these functions constantly
+ */
+
 function randomElementFromArray(array){
     return array[Math.floor(Math.random()*array.length)];
 }

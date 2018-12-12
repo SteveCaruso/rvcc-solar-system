@@ -1,3 +1,7 @@
+/*
+ * Don't touch this file or the universe will explode (unless you really want to)
+ */
+
 var sliderSlider=null;
 // there's a way to make the linter shut up but it's a pain in the neck so in
 // the meantime if brackets tells you there's something wrong with this line

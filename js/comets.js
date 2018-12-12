@@ -1,5 +1,5 @@
 /*
- * comets are kinda nice
+ * this was my only real contribution to the project honestly
  */
 
 var cometContainer=new PIXI.Container();

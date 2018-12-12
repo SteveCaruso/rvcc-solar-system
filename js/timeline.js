@@ -1,4 +1,7 @@
 /*
+ * most of this file is actually just copied and pasted from somewhere else
+ */
+/*
  * pretty sure there's a bug where if you click on the sun (to go back to the idle stage)
  * and then click on a timeline node before it disappears, pixi continues with the transition
  * to idle and the timeline ends up hidden. i've been doing a lot of projects this week

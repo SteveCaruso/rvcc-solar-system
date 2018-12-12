@@ -106,6 +106,11 @@ Solar.Scene = function(name) {
 };
 
 //Change to the named scene and provoke its transition
+/*
+ * Pretty sure this was changed to take an optional argument
+ * that decides whether you keep the slider or not. By default,
+ * the slider is hidden when you change scenes.
+ */
 Solar.changeSceneTo = async function(name, preserveSlider) {
     if (preserveSlider===undefined||!preserveSlider){
         hideSlider();
@@ -129,11 +134,21 @@ Solar.changeSceneTo = async function(name, preserveSlider) {
     console.log("new scene: "+name);
 }
 
+
+/*
+ * Discards the current scene and brings in a new one. If you
+ * specify an invalid scene it'll discard the current one before
+ * exploding and you'll be stuck with an empty screen probably.
+ */
 Solar.changeSceneDiscardCurrent=async function(name, preserveSlider){
     await Solar.discardCurrentScene();
     await Solar.changeSceneTo(name, preserveSlider);
 }
 
+
+/*
+ * Discards the current scene, surprisingly enough
+ */
 Solar.discardCurrentScene=async function(){
     //Trigger the transition
     if (Solar.currentScene!==undefined){

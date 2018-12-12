@@ -1,4 +1,10 @@
 /*
+ * Pretty sure the only changes I made to this are the addition of
+ * showSlider and hideSlider where they belong, but it's probably
+ * worth doing a diff check just to be safe
+ */
+
+/*
 	The Idle and Lineup Screens
 */
 
