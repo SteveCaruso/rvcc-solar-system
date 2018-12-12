@@ -1,21 +1,28 @@
 /*
-	comets are kinda nice
-*/
+ * comets are kinda nice
+ */
 
 var cometContainer=new PIXI.Container();
 app.stage.addChild(cometContainer);
 
 var resources=null;
 
-const cometPeriods=[
+/*
+ * seconds between appearences
+ */
+const COMET_PERIODS=[
     30, 60, 120, 600
 ]
 
-const COMET_RADIUS=16;
-
+/*
+ * time it takes to cross the screen (the tails are less satisfying with slower
+ * transit times)
+ */
 const COMET_TRAVEL_TIME=[
-    12, 24, 120, 300
+    12, 16, 20
 ]
+
+const COMET_RADIUS=16;
 
 //Queue up our files we'll need
 Solar.loader.add("particle","img/particles/particle.png");
@@ -26,7 +33,7 @@ Solar.loader.on('complete', function(loader, loadedResources) {
     setTimeout(function(){
         setInterval(function(){
             spawnComet();
-        }, randomElementFromArray(cometPeriods)*1000/4);
+        }, randomElementFromArray(COMET_PERIODS)*1000/4);
     }, 1000);
 });
 

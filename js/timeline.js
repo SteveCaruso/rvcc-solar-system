@@ -1,4 +1,11 @@
 /*
+ * pretty sure there's a bug where if you click on the sun (to go back to the idle stage)
+ * and then click on a timeline node before it disappears, pixi continues with the transition
+ * to idle and the timeline ends up hidden. i've been doing a lot of projects this week
+ * though so maybe someone else can be nice and fix that for me.
+ */
+
+/*
  * Timeline frames
  */
 
@@ -12,19 +19,13 @@ var timeline5Giant = new Solar.Scene("timeline: red giant");
 var timeline6Dwarf = new Solar.Scene("timeline: white dwarf");
 var timeline7Death = new Solar.Scene("timeline: death");
 
-var ipsum={
-    "Big Bang": `Egg rooster pecking order beak nest hatch hen. Incubation coop poultry hackles barnyard. Roost pullet crest hen chick chicken wattles broody scratch crest fowl. Hen comb coop broody hen. Hatch clutch hackles bantam hackles wattles hen hatch clutch wattles scratch. Rooster chicken incubation egg incubation. Egg free range rooster hen wattles crest clutch. Hatch comb bantam hackles comb pecking order.`,
-    
-    "Stellar Dust": `Bantam hatch wattles barnyard fowl hen barnyard coop roost pullet. Crest hackles hen chicken broody incubation. Scratch perch poultry roost rooster. Fowl chicken beak coop hen crest clutch free range roost. Free range hatch chick pullet bantam chicken.`,
-    
-    "Accretion Disk": `Wattles chick bantam nest. Broody hen clutch chicken coop rooster. Coop nest incubation nest egg. Beak pecking order poultry egg scratch pullet barnyard fowl hatch free range.`,
-    
-    "Red Giant": `Broody hen hackles nest broody crest beak. Hackles comb fowl pecking order. Scratch barnyard chicken clutch egg crest comb fowl egg pecking order. Nest clutch bantam hackles pullet. Bantam wattles pullet hackles comb pecking order chick hen pullet hackles hen. Poultry chick chicken wattles nest coop beak chick. Poultry comb coop pullet broody clutch pullet roost poultry nest pecking order.`,
-    
-    "Red Dwarf": ` Hackles perch hen scratch clutch wattles comb. Scratch pecking order hatch crest egg barnyard nest roost perch. Free range pullet incubation broody perch hatch hackles clutch. Incubation hen chicken perch beak.`,
-    
-    "Death": `Barnyard rooster perch pecking order barnyard broody hen. Perch clutch comb rooster pullet incubation. Pullet hen chicken hen chick clutch. Comb incubation nest pecking order pullet scratch coop rooster hen coop. Bantam egg wattles clutch rooster clutch comb perch clutch.`,
-}
+// pictures
+Solar.loader.add("cmb", "img/tl/cmb.png");
+Solar.loader.add("dust", "img/tl/dust.png");
+Solar.loader.add("disc", "img/tl/disc.png");
+Solar.loader.add("giant", "img/tl/giant.png");
+Solar.loader.add("dwarf", "img/tl/dwarf.png");
+Solar.loader.add("death", "img/tl/death.png");
 
 // A style for the text
 var tlStyle = new PIXI.TextStyle({
@@ -48,54 +49,18 @@ var tlDataOut={
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete', function(loader, resources) {
-    initTimeline(timeline1Bang, "Big Bang", resources);
-    initTimeline(timeline2Dust, "Stellar Dust", resources);
-    initTimeline(timeline3Disk, "Accretion Disk", resources);
+    initTimelineBang(timeline1Bang, "Big Bang", resources);
+    initTimelineDust(timeline2Dust, "Stellar Dust", resources);
+    initTimelineDisc(timeline3Disk, "Accretion Disk", resources);
     // timeline: now is elsewhere
-    initTimeline(timeline5Giant, "Red Giant", resources);
-    initTimeline(timeline6Dwarf, "Red Dwarf", resources);
-    initTimeline(timeline7Death, "Death", resources);
+    initTimelineGiant(timeline5Giant, "Red Giant", resources);
+    initTimelineDwarf(timeline6Dwarf, "Red Dwarf", resources);
+    initTimelineDeath(timeline7Death, "Death", resources);
 });
 
-function initTimeline(timeline, name, resources){
+function initTimelineTransitions(timeline, name, resources){
     assignTLTransitionIn(timeline);
     assignTLTransitionOut(timeline);
-    
-    // good to remember: Timelines (and all Solar.Scenes) are just Containers
-    var infobox = new PIXI.Sprite(resources.infobox.texture);
-        infobox.width = 750;
-        infobox.height = 1000;
-        infobox.x = 2000;
-        infobox.y = 50;
-    
-    timeline.addChild(infobox);
-    
-    //Info box title
-    var title = new PIXI.Text(name, tlStyle);
-        title.x = 960;
-        title.y = 100;
-    
-    timeline.addChild(title);
-            
-    //Info box text
-    var text = new PIXI.Text(ipsum[name], tlStyle);
-        text.x = 960;
-        text.y = 180;
-    
-    //Add to content
-    timeline.addChild(text);
-    
-    // todo nothing's appearing on the new screens except for this,
-    // if you uncomment it. also it's appearing over the top of the slider
-    // so that ought to be dealt with if you want it to work more than once.
-    
-    /*var scrim = new PIXI.Graphics();
-        scrim.beginFill(0x00ff00);
-        scrim.drawRect(0,0,app.view.width,app.view.height);
-        scrim.alpha = 1;
-    
-    //Add the scrim to the scene
-    timeline.addChild(scrim);*/
 }
 
 function assignTLTransitionIn(timeline){
@@ -112,4 +77,117 @@ async function assignTLTransitionOut(timeline){
         await Animate.to(timeline, TIMELINE_TIME, tlDataOut);
         app.stage.removeChild(timeline);
     }
+}
+
+/*
+ * specific things
+ */
+
+function initTimelineBang(timeline, name, resources){
+    initTimelineTransitions(timeline, name, resources);
+    
+    timeline.addChild(tlCreateInfobox());
+    timeline.addChild(tlCreateTitle("Big Bang"));
+    timeline.addChild(tlCreateText("Someone add content to this please"));
+    timeline.addChild(tlCreatePicture());
+	
+	//Add our Jupiter to the scene
+    timeline.addChildAt(tlCreatePicture(resources.cmb.texture, app.view.width/4, app.view.height/2, 800, 880));
+}
+
+function initTimelineDust(timeline, name, resources){
+    initTimelineTransitions(timeline, name, resources);
+    
+    timeline.addChild(tlCreateInfobox());
+    timeline.addChild(tlCreateTitle("Stellar Dust"));
+    timeline.addChild(tlCreateText("Someone add content to this please"));
+    timeline.addChild(tlCreatePicture());
+	
+	//Add our Jupiter to the scene
+    timeline.addChildAt(tlCreatePicture(resources.dust.texture, app.view.width/4, app.view.height/2, 800, 880));
+}
+
+function initTimelineDisc(timeline, name, resources){
+    initTimelineTransitions(timeline, name, resources);
+    
+    timeline.addChild(tlCreateInfobox());
+    timeline.addChild(tlCreateTitle("Accretion Disc"));
+    timeline.addChild(tlCreateText("Someone add content to this please"));
+    timeline.addChild(tlCreatePicture());
+	
+	//Add our Jupiter to the scene
+    timeline.addChildAt(tlCreatePicture(resources.disc.texture, app.view.width/4, app.view.height/2, 800, 880));
+}
+
+function initTimelineGiant(timeline, name, resources){
+    initTimelineTransitions(timeline, name, resources);
+    
+    timeline.addChild(tlCreateInfobox());
+    timeline.addChild(tlCreateTitle("Red Giant"));
+    timeline.addChild(tlCreateText("Someone add content to this please"));
+    timeline.addChild(tlCreatePicture());
+	
+	//Add our Jupiter to the scene
+    timeline.addChildAt(tlCreatePicture(resources.giant.texture, app.view.width/4, app.view.height/2, 800, 880));
+}
+
+function initTimelineDwarf(timeline, name, resources){
+    initTimelineTransitions(timeline, name, resources);
+    
+    timeline.addChild(tlCreateInfobox());
+    timeline.addChild(tlCreateTitle("White Dwarf"));
+    timeline.addChild(tlCreateText("Someone add content to this please"));
+    timeline.addChild(tlCreatePicture());
+	
+	//Add our Jupiter to the scene
+    timeline.addChildAt(tlCreatePicture(resources.dwarf.texture, app.view.width/4, app.view.height/2, 800, 880));
+}
+
+function initTimelineDeath(timeline, name, resources){
+    initTimelineTransitions(timeline, name, resources);
+    
+    timeline.addChild(tlCreateInfobox());
+    timeline.addChild(tlCreateTitle("Heat Death"));
+    timeline.addChild(tlCreateText("Someone add content to this please"));
+    timeline.addChild(tlCreatePicture());
+	
+	//Add our Jupiter to the scene
+    timeline.addChildAt(tlCreatePicture(resources.death.texture, app.view.width/4, app.view.height/2, 800, 880));
+}
+
+function tlCreateInfobox(){
+    var infobox = new PIXI.Sprite(resources.infobox.texture);
+        infobox.width = 750;
+        infobox.height = 880;
+        infobox.x = app.view.width/2;
+        infobox.y = 50;
+    
+    return infobox;
+}
+
+function tlCreateTitle(title){
+    var title = new PIXI.Text(title, titleStyle);
+        title.x = 1200;
+        title.y = 100;
+    
+    return title;
+}
+
+function tlCreateText(text){
+    var text = new PIXI.Text(text, textStyle);
+        text.x = 1200;
+        text.y = 180;
+    
+    return text;
+}
+
+function tlCreatePicture(picture, x, y, width, height){
+    var picture = new PIXI.Sprite(picture);
+        picture.anchor.set(0.5);
+		picture.x = x;
+		picture.y = y;
+        picture.width = width;
+        picture.height = height;
+    
+    return picture;
 }
