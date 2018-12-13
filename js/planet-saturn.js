@@ -2,6 +2,9 @@
 var saturnScreen = new Solar.Scene("saturn");
 
 
+//Load in media
+Solar.loader.add("titan",'img/titan(saturn).png');
+
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -75,6 +78,15 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Add our Saturn to the scene
     scene.addChildAt(planet,1);
 	
+    //Saturn's moons
+    var titan = new PIXI.Sprite(resources.titan.texture);
+        titan.width = 400;
+        titan.height = 400;
+        titan.anchor.set(0.5);
+        titan.x = 200;
+        titan.y = 200;
+    
+    content.addChild(titan)
     
 	//Change the default transition
 	scene.transition = async function() {
