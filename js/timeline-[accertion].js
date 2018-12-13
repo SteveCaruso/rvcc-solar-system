@@ -19,7 +19,16 @@
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
+        
+ var accretion = new Solar.Scene("accretion");
 
+
+Solar.loader.on('complete',function(loader,resources) {
+
+    
+    var scene = accretion;
+    
+    
         //Set up the app
         var app = new PIXI.Application(1080, 720, {backgroundColor : 0x000000});
         document.body.appendChild(app.view);
@@ -159,7 +168,7 @@ function slide(){
         app.stage.addChild(Title);
         
 
-         
+}
         
     </script>
 </body>

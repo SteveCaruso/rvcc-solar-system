@@ -12,7 +12,13 @@
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
+    var bigbang = new Solar.Scene("bigbang");
+
+
+Solar.loader.on('complete',function(loader,resources) {
+
     
+    var scene = bigbang;
        
        var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
         document.body.appendChild(app.view);
@@ -117,7 +123,7 @@
         app.stage.addChild(Title);
         
         
-        
+}
 
     </script>
 </body>
