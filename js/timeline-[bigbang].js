@@ -1,41 +1,29 @@
-<!doctype html>
-<html>
-<head>
-	<title>Pixi.js Sound &amp; Buttons</title>
-    
-    <!-- Import Pixi.js from the main website. -->
-	<script src="https://pixijs.download/dev/pixi.min.js"></script>
-    
-    <!-- Import the Pixi.js sound module. -->
-	<script src="https://pixijs.io/pixi-sound/dist/pixi-sound.js"></script>
-</head>
-<body>
-    <!-- Where our Pixi code is going. -->
-    <script>
-    var bigbang = new Solar.Scene("bigbang");
+var bigbang = new Solar.Scene("bigbang");
 
+
+Solar.loader.add("bang","img/bigbang.png")
+            .add("Beam","img/bigbeam.png")
+            
 
 Solar.loader.on('complete',function(loader,resources) {
 
     
     var scene = bigbang;
        
-       var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
+    var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
         document.body.appendChild(app.view);
         
-        //Center coordinates for the stage
-        var centerX = app.view.width/2;
-        var centerY = app.view.height/2;
-        
-        
-      var bigbang = PIXI.Sprite.fromImage("img/bigbang.png");
+    //Center coordinates for the stage
+    var centerX = app.view.width/2;
+    var centerY = app.view.height/2;
+     
             bigbang.width = 500;
             bigbang.height = 500;
             bigbang.anchor.set(0.5);
             bigbang.x= 240;
             bigbang.y= 300;
              
-         var bigbeam = PIXI.Sprite.fromImage("img/bigbeam.png");
+        
             bigbeam.width = 450;
             bigbeam.height = 1800;
             bigbeam.anchor.set(0.5);
@@ -125,6 +113,3 @@ Solar.loader.on('complete',function(loader,resources) {
         
 }
 
-    </script>
-</body>
-</html>

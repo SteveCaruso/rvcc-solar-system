@@ -27,8 +27,8 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //the light beam
         var thebeam = new PIXI.Sprite(resources.diskBeam.texture);
-            thebeam.width = 372;
-            thebeam.height =  720;
+            thebeam.width = 1920;
+            thebeam.height =  1080;
             thebeam.anchor.set(0.5);
             thebeam.x= 260;
             thebeam.y= 300;
