@@ -1,6 +1,8 @@
 //Create our scene
 var plutoScreen = new Solar.Scene("pluto");
 
+//Load in media
+Solar.loader.add("charon",'img/charon(saturn).png');
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -74,6 +76,15 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Add our pluto to the scene
     scene.addChild(planet);
 	
+    //Pluto's moons
+    var charon = new PIXI.Sprite(resources.charon.texture);
+        charon.width = 400;
+        charon.height = 400;
+        charon.anchor.set(0.5);
+        charon.x = 200;
+        charon.y = 200;
+    
+    content.addChild(charon)
     
 	//Change the default transition
 	scene.transition = async function() {
