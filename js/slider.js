@@ -73,6 +73,13 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
             container.addChild(this.picture);
             container.addChild(this.picture_active);
             //container.addChild(this.picture_hover);
+            
+            this.text=new PIXI.Text(name, textStyleCenter);
+            this.text.x=x;
+            this.text.y=y-56;
+            this.text.anchor.set(0.5);
+            this.text.scale.set(0.7);
+            container.addChild(this.text);
 
             this.picture.interactive=true;
 

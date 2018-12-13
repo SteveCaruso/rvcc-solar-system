@@ -21,3 +21,12 @@ var textStyle = new PIXI.TextStyle({
     wordWrap:       true,
     wordWrapWidth:  675
 });
+
+var textStyleCenter = new PIXI.TextStyle({
+    align:          "right",
+    fontFamily:     "Constantia (Headings)",
+    fontSize:       40,
+    fill:           0xffffff,
+    wordWrap:       true,
+    wordWrapWidth:  675
+});
