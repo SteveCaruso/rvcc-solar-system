@@ -339,7 +339,9 @@ function showSlider(delay){
         alpha: 1,
         easing: Easing.easeInOut
     };
-
+    
+    app.stage.addChildAt(sliderSlider.container,app.stage.children.length-1);
+    
     setTimeout(function() {
 		Animate.to(sliderSlider.container, ANIMATE_TIME, data);
 	}, delay);
