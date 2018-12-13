@@ -23,7 +23,7 @@ Solar.loader.on('complete',function(loader,resources) {
     //Info box
     var infobox = new PIXI.Sprite(resources.infobox.texture);
         infobox.width = 750;
-        infobox.height = 1000;
+        infobox.height = 1020;
         infobox.x = 2000;
         infobox.y = 50;
     

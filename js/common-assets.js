@@ -9,7 +9,7 @@ var titleStyle = new PIXI.TextStyle({
     fontSize:       70,
     fontWeight:     "bold",
     align:          "center",
-    fill:           0x000000,
+    fill:           0xffffff,
     wordWrap:       true,
     wordWrapWidth:  675
 });
@@ -17,7 +17,7 @@ var titleStyle = new PIXI.TextStyle({
 var textStyle = new PIXI.TextStyle({
     fontFamily:     "Constantia (Headings)",
     fontSize:       40,
-    fill:           0x000000,
+    fill:           0xffffff,
     wordWrap:       true,
     wordWrapWidth:  675
 });
