@@ -16,18 +16,18 @@ Solar.loader.on('complete',function(loader,resources) {
      
     var bang = new PIXI.Sprite(resources.bang.texture);
     
-            bang.width = 500;
-            bang.height = 500;
+            bang.width = 1920;
+            bang.height = 1920;
             bang.anchor.set(0.5);
-            bang.x= 240;
-            bang.y= 300;
+            bang.x= 960;
+            bang.y= 540;
              
     var bigbeam = new PIXI.Sprite(resources.Beam.texture);
-            bigbeam.width = 450;
-            bigbeam.height = 1800;
+            bigbeam.width = 1920;
+            bigbeam.height = 1080;
             bigbeam.anchor.set(0.5);
-            bigbeam.x= 240;
-            bigbeam.y= 300;
+            bigbeam.x=960;
+            bigbeam.y= 540;
         
         app.ticker.add(function(delta) 
         {
@@ -36,12 +36,13 @@ Solar.loader.on('complete',function(loader,resources) {
         });
 
              
-          bang.addChild(bigbeam);
+          scene.addChild(bigbeam);
+    scene.addChild(bang);
               
         var style = new PIXI.TextStyle
          ({
             fontFamily: 'Arial',
-            fontSize: 18,
+            fontSize: 36,
             fontStyle: 'italic',
             fontWeight: 'bold',
             //stroke: '#FFFFFF',

@@ -17,11 +17,12 @@ Solar.loader.on('complete',function(loader,resources) {
         
         var dust = new PIXI.Sprite(resources.reddust.texture);   
     
-            dust.width = 500;
-            dust.height = 500;
+            dust.width = 600;
+            dust.height = 600;
             dust.anchor.set(0.5);
-            dust.x= 240;
-            dust.y= 300;
+            dust.x= 960;
+            dust.y= 540;
+         
              
          
         var light = new PIXI.Sprite(resources.light.texture);      
@@ -29,8 +30,8 @@ Solar.loader.on('complete',function(loader,resources) {
             light.width = 300;
             light.height = 300;
             light.anchor.set(0.5);
-            light.x= 240;
-            light.y= 300;
+            light.x= 960;
+            light.y= 540;
         
         
                 scene.addChild(light);
@@ -56,7 +57,7 @@ Solar.loader.on('complete',function(loader,resources) {
         var style = new PIXI.TextStyle
          ({
             fontFamily: 'Arial',
-            fontSize: 18,
+            fontSize: 36,
             fontStyle: 'italic',
             fontWeight: 'bold',
             //stroke: '#FFFFFF',
@@ -74,7 +75,7 @@ Solar.loader.on('complete',function(loader,resources) {
          var style2 = new PIXI.TextStyle
          ({
             fontFamily: 'Arial',
-            fontSize: 36,
+            fontSize: 80,
             fontStyle: 'italic',
             fontWeight: 'bold',
             //stroke: '#FFFFFF',
