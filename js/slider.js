@@ -21,7 +21,7 @@ Solar.loader.add("ui-node","img/ui/node.png")
 	.add("ui-node-hover","img/ui/node-hover.png")
     .add("ui-slider","img/ui/slider.png");
 
-var slider;
+var slider, node1, node2, node3, node4, node5, node6, node7;
 
 Solar.loader.on("complete", function(loader,resources) {
     
@@ -253,13 +253,13 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
     
     container.alpha=0;
     
-    var node1=new Node(64, 64, container, "Big Bang", resources);
-    var node2=new Node(64+192, 64, container, "Stellar Dust", resources);
-    var node3=new Node(64+2*192, 64, container, "Disk", resources);
-    var node4=new Node(64+3*192, 64, container, "Now", resources);
-    var node5=new Node(64+4*192, 64, container, "Red Giant", resources);
-    var node6=new Node(64+5*192, 64, container, "White Dwarf", resources);
-    var node7=new Node(64+6*192, 64, container, "Heat Death", resources);
+    node1=new Node(64, 64, container, "Big Bang", resources);
+    node2=new Node(64+192, 64, container, "Stellar Dust", resources);
+    node3=new Node(64+2*192, 64, container, "Disk", resources);
+    node4=new Node(64+3*192, 64, container, "Now", resources);
+    node5=new Node(64+4*192, 64, container, "Red Giant", resources);
+    node6=new Node(64+5*192, 64, container, "White Dwarf", resources);
+    node7=new Node(64+6*192, 64, container, "Heat Death", resources);
     
     node1.onSelect = function() {
         Solar.changeSceneDiscardCurrent("timeline: big bang", true);
@@ -313,10 +313,31 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
     return sliderSlider;
 }
 
-function hideSlider(delay){
+function activateSlider() {
+    node1.picture.interactive = true;
+    node2.picture.interactive = true;
+    node3.picture.interactive = true;
+    node4.picture.interactive = true;
+    node5.picture.interactive = true;
+    node6.picture.interactive = true;
+    node7.picture.interactive = true;
+}
+function deactivateSlider() {
+    node1.picture.interactive = false;
+    node2.picture.interactive = false;
+    node3.picture.interactive = false;
+    node4.picture.interactive = false;
+    node5.picture.interactive = false;
+    node6.picture.interactive = false;
+    node7.picture.interactive = false;
+}
+
+async function hideSlider(delay){
     if (typeof delay==="undefined"){
         delay=0;
     }
+    
+    deactivateSlider();
     
     var data={
         x: sliderSlider.container.xoffscreen,
@@ -325,12 +346,11 @@ function hideSlider(delay){
         easing: Easing.easeOut
     };
     
-    setTimeout(function() {
-		Animate.to(sliderSlider.container, ANIMATE_TIME, data);
-	}, delay);
+    await setTimeout(_=>true,delay);
+    await Animate.to(sliderSlider.container, ANIMATE_TIME, data);
 }
 
-function showSlider(delay){
+async function showSlider(delay){
     if (typeof delay==="undefined"){
         delay=0;
     }
@@ -344,9 +364,9 @@ function showSlider(delay){
     
     app.stage.addChildAt(sliderSlider.container,app.stage.children.length-1);
     
-    setTimeout(function() {
-		Animate.to(sliderSlider.container, ANIMATE_TIME, data);
-	}, delay);
+    await setTimeout(_=>true,delay);
+    await Animate.to(sliderSlider.container, ANIMATE_TIME, data);
+    activateSlider();
 }
 
 function resetSlider(){
