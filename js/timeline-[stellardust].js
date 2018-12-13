@@ -1,27 +1,13 @@
-<!doctype html>
-<html>
-<head>
-	<title>Pixi.js Sound &amp; Buttons</title>
-    
-    <!-- Import Pixi.js from the main website. -->
-	<script src="https://pixijs.download/dev/pixi.min.js"></script>
-    
-    <!-- Import the Pixi.js sound module. -->
-	<script src="https://pixijs.io/pixi-sound/dist/pixi-sound.js"></script>
-</head>
-<body>
-    <!-- Where our Pixi code is going. -->
-    <script>
-    var stellarDust = new Solar.Scene("stellarDust");
+var stellarDust = new Solar.Scene("stellarDust");
 
+
+Solar.loader.add("reddust","img/timeline/reddust.png")
+            .add("light","img/timeline/light.png")
 
 Solar.loader.on('complete',function(loader,resources) {
 
     
     var scene = stellarDust;
-       
-       var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
-        document.body.appendChild(app.view);
         
         //Center coordinates for the stage
         var centerX = app.view.width/2;
@@ -29,7 +15,8 @@ Solar.loader.on('complete',function(loader,resources) {
         
         var count = 0;
         
-        var dust = PIXI.Sprite.fromImage("img/reddust.png");
+        var dust = new PIXI.Sprite(resources.reddust.texture);   
+    
             dust.width = 500;
             dust.height = 500;
             dust.anchor.set(0.5);
@@ -37,8 +24,8 @@ Solar.loader.on('complete',function(loader,resources) {
             dust.y= 300;
              
          
-              
-        var light = PIXI.Sprite.fromImage("img/light.png");
+        var light = new PIXI.Sprite(resources.light.texture);      
+       
             light.width = 300;
             light.height = 300;
             light.anchor.set(0.5);
@@ -46,9 +33,9 @@ Solar.loader.on('complete',function(loader,resources) {
             light.y= 300;
         
         
-                app.stage.addChild(light);
+                scene.addChild(light);
 
-          app.stage.addChild(dust);
+          scene.addChild(dust);
         
         
         app.ticker.add(function(delta) 
@@ -116,7 +103,7 @@ Solar.loader.on('complete',function(loader,resources) {
         infoText.x = 600;
         infoText.y = 190;
 
-        app.stage.addChild(infoText);
+        scene.addChild(infoText);
         
       //Title  
          var Titlegraphics = new PIXI.Graphics();
@@ -132,9 +119,5 @@ Solar.loader.on('complete',function(loader,resources) {
         Title.x = 370;
         Title.y = 15;
 
-        app.stage.addChild(Title);
-}
-
-    </script>
-</body>
-</html>
+        scene.addChild(Title);
+});

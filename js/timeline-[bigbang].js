@@ -1,41 +1,28 @@
-<!doctype html>
-<html>
-<head>
-	<title>Pixi.js Sound &amp; Buttons</title>
-    
-    <!-- Import Pixi.js from the main website. -->
-	<script src="https://pixijs.download/dev/pixi.min.js"></script>
-    
-    <!-- Import the Pixi.js sound module. -->
-	<script src="https://pixijs.io/pixi-sound/dist/pixi-sound.js"></script>
-</head>
-<body>
-    <!-- Where our Pixi code is going. -->
-    <script>
-    var bigbang = new Solar.Scene("bigbang");
+var bigbang = new Solar.Scene("bigbang");
 
+
+Solar.loader.add("bang","img/timeline/bigbang.png")
+            .add("Beam","img/timeline/bigbeam.png")
+            
 
 Solar.loader.on('complete',function(loader,resources) {
 
     
     var scene = bigbang;
-       
-       var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
-        document.body.appendChild(app.view);
         
-        //Center coordinates for the stage
-        var centerX = app.view.width/2;
-        var centerY = app.view.height/2;
-        
-        
-      var bigbang = PIXI.Sprite.fromImage("img/bigbang.png");
-            bigbang.width = 500;
-            bigbang.height = 500;
-            bigbang.anchor.set(0.5);
-            bigbang.x= 240;
-            bigbang.y= 300;
+    //Center coordinates for the stage
+    var centerX = app.view.width/2;
+    var centerY = app.view.height/2;
+     
+    var bang = new PIXI.Sprite(resources.bang.texture);
+    
+            bang.width = 500;
+            bang.height = 500;
+            bang.anchor.set(0.5);
+            bang.x= 240;
+            bang.y= 300;
              
-         var bigbeam = PIXI.Sprite.fromImage("img/bigbeam.png");
+    var bigbeam = new PIXI.Sprite(resources.Beam.texture);
             bigbeam.width = 450;
             bigbeam.height = 1800;
             bigbeam.anchor.set(0.5);
@@ -45,14 +32,11 @@ Solar.loader.on('complete',function(loader,resources) {
         app.ticker.add(function(delta) 
         {
            bigbeam.rotation += -0.05 * delta;
-            bigbang.rotation += 0.01 * delta;
+            bang.rotation += 0.01 * delta;
         });
 
              
-          app.stage.addChild(bigbeam);
-              
-        
-          app.stage.addChild(bigbang);
+          bang.addChild(bigbeam);
               
         var style = new PIXI.TextStyle
          ({
@@ -104,7 +88,7 @@ Solar.loader.on('complete',function(loader,resources) {
         infoText.x = 600;
         infoText.y = 190;
 
-        app.stage.addChild(infoText);
+        bigbang.addChild(infoText);
         
       //Title  
          var Titlegraphics = new PIXI.Graphics();
@@ -120,11 +104,8 @@ Solar.loader.on('complete',function(loader,resources) {
         Title.x = 370;
         Title.y = 15;
 
-        app.stage.addChild(Title);
+        bigbang.addChild(Title);
         
         
-}
+});
 
-    </script>
-</body>
-</html>
