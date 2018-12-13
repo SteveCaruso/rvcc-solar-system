@@ -2,7 +2,8 @@
 var marsScreen = new Solar.Scene("mars");
 
 //Queue up our files we'll need
-//None!
+Solar.loader.add("phobos",'img/phobos.png')
+            .add("deimos",'img/deimos.png');
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -74,7 +75,25 @@ Solar.loader.on('complete',function(loader,resources) {
 		planet.y = 0;
 	
 	//Add our mars to the scene
-    scene.addChild(planet);
+    scene.addChildAt(planet,1);
+    
+    var phobos = new PIXI.Sprite(resources.phobos.texture);
+        phobos.width = 225;
+        phobos.height = 225;
+        phobos.anchor.set(0.5);
+        phobos.x = 150;
+        phobos.y = 150;
+    
+    content.addChild(phobos);
+    
+    var deimos = new PIXI.Sprite(resources.deimos.texture);
+        deimos.width = 225;
+        deimos.height = 225;
+        deimos.anchor.set(0.5);
+        deimos.x = 1000;
+        deimos.y = 400;
+    
+    content.addChild(deimos);
 	
     
 	//Change the default transition
