@@ -12,7 +12,13 @@
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
+    var stellarDust = new Solar.Scene("stellarDust");
+
+
+Solar.loader.on('complete',function(loader,resources) {
+
     
+    var scene = stellarDust;
        
        var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
         document.body.appendChild(app.view);
@@ -127,7 +133,7 @@
         Title.y = 15;
 
         app.stage.addChild(Title);
-        
+}
 
     </script>
 </body>
