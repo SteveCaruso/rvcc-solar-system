@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title></title>
+	<title>Pixi.js Sound &amp; Buttons</title>
     
     <!-- Import Pixi.js from the main website. -->
 	<script src="https://pixijs.download/dev/pixi.min.js"></script>
@@ -12,7 +12,13 @@
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
+    var stellarDust = new Solar.Scene("stellarDust");
+
+
+Solar.loader.on('complete',function(loader,resources) {
+
     
+    var scene = stellarDust;
        
        var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
         document.body.appendChild(app.view);
@@ -66,10 +72,11 @@
             fontSize: 18,
             fontStyle: 'italic',
             fontWeight: 'bold',
-            stroke: '#FFFFFF',
+            //stroke: '#FFFFFF',
+             fill: '#FFFFFF',
             strokeThickness: 5,
-            dropShadow: true,
-            dropShadowColor: '#000000',
+            //dropShadow: true,
+            //dropShadowColor: '#000000',
             dropShadowBlur: 4,
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
@@ -83,10 +90,11 @@
             fontSize: 36,
             fontStyle: 'italic',
             fontWeight: 'bold',
-            stroke: '#FFFFFF',
+            //stroke: '#FFFFFF',
+             fill: '#FFFFFF',
             strokeThickness: 5,
-            dropShadow: true,
-            dropShadowColor: '#000000',
+            //dropShadow: true,
+            //dropShadowColor: '#000000',
             dropShadowBlur: 4,
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
@@ -101,7 +109,7 @@
             graphics.drawRoundedRect(590, 180, 430, 140, 15);
             graphics.endFill();
         
-        app.stage.addChild(graphics);
+        //app.stage.addChild(graphics);
          
         var infoText = new PIXI.Text('Atomic and molecular gas (primarily hydrogen and helium) and tiny pieces of solid particles or dust (composed mainly of carbon, silicon and oxygen). In some places this interstellar material is very dense, forming nebulas.', style);
         
@@ -117,7 +125,7 @@
              Titlegraphics.drawRoundedRect(360, 15, 240, 50, 15);
              Titlegraphics.endFill();
         
-        app.stage.addChild(Titlegraphics);
+       // app.stage.addChild(Titlegraphics);
          
         var Title = new PIXI.Text("Stellar Dust", style2);
         
@@ -125,7 +133,7 @@
         Title.y = 15;
 
         app.stage.addChild(Title);
-        
+}
 
     </script>
 </body>

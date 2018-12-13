@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title></title>
+	<title>Pixi.js Sound &amp; Buttons</title>
     
     <!-- Import Pixi.js from the main website. -->
 	<script src="https://pixijs.download/dev/pixi.min.js"></script>
@@ -12,7 +12,13 @@
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
+    var bigbang = new Solar.Scene("bigbang");
+
+
+Solar.loader.on('complete',function(loader,resources) {
+
     
+    var scene = bigbang;
        
        var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
         document.body.appendChild(app.view);
@@ -54,10 +60,11 @@
             fontSize: 18,
             fontStyle: 'italic',
             fontWeight: 'bold',
-            stroke: '#FFFFFF',
+            //stroke: '#FFFFFF',
+             fill: '#FFFFFF',
             strokeThickness: 5,
-            dropShadow: true,
-            dropShadowColor: '#000000',
+            //dropShadow: true,
+            //dropShadowColor: '#000000',
             dropShadowBlur: 4,
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
@@ -71,10 +78,11 @@
             fontSize: 36,
             fontStyle: 'italic',
             fontWeight: 'bold',
-            stroke: '#FFFFFF',
+            //stroke: '#FFFFFF',
+             fill: '#FFFFFF',
             strokeThickness: 5,
-            dropShadow: true,
-            dropShadowColor: '#000000',
+            //dropShadow: true,
+            //dropShadowColor: '#000000',
             dropShadowBlur: 4,
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
@@ -89,7 +97,7 @@
             graphics.drawRoundedRect(590, 180, 420, 100, 15);
             graphics.endFill();
         
-        app.stage.addChild(graphics);
+        //app.stage.addChild(graphics);
          
         var infoText = new PIXI.Text('the cosmic explosion that marked the beginning of the universe according to the big bang theory', style);
         
@@ -105,7 +113,7 @@
              Titlegraphics.drawRoundedRect(360, 15, 190, 50, 15);
              Titlegraphics.endFill();
         
-        app.stage.addChild(Titlegraphics);
+        //app.stage.addChild(Titlegraphics);
          
         var Title = new PIXI.Text("Big Bang", style2);
         
@@ -115,7 +123,7 @@
         app.stage.addChild(Title);
         
         
-        
+}
 
     </script>
 </body>

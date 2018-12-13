@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title></title>
+	<title>Pixi.js Sound &amp; Buttons</title>
 
     <!-- Import Pixi.js from the main website. -->
 	<script src="js/pixi.min.js"></script>
@@ -19,7 +19,16 @@
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
+        
+ var accretion = new Solar.Scene("accretion");
 
+
+Solar.loader.on('complete',function(loader,resources) {
+
+    
+    var scene = accretion;
+    
+    
         //Set up the app
         var app = new PIXI.Application(1080, 720, {backgroundColor : 0x000000});
         document.body.appendChild(app.view);
@@ -41,7 +50,7 @@
         //the light beam
         var thebeam = PIXI.Sprite.fromImage("img/light beam.png");
             thebeam.width = 372;
-            thebeam.height = 720;
+            thebeam.height =  720;
             thebeam.anchor.set(0.5);
             thebeam.x= 260;
             thebeam.y= 300;
@@ -96,10 +105,11 @@ function slide(){
             fontSize: 18,
             fontStyle: 'italic',
             fontWeight: 'bold',
-            stroke: '#FFFFFF',
+            //stroke: '#FFFFFF',
+            fill: '#FFFFFF',
             strokeThickness: 5,
-            dropShadow: true,
-            dropShadowColor: '#000000',
+            //dropShadow: true,
+            //dropShadowColor: '#000000',
             dropShadowBlur: 4,
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
@@ -113,10 +123,11 @@ function slide(){
             fontSize: 36,
             fontStyle: 'italic',
             fontWeight: 'bold',
-            stroke: '#FFFFFF',
+            //stroke: '#FFFFFF',
+             fill: '#FFFFFF',
             strokeThickness: 5,
-            dropShadow: true,
-            dropShadowColor: '#000000',
+            //dropShadow: true,
+            //dropShadowColor: '#000000',
             dropShadowBlur: 4,
             dropShadowAngle: Math.PI / 6,
             dropShadowDistance: 6,
@@ -131,7 +142,7 @@ function slide(){
             graphics.drawRoundedRect(590, 180, 420, 100, 15);
             graphics.endFill();
         
-        app.stage.addChild(graphics);
+        //app.stage.addChild(graphics);
          
         var infoText = new PIXI.Text('A rotating disk of matter formed by accretion around a massive body (such as a black hole) under the influence of gravitation', style);
         
@@ -147,9 +158,9 @@ function slide(){
              Titlegraphics.drawRoundedRect(360, 15, 300, 50, 15);
              Titlegraphics.endFill();
         
-        app.stage.addChild(Titlegraphics);
+       // app.stage.addChild(Titlegraphics);
          
-        var Title = new PIXI.Text("Accertion Disk", style2);
+        var Title = new PIXI.Text("Accretion Disk", style2);
         
         Title.x = 370;
         Title.y = 15;
@@ -157,7 +168,7 @@ function slide(){
         app.stage.addChild(Title);
         
 
-         
+}
         
     </script>
 </body>

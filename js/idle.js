@@ -19,6 +19,7 @@ Solar.loader
 	.add("asteroid","img/asteroidVesta.png")			//Asteroids
     .add("spaaace","img/spaaace.png")	//spaaace
 	.add("jupiter","img/jupiter.png")	//Jupiter
+    .add("jMoon","img/jupiterMoons.png")  // Jupiter's moons
 	.add("saturn","img/saturn.png")		//Saturn
 	.add("uranus","img/uranus.png")		//That Planet
 	.add("neptune","img/neptune.png")	//Neptune
@@ -511,6 +512,8 @@ Solar.loader.on('complete', function(loader, resources) {
 	orbit = async function () {
         
         deactivatePlanets();
+        
+        hideSlider(1000);
 	
 		orbiting = true;
 	       
@@ -648,6 +651,8 @@ Solar.loader.on('complete', function(loader, resources) {
             .then( _=> Animate.to(plutoText,speed,{alpha:1}));
         
         activatePlanets();
+        
+        showSlider(1000);
     }
     
     /*
