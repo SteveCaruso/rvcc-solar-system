@@ -91,6 +91,7 @@ Solar.loader.on('complete',function(loader,resources) {
 		
         //Stop clickability
         deactivatePlanets();
+        hideSlider();
         
 		//If it's from the idle scene, we do something special
 		//if (Solar.currentScene.name == "idle") {
@@ -181,6 +182,7 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //Make them clickable again
         activatePlanets();
+        showSlider();
         
 	}
 	

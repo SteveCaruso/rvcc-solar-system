@@ -1,12 +1,16 @@
 /*
  * this was my only real contribution to the project honestly
  * - peng
+ *
+ * I call BS.
+ * - The Professor
+ *
  * (also the comet particles get hidden behind milkyway.jpg but
  * that can get fixed later)
  */
 
 var cometContainer=new PIXI.Container();
-app.stage.addChild(cometContainer);
+solarSystem.addChild(cometContainer);
 
 var resources=null;
 
