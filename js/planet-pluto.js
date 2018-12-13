@@ -2,7 +2,7 @@
 var plutoScreen = new Solar.Scene("pluto");
 
 //Load in media
-Solar.loader.add("charon",'img/charon(saturn).png');
+Solar.loader.add("charon",'img/charon(pluto).png');
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
