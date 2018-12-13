@@ -72,6 +72,8 @@ function activatePlanets() {
     uranus.interactive = true;
     neptune.interactive = true;
     pluto.interactive = true;
+    
+    spaaace.interactive = true;
 }
 
 function deactivatePlanets() {
@@ -86,6 +88,8 @@ function deactivatePlanets() {
     uranus.interactive = false;
     neptune.interactive = false;
     pluto.interactive = false;
+    
+    spaaace.interactive = false;
 }
 
 
@@ -321,6 +325,15 @@ Solar.loader.on('complete', function(loader, resources) {
     spaaace.height = 12;
     spaaace.anchor.set(0.5);
     spaaace.x = 420;
+    
+    spaaace.on("click",async function() {
+        var scale = spaaace.scale.x;
+        await Animate.to(spaaace,2000,{scale:5});
+        await Animate.to(spaaace,2000,{alpha:0});
+        spaaace.alpha = 1;
+        spaaace.width = 12;
+        spaaace.height = 12;
+    });
     
     spaaaceOrbit = new PIXI.Container();
     var spaaaceTwist = new PIXI.Container();
