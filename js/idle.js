@@ -529,7 +529,9 @@ Solar.loader.on('complete', function(loader, resources) {
 		Animate.to(saturnText,500,{alpha:0});
 		Animate.to(uranusText,500,{alpha:0});
 		Animate.to(neptuneText,500,{alpha:0});
-		await Animate.to(plutoText,500,{alpha:0});
+		Animate.to(plutoText,500,{alpha:0});
+        
+        await setTimeout(_=>true,550);
         
         //Bring back to normal size
         var line = {
