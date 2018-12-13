@@ -262,11 +262,13 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
     node7=new Node(64+6*192, 64, container, "Heat Death", resources);
     
     node1.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: big bang", true);
+        Solar.changeSceneTo("bigbang");
+        //Solar.changeSceneDiscardCurrent("timeline: big bang", true);
     }
     
     node2.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: stellar dust", true);
+        Solar.changeSceneTo("stellarDust");
+        //Solar.changeSceneDiscardCurrent("timeline: stellar dust", true);
     }
     
     node3.onSelect = function() {

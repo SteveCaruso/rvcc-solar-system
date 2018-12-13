@@ -1,16 +1,13 @@
 var stellarDust = new Solar.Scene("stellarDust");
 
 
-Solar.loader.add("reddust","img/reddust.png")
-            .add("light","img/light.png")
+Solar.loader.add("reddust","img/timeline/reddust.png")
+            .add("light","img/timeline/light.png")
 
 Solar.loader.on('complete',function(loader,resources) {
 
     
     var scene = stellarDust;
-       
-       var app = new PIXI.Application(1080, 600, {backgroundColor : 0x000000});
-        document.body.appendChild(app.view);
         
         //Center coordinates for the stage
         var centerX = app.view.width/2;
@@ -18,7 +15,8 @@ Solar.loader.on('complete',function(loader,resources) {
         
         var count = 0;
         
-       
+        var dust = new PIXI.Sprite(resources.reddust.texture);   
+    
             dust.width = 500;
             dust.height = 500;
             dust.anchor.set(0.5);
@@ -26,7 +24,7 @@ Solar.loader.on('complete',function(loader,resources) {
             dust.y= 300;
              
          
-              
+        var light = new PIXI.Sprite(resources.light.texture);      
        
             light.width = 300;
             light.height = 300;
@@ -35,9 +33,9 @@ Solar.loader.on('complete',function(loader,resources) {
             light.y= 300;
         
         
-                app.stage.addChild(light);
+                scene.addChild(light);
 
-          app.stage.addChild(dust);
+          scene.addChild(dust);
         
         
         app.ticker.add(function(delta) 
@@ -105,7 +103,7 @@ Solar.loader.on('complete',function(loader,resources) {
         infoText.x = 600;
         infoText.y = 190;
 
-        app.stage.addChild(infoText);
+        scene.addChild(infoText);
         
       //Title  
          var Titlegraphics = new PIXI.Graphics();
@@ -121,5 +119,5 @@ Solar.loader.on('complete',function(loader,resources) {
         Title.x = 370;
         Title.y = 15;
 
-        app.stage.addChild(Title);
-}
+        scene.addChild(Title);
+});
