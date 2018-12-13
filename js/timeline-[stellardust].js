@@ -123,7 +123,3 @@ Solar.loader.on('complete',function(loader,resources) {
 
         app.stage.addChild(Title);
 }
-
-    </script>
-</body>
-</html>
