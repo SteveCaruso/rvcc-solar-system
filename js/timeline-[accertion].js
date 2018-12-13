@@ -22,8 +22,8 @@ Solar.loader.on('complete',function(loader,resources) {
             theSun.width = 175;
             theSun.height = 175;
             theSun.anchor.set(0.5);
-            theSun.x= 240;
-            theSun.y= 300;
+            theSun.x= 200;
+            theSun.y= 350;
         
         //the light beam
         var thebeam = new PIXI.Sprite(resources.diskBeam.texture);
@@ -80,7 +80,7 @@ function slide(){
         var style = new PIXI.TextStyle
          ({
             fontFamily: 'Arial',
-            fontSize: 18,
+            fontSize: 36,
             fontStyle: 'italic',
             fontWeight: 'bold',
             //stroke: '#FFFFFF',
