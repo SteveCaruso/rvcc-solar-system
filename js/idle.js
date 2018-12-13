@@ -19,7 +19,10 @@ Solar.loader
 	.add("asteroid","img/asteroidVesta.png")			//Asteroids
     .add("spaaace","img/spaaace.png")	//spaaace
 	.add("jupiter","img/jupiter.png")	//Jupiter
-    .add("jMoon","img/jupiterMoons.png")  // Jupiter's moons
+    .add("jMoonIo","img/jupiter-io.png")  // Jupiter's moons
+    .add("jMoonEuropa","img/jupiter-europa.png")
+    .add("jMoonGanymede","img/jupiter-ganymede.png")
+    .add("jMoonCallisto","img/jupiter-callisto.png")
 	.add("saturn","img/saturn.png")		//Saturn
 	.add("uranus","img/uranus.png")		//That Planet
 	.add("neptune","img/neptune.png")	//Neptune

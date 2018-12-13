@@ -2,6 +2,9 @@
 var saturnScreen = new Solar.Scene("saturn");
 
 
+//Load in media
+Solar.loader.add("titan",'img/titan(saturn).png');
+
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -43,7 +46,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 10.7 Earth Days \n\n• Year: 29 Earth Years \n\n• Size: 74,897 miles in diameter \n\n• Distance from Sun: 886 million miles \n\n• Avg. Temperature:\n  about -288 degrees \n\n• Atmosphere: Hydrogen, Helium \n\n• The rings are mostly made of\n  ice and rock \n\n• Moons: 62",textStyle);
+    var text = new PIXI.Text("• Day: 10.7 Earth Days \n\n• Year: 29 Earth Years \n\n• Size: 74,897 miles in diameter \n\n• Distance from Sun: 886 million miles \n\n• Avg. Temperature:\n  about -288 degrees \n\n• Atmosphere: Hydrogen, Helium \n\n• The rings are mostly made of\n  ice and rock \n\n• Moons: 62 (Titan in Display)",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -75,6 +78,15 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Add our Saturn to the scene
     scene.addChildAt(planet,1);
 	
+    //Saturn's moons
+    var titan = new PIXI.Sprite(resources.titan.texture);
+        titan.width = 400;
+        titan.height = 400;
+        titan.anchor.set(0.5);
+        titan.x = 200;
+        titan.y = 200;
+    
+    content.addChild(titan)
     
 	//Change the default transition
 	scene.transition = async function() {
