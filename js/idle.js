@@ -473,7 +473,7 @@ Solar.loader.on('complete', function(loader, resources) {
 	//Pluto's text
 	var plutoText = new PIXI.Text('Pluto', style);
 		plutoText.x = pluto.x;
-		plutoText.y = textHeight;
+		plutoText.y = textHeight+20;
 		plutoText.alpha = 0;
         plutoText.rotation = textRotate;
 
@@ -643,7 +643,7 @@ Solar.loader.on('complete', function(loader, resources) {
         
         var speed = 250;
         
-        Animate.to(mercuryText,speed,{alpha:1})
+        await Animate.to(mercuryText,speed,{alpha:1})
             .then( _=> Animate.to(venusText,speed,{alpha:1}))
             .then( _=> Animate.to(earthText,speed,{alpha:1}))
             .then( _=> Animate.to(marsText,speed,{alpha:1}))
@@ -655,7 +655,7 @@ Solar.loader.on('complete', function(loader, resources) {
         
         activatePlanets();
         
-        showSlider(1000);
+        showSlider();
     }
     
     /*
