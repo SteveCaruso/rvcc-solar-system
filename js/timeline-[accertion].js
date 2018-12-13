@@ -1,27 +1,3 @@
-/*
-<!doctype html>
-<html>
-<head>
-	<title>Pixi.js Sound &amp; Buttons</title>
-
-    <!-- Import Pixi.js from the main website. -->
-	<script src="js/pixi.min.js"></script>
-    <!-- <script src="https://pixijs.download/dev/pixi.min.js"></script>-->
-
-    <!-- Import the Pixi.js sound module. -->
-	<!--<script src="https://pixijs.io/pixi-sound/dist/pixi-sound.js"></script>-->
-
-    <!-- Import Easing -->
-    <script src="js/easing.js"></script>
-
-    <!-- Import Animator -->
-    <script src="js/animate.js"></script>
-</head>
-<body>
-    <!-- Where our Pixi code is going. -->
-    <script>
-*/
-
 var accretion = new Solar.Scene("accretion");
 
 Solar.loader.add("diskStar","img/timeline/star.png")
@@ -171,7 +147,3 @@ function slide(){
         
 
 });
-/*        
-    </script>
-</body>
-</html>*/
