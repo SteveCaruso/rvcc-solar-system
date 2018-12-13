@@ -1,3 +1,4 @@
+/*
 <!doctype html>
 <html>
 <head>
@@ -19,19 +20,20 @@
 <body>
     <!-- Where our Pixi code is going. -->
     <script>
-        
- var accretion = new Solar.Scene("accretion");
+*/
+
+var accretion = new Solar.Scene("accretion");
+
+Solar.loader.add("diskStar","img/timeline/star.png")
+            .add("diskBeam","img/timeline/light beam.png")
+            .add("diskFront","img/timeline/front dust.png")
+            .add("diskBack","img/timeline/dust back.png");
 
 
 Solar.loader.on('complete',function(loader,resources) {
 
     
     var scene = accretion;
-    
-    
-        //Set up the app
-        var app = new PIXI.Application(1080, 720, {backgroundColor : 0x000000});
-        document.body.appendChild(app.view);
         
         //Center coordinates for the stage
         var centerX = app.view.width/2;
@@ -40,7 +42,7 @@ Solar.loader.on('complete',function(loader,resources) {
         var count = 0;
        
         //The Sun
-        var theSun = PIXI.Sprite.fromImage("img/star.png");
+        var theSun = new PIXI.Sprite(resources.diskStar.texture);
             theSun.width = 175;
             theSun.height = 175;
             theSun.anchor.set(0.5);
@@ -48,31 +50,31 @@ Solar.loader.on('complete',function(loader,resources) {
             theSun.y= 300;
         
         //the light beam
-        var thebeam = PIXI.Sprite.fromImage("img/light beam.png");
+        var thebeam = new PIXI.Sprite(resources.diskBeam.texture);
             thebeam.width = 372;
             thebeam.height =  720;
             thebeam.anchor.set(0.5);
             thebeam.x= 260;
             thebeam.y= 300;
         
-        var frontdust = PIXI.Sprite.fromImage("img/front dust.png");
+        var frontdust = new PIXI.Sprite(resources.diskFront.texture);
             frontdust.width = 612;
             frontdust.height = 216;
             frontdust.anchor.set(0.5);
             frontdust.x= 310;
             frontdust.y= 325;
         
-        var backdust = PIXI.Sprite.fromImage("img/dust back.png");
+        var backdust =new PIXI.Sprite(resources.diskBack.texture);
             backdust.width = 612;
             backdust.height = 216;
             backdust.anchor.set(0.5);
             backdust.x= 310;
             backdust.y= 300;
         
-         app.stage.addChild(backdust);
-         app.stage.addChild(thebeam);
-         app.stage.addChild(theSun);
-         app.stage.addChild(frontdust);
+         accretion.addChild(backdust);
+         accretion.addChild(thebeam);
+         accretion.addChild(theSun);
+         accretion.addChild(frontdust);
     
          app.ticker.add(function(delta) {
 
@@ -149,7 +151,7 @@ function slide(){
         infoText.x = 600;
         infoText.y = 190;
 
-        app.stage.addChild(infoText);
+        accretion.addChild(infoText);
         
       //Title  
          var Titlegraphics = new PIXI.Graphics();
@@ -165,11 +167,11 @@ function slide(){
         Title.x = 370;
         Title.y = 15;
 
-        app.stage.addChild(Title);
+        accretion.addChild(Title);
         
 
-}
-        
+});
+/*        
     </script>
 </body>
-</html>
+</html>*/
