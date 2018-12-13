@@ -699,7 +699,14 @@ Solar.loader.on('complete', function(loader, resources) {
     
     solarSystem.transition = async function() {
         
-        Solar.currentScene.transitionOut();
+        var scenes = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune','pluto'];
+        
+        if ( scenes.includes(Solar.currentScene.name) ) {
+            Solar.currentScene.transitionOut();
+        }
+        else {
+            solarSystem.defaultTransition();
+        }
         
     }
 

@@ -270,11 +270,13 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
     }
     
     node3.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: disk", true);
+        Solar.changeSceneTo("accretion");
+        //Solar.changeSceneDiscardCurrent("timeline: disk", true);
     }
     
     node4.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("idle", true);
+        Solar.changeSceneTo("idle");
+        //Solar.changeSceneDiscardCurrent("idle", true);
     }
     
     node5.onSelect = function() {
