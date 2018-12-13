@@ -39,6 +39,7 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
             this.picture=new PIXI.Sprite(resources["ui-node"].texture);
             this.picture.anchor.set(0.5);
             this.picture.position.set(x, y);
+            this.picture_active.scale.set(1.5);
             this.picture.base=this;
 
             // this didn't end up being used because it turns out that touch
@@ -47,6 +48,7 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
                 this.picture_hover=new PIXI.Sprite(resources["ui-node-hover"].texture);
                 this.picture_hover.anchor.set(0.5);
                 this.picture_hover.position.set(x, y);
+            this.picture_active.scale.set(1.5);
                 this.picture_hover.base=this;
                 this.picture_hover.visible=false;
             */
@@ -54,7 +56,9 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
             this.picture_active=new PIXI.Sprite(resources["ui-node-active"].texture);
             this.picture_active.anchor.set(0.5);
             this.picture_active.position.set(x, y);
+            this.picture_active.scale.set(1.5);
             this.picture_active.base=this;
+            this.picture_active.scale.set(1.5);
 
             this.next=null;
             this.previous=null;
@@ -139,6 +143,7 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
             this.picture=new PIXI.Sprite(resources["ui-slider"].texture);
             this.picture.anchor.set(0.5);
             this.picture.position.set(node.x, node.y);
+            this.picture_active.scale.set(1.5);
             this.picture.base=this;
             this.picture.interactive=true;
             this.node=node;

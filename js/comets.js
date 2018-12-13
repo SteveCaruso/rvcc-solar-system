@@ -73,7 +73,7 @@ function spawnComet(){
     // do it again
     setTimeout(function(){
         spawnComet();
-    }, randomElementFromArray(COMET_PERIODS)*1000/4);
+    }, randomElementFromArray(COMET_PERIODS)*1000/10);
     
     return new Comet(x, y, xto, yto);
 }
