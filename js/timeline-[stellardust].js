@@ -1,19 +1,8 @@
-<!doctype html>
-<html>
-<head>
-	<title>Pixi.js Sound &amp; Buttons</title>
-    
-    <!-- Import Pixi.js from the main website. -->
-	<script src="https://pixijs.download/dev/pixi.min.js"></script>
-    
-    <!-- Import the Pixi.js sound module. -->
-	<script src="https://pixijs.io/pixi-sound/dist/pixi-sound.js"></script>
-</head>
-<body>
-    <!-- Where our Pixi code is going. -->
-    <script>
-    var stellarDust = new Solar.Scene("stellarDust");
+var stellarDust = new Solar.Scene("stellarDust");
 
+
+Solar.loader.add("reddust","img/reddust.png")
+            .add("light","img/light.png")
 
 Solar.loader.on('complete',function(loader,resources) {
 
@@ -29,7 +18,7 @@ Solar.loader.on('complete',function(loader,resources) {
         
         var count = 0;
         
-        var dust = PIXI.Sprite.fromImage("img/reddust.png");
+       
             dust.width = 500;
             dust.height = 500;
             dust.anchor.set(0.5);
@@ -38,7 +27,7 @@ Solar.loader.on('complete',function(loader,resources) {
              
          
               
-        var light = PIXI.Sprite.fromImage("img/light.png");
+       
             light.width = 300;
             light.height = 300;
             light.anchor.set(0.5);
