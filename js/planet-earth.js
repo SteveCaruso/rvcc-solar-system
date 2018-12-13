@@ -74,7 +74,16 @@ Solar.loader.on('complete',function(loader,resources) {
 		planet.y = 0;
 	
 	//Add our Earth to the scene
-    scene.addChild(planet);
+    scene.addChildAt(planet,1);
+    
+    var moon = new PIXI.Sprite(resources.moon.texture);
+        moon.width = 275;
+        moon.height = 275;
+        moon.anchor.set(0.5);
+        moon.x = 150;
+        moon.y = 150;
+    
+    content.addChild(moon);
 	
     
 	//Change the default transition
