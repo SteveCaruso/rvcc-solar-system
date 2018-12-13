@@ -23,7 +23,7 @@ Solar.loader.on('complete',function(loader,resources) {
     //Info box
     var infobox = new PIXI.Sprite(resources.infobox.texture);
         infobox.width = 750;
-        infobox.height = 1000;
+        infobox.height = 1020;
         infobox.x = 2000;
         infobox.y = 50;
     
@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 17 hours 14 minutes Earth Days \n\n• Year: 84 years \n\n• Size: 31763 miles is diameter \n\n• Distance from sun: 1.786 billion miles \n\n• Average temperature: -356.8f \n\n• Uranus hits the coldest temperatures of any planet. \n\n• Moons: 27",textStyle);
+    var text = new PIXI.Text("• Day: 17.23 Earth Hours \n\n• Year: 84 Earth Years \n\n• Size: 31,763 miles in diameter \n\n• Distance from Sun: 1.786 billion miles \n\n• Avg. Temperature: -357 degrees \n\n• Uranus hits the coldest\n  temperatures of any planet \n\n• Atmosphere: Hydrogen, Helium, \n  Methane \n\n• Moons: 27",textStyle);
         text.x = 1200;
         text.y = 180;
     

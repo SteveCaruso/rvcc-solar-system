@@ -19,6 +19,10 @@ Solar.loader
 	.add("asteroid","img/asteroidVesta.png")			//Asteroids
     .add("spaaace","img/spaaace.png")	//spaaace
 	.add("jupiter","img/jupiter.png")	//Jupiter
+    .add("jMoonIo","img/jupiter-io.png")  // Jupiter's moons
+    .add("jMoonEuropa","img/jupiter-europa.png")
+    .add("jMoonGanymede","img/jupiter-ganymede.png")
+    .add("jMoonCallisto","img/jupiter-callisto.png")
 	.add("saturn","img/saturn.png")		//Saturn
 	.add("uranus","img/uranus.png")		//That Planet
 	.add("neptune","img/neptune.png")	//Neptune
@@ -511,6 +515,8 @@ Solar.loader.on('complete', function(loader, resources) {
 	orbit = async function () {
         
         deactivatePlanets();
+        
+        hideSlider(1000);
 	
 		orbiting = true;
 	       
@@ -648,6 +654,8 @@ Solar.loader.on('complete', function(loader, resources) {
             .then( _=> Animate.to(plutoText,speed,{alpha:1}));
         
         activatePlanets();
+        
+        showSlider(1000);
     }
     
     /*
@@ -691,7 +699,14 @@ Solar.loader.on('complete', function(loader, resources) {
     
     solarSystem.transition = async function() {
         
-        Solar.currentScene.transitionOut();
+        var scenes = ['mercury','venus','earth','mars','jupiter','saturn','uranus','neptune','pluto'];
+        
+        if ( scenes.includes(Solar.currentScene.name) ) {
+            Solar.currentScene.transitionOut();
+        }
+        else {
+            solarSystem.defaultTransition();
+        }
         
     }
 
