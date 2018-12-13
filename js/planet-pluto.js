@@ -2,7 +2,7 @@
 var plutoScreen = new Solar.Scene("pluto");
 
 //Load in media
-Solar.loader.add("charon",'img/charon(saturn).png');
+Solar.loader.add("charon",'img/charon(pluto).png');
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 153 Earth Hours \n\n• Year: 248 Earth Years \n\n• Size: 1,430 miles in diameter \n\n• Distance from Sun: 3.7 billion miles \n\n• Avg. Temperature: about -385 degrees \n\n• Atmosphere: Nitrogen, Methane,\n  Carbon Monoxide \n\n• Moons: Charon, Styx, Nix, \n  Kerberos, Hydra",textStyle);
+    var text = new PIXI.Text("• Day: 153 Earth Hours \n\n• Year: 248 Earth Years \n\n• Size: 1,430 miles in diameter \n\n• Distance from Sun: 3.7 billion miles \n\n• Avg. Temperature: about -385 degrees \n\n• Atmosphere: Nitrogen, Methane,\n  Carbon Monoxide \n\n• Moons: Charon, Styx, Nix, \n  Kerberos, Hydra \n\n• Charon is the largest of Pluto's moons and is half the size of Pluto" ,textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -74,17 +74,17 @@ Solar.loader.on('complete',function(loader,resources) {
 		planet.y = 0;
 	
 	//Add our pluto to the scene
-    scene.addChild(planet);
+    scene.addChildAt(planet,1);
 	
     //Pluto's moons
     var charon = new PIXI.Sprite(resources.charon.texture);
-        charon.width = 400;
-        charon.height = 400;
+        charon.width = 450;
+        charon.height = 450;
         charon.anchor.set(0.5);
         charon.x = 200;
         charon.y = 200;
     
-    content.addChild(charon)
+    content.addChildAt(charon,content.children.length-1);
     
 	//Change the default transition
 	scene.transition = async function() {
