@@ -522,7 +522,7 @@ Solar.loader.on('complete', function(loader, resources) {
     
     
 	//Base rate of orbit
-	var base = .0005;
+	var base = -.0005;
 	var orbiting = false;
 
 	orbit = async function () {
