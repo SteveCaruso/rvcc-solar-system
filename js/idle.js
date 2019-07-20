@@ -146,6 +146,7 @@ Solar.loader.on('complete', function(loader, resources) {
 		mercuryText.x = mercury.x;
 		mercuryText.y = textHeight;
 		mercuryText.alpha = 0;
+        mercuryText.visible = false;
         mercuryText.rotation = textRotate;
 
 	//Mercury's Orbit
@@ -534,15 +535,15 @@ Solar.loader.on('complete', function(loader, resources) {
 		orbiting = true;
 	       
 		//getting rid of name text
-		Animate.to(mercuryText,500,{alpha:0});
-		Animate.to(venusText,500,{alpha:0});
-		Animate.to(earthText,500,{alpha:0});
-		Animate.to(marsText,500,{alpha:0});
-		Animate.to(jupiterText,500,{alpha:0});
-		Animate.to(saturnText,500,{alpha:0});
-		Animate.to(uranusText,500,{alpha:0});
-		Animate.to(neptuneText,500,{alpha:0});
-		Animate.to(plutoText,500,{alpha:0});
+		Animate.to(mercuryText,500,{alpha:0}).then(_=> mercuryText.visible = false);
+		Animate.to(venusText,500,{alpha:0}).then(_=> venusText.visible = false);
+		Animate.to(earthText,500,{alpha:0}).then(_=> earthText.visible = false);
+		Animate.to(marsText,500,{alpha:0}).then(_=> marsText.visible = false);
+		Animate.to(jupiterText,500,{alpha:0}).then(_=> jupiterText.visible = false);
+		Animate.to(saturnText,500,{alpha:0}).then(_=> saturnText.visible = false);
+		Animate.to(uranusText,500,{alpha:0}).then(_=> uranusText.visible = false);
+		Animate.to(neptuneText,500,{alpha:0}).then(_=> neptuneText.visible = false);
+		Animate.to(plutoText,500,{alpha:0}).then(_=> plutoText.visible = false);
         
         await setTimeout(_=>true,550);
         
@@ -655,6 +656,16 @@ Solar.loader.on('complete', function(loader, resources) {
 
 		//Make the sun BIG
 		await Animate.to(theSun,3000,{width:2000,height:2000,x:-750});
+        
+        mercuryText.visible = true;
+        venusText.visible = true;
+        earthText.visible = true;
+        marsText.visible = true;
+        jupiterText.visible = true;
+        saturnText.visible = true;
+        uranusText.visible = true;
+        neptuneText.visible = true;
+        plutoText.visible = true;
         
         var speed = 250;
         

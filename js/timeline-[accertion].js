@@ -19,64 +19,72 @@ Solar.loader.on('complete',function(loader,resources) {
        
         //The Sun
         var theSun = new PIXI.Sprite(resources.diskStar.texture);
-            theSun.width = 175;
-            theSun.height = 175;
+            theSun.width = 225;
+            theSun.height = 225;
             theSun.anchor.set(0.5);
-            theSun.x= 200;
-            theSun.y= 350;
+            theSun.x= 200 + 760;
+            theSun.y= 350 + 120;
         
         //the light beam
         var thebeam = new PIXI.Sprite(resources.diskBeam.texture);
-            thebeam.width = 1920;
-            thebeam.height =  1080;
+            thebeam.width = 400;
+            thebeam.height =  3000;
             thebeam.anchor.set(0.5);
-            thebeam.x= 260;
-            thebeam.y= 300;
+            thebeam.x= 260 + 760 + 20;
+            thebeam.y= 300 + 190 + 500;
         
         var frontdust = new PIXI.Sprite(resources.diskFront.texture);
-            frontdust.width = 612;
+            frontdust.width = 2500;
             frontdust.height = 216;
             frontdust.anchor.set(0.5);
-            frontdust.x= 310;
-            frontdust.y= 325;
+            frontdust.x= 310 + 760;
+            frontdust.y= 325 + 190;
         
         var backdust =new PIXI.Sprite(resources.diskBack.texture);
-            backdust.width = 612;
+            backdust.width = 2500;
             backdust.height = 216;
             backdust.anchor.set(0.5);
-            backdust.x= 310;
-            backdust.y= 300;
+            backdust.x= 310 + 760;
+            backdust.y= 300 + 190;
         
          accretion.addChild(backdust);
          accretion.addChild(thebeam);
          accretion.addChild(theSun);
          accretion.addChild(frontdust);
+        
+        var sunscaleX = theSun.scale.x;
+        var sunscaleY = theSun.scale.y;
+        var beamScaleX = thebeam.scale.x;
+        var beamScaleY = thebeam.scale.y;
+        var frontDustScaleX = frontdust.scale.x;
+        var backDustScaleX = backdust.scale.x;
     
          app.ticker.add(function(delta) {
 
-   theSun.scale.x = 1 + Math.sin(count) * 0.01;
-   theSun.scale.y = 1 + Math.cos(count) * 0.01;
-            
-  thebeam.scale.x = 1 + Math.sin(count) * 0.01;
-  thebeam.scale.y = 1 + Math.cos(count) * 0.01;
-             
-  frontdust.scale.x = 1 + Math.sin(count) * 0.01;
-  //frontdust.scale.y = 1 + Math.cos(count) * 0.01;
-             
- backdust.scale.x = 1 + Math.sin(count) * 0.01;
-            
-function slide(){
-    if(x>0)
-        this.x= this.x-1;
-     else{
-         this.x= 310;
-     }
-}
-        
-    count += 0.1; 
+            theSun.scale.x = sunscaleX + Math.sin(count) * 0.01;
+            theSun.scale.y = sunscaleY + Math.cos(count) * 0.01;
+
+            thebeam.scale.x = beamScaleX + Math.sin(count) * 0.01;
+            thebeam.scale.y = beamScaleY + Math.cos(count) * 0.01;
+
+            frontdust.scale.x = frontDustScaleX + Math.sin(count) * 0.01;
+            //frontdust.scale.y = 1 + Math.cos(count) * 0.01;
+
+            backdust.scale.x = backDustScaleX + Math.sin(count) * 0.01;
+
+            function slide(){
+                if(x>0)
+                    this.x= this.x-1;
+                 else{
+                     this.x= 310;
+                 }
+            }
+
+                count += 0.1; 
 
    
-});
+        });
+    
         var style = new PIXI.TextStyle
          ({
             fontFamily: 'Arial',
@@ -122,7 +130,7 @@ function slide(){
         
         //app.stage.addChild(graphics);
          
-        var infoText = new PIXI.Text('A rotating disk of matter formed by accretion around a massive body (such as a black hole) under the influence of gravitation', textStyle);
+        var infoText = new PIXI.Text('A rotating disk of matter formed under the influence of gravity around a star. The dust slowly accretes (comes together) into bigger and bigger pieces eventually forming planets.', textStyle);
         
         infoText.x = 1200;
         infoText.y = 700;

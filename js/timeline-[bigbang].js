@@ -23,7 +23,7 @@ Solar.loader.on('complete',function(loader,resources) {
             bang.y= 540;
              
     var bigbeam = new PIXI.Sprite(resources.Beam.texture);
-            bigbeam.width = 2300;
+            bigbeam.width = 4000;
             bigbeam.height = 1080;
             bigbeam.anchor.set(0.5);
             bigbeam.x=960;
