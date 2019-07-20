@@ -289,15 +289,15 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
     }
     
     node5.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: red giant", true);
+        Solar.changeSceneTo("redGiant");
     }
     
     node6.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: white dwarf", true);
+        Solar.changeSceneTo("whiteDwarf");
     }
     
     node7.onSelect = function() {
-        Solar.changeSceneDiscardCurrent("timeline: death", true);
+        Solar.changeSceneTo("heatDeath");
     }
 
     node1.setNext(node2);
