@@ -179,13 +179,13 @@ Solar.loader.on('complete',function(loader,resources) {
 	
 	//Set the event listeners
 	targetPlanet.interactive = true;
-    targetPlanet.on('click', function() {
+    targetPlanet.on('pointerdown', function() {
 		Solar.changeSceneTo("uranus");
 	});
 	
 	//When done, head back
     backbutton.interactive = false;
-	backbutton.on('click', function() {
+	backbutton.on('pointerdown', function() {
 		Solar.changeSceneTo('idle');
 	});
 	

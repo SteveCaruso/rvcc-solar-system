@@ -121,5 +121,32 @@
 		Solar.loader.load();
 
     </script>
+    
+    <!-- Fullscreen button -->
+    
+    <input type="button" id="fullscreen" value="Go Full Screen"/>
+        
+    <script>
+
+        var fullScreenButton = document.getElementById("fullscreen");
+            fullScreenButton.addEventListener("touchstart",fullscreenit);
+            fullScreenButton.addEventListener("mousedown",fullscreenit);
+
+        function fullscreenit() {
+            console.log("Requesting full screen...");
+            app.view.requestFullscreen();
+        }
+
+    </script>
+    
+    <!-- Disallow right-click -->
+    
+    <script>
+        
+        document.addEventListener("contextmenu", function(e){
+            e.preventDefault();
+        }, false);
+        
+    </script>
 </body>
 </html>

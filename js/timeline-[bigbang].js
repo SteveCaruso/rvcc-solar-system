@@ -23,7 +23,7 @@ Solar.loader.on('complete',function(loader,resources) {
             bang.y= 540;
              
     var bigbeam = new PIXI.Sprite(resources.Beam.texture);
-            bigbeam.width = 1920;
+            bigbeam.width = 2300;
             bigbeam.height = 1080;
             bigbeam.anchor.set(0.5);
             bigbeam.x=960;
@@ -84,10 +84,10 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //app.stage.addChild(graphics);
          
-        var infoText = new PIXI.Text('the cosmic explosion that marked the beginning of the universe according to the big bang theory', style);
+        var infoText = new PIXI.Text('The cosmic explosion that marked the beginning of the universe according to the big bang theory.', textStyle);
         
-        infoText.x = 600;
-        infoText.y = 190;
+        infoText.x = 1200;
+        infoText.y = 700;
 
         bigbang.addChild(infoText);
         
@@ -100,9 +100,9 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //app.stage.addChild(Titlegraphics);
          
-        var Title = new PIXI.Text("Big Bang", style2);
+        var Title = new PIXI.Text("The Big Bang", titleStyle);
         
-        Title.x = 370;
+        Title.x = 20;
         Title.y = 15;
 
         bigbang.addChild(Title);

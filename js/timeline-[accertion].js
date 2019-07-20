@@ -122,10 +122,10 @@ function slide(){
         
         //app.stage.addChild(graphics);
          
-        var infoText = new PIXI.Text('A rotating disk of matter formed by accretion around a massive body (such as a black hole) under the influence of gravitation', style);
+        var infoText = new PIXI.Text('A rotating disk of matter formed by accretion around a massive body (such as a black hole) under the influence of gravitation', textStyle);
         
-        infoText.x = 600;
-        infoText.y = 190;
+        infoText.x = 1200;
+        infoText.y = 700;
 
         accretion.addChild(infoText);
         
@@ -138,9 +138,9 @@ function slide(){
         
        // app.stage.addChild(Titlegraphics);
          
-        var Title = new PIXI.Text("Accretion Disk", style2);
+        var Title = new PIXI.Text("Accretion Disk", titleStyle);
         
-        Title.x = 370;
+        Title.x = 20;
         Title.y = 15;
 
         accretion.addChild(Title);

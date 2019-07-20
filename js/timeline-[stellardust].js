@@ -1,8 +1,8 @@
 var stellarDust = new Solar.Scene("stellarDust");
 
 
-Solar.loader.add("reddust","img/timeline/reddust.png")
-            .add("light","img/timeline/light.png")
+Solar.loader.add("reddust","img/timeline/Reddust.png")
+            .add("light","img/timeline/Light.png")
 
 Solar.loader.on('complete',function(loader,resources) {
 
@@ -99,10 +99,10 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //app.stage.addChild(graphics);
          
-        var infoText = new PIXI.Text('Atomic and molecular gas (primarily hydrogen and helium) and tiny pieces of solid particles or dust (composed mainly of carbon, silicon and oxygen). In some places this interstellar material is very dense, forming nebulas.', style);
+        var infoText = new PIXI.Text('Atomic and molecular gas (primarily hydrogen and helium) and tiny pieces of solid particles or dust (composed mainly of carbon, silicon and oxygen). In some places this interstellar material is very dense, forming nebulas.', textStyle);
         
-        infoText.x = 600;
-        infoText.y = 190;
+        infoText.x = 1200;
+        infoText.y = 600;
 
         scene.addChild(infoText);
         
@@ -115,9 +115,9 @@ Solar.loader.on('complete',function(loader,resources) {
         
        // app.stage.addChild(Titlegraphics);
          
-        var Title = new PIXI.Text("Stellar Dust", style2);
+        var Title = new PIXI.Text("Stellar Dust", titleStyle);
         
-        Title.x = 370;
+        Title.x = 20;
         Title.y = 15;
 
         scene.addChild(Title);
