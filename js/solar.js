@@ -90,7 +90,7 @@ Solar.Scene = function(name) {
 Solar.changeSceneTo = async function(name) {
 
 	if (Solar.scenes[name] === undefined)
-		throw "So such scene.";
+		throw "No such scene.";
 
 	//Set the incoming scene
 	Solar.incomingScene = Solar.scenes[name];
