@@ -90,7 +90,7 @@ Solar.Scene = function(name) {
 Solar.changeSceneTo = async function(name) {
 
 	if (Solar.scenes[name] === undefined)
-		throw "So such scene.";
+		throw "No such scene.";
 
 	//Set the incoming scene
 	Solar.incomingScene = Solar.scenes[name];
@@ -107,17 +107,17 @@ Solar.changeSceneTo = async function(name) {
 Solar.startScene = async function(name) {
 
 	if (Solar.scenes[name] === undefined)
-		throw "So such scene.";
+		throw "No such scene.";
 	
 	//Set the incoming scene
 	Solar.incomingScene = Solar.scenes[name];
 
 	//Set alpha to zero
-	Solar.incomingScene.alpha = 0;
+	Solar.incomingScene.alpha = 1;
 	//Add to stage
 	app.stage.addChild(Solar.incomingScene);
 	//Fade in
-	await Animate.to(Solar.incomingScene,2000,{alpha:1});
+	//await Animate.to(Solar.incomingScene,2000,{alpha:1});
 
 	//Set the last scene as the current scene
 	Solar.lastScene = Solar.scenes[name];

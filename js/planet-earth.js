@@ -82,9 +82,15 @@ Solar.loader.on('complete',function(loader,resources) {
         moon.anchor.set(0.5);
         moon.x = 150;
         moon.y = 150;
+
+        moon.interactive = true;
+        moon.on('pointerdown', function() {
+            Solar.changeSceneTo("moon");
+        });
     
     content.addChild(moon);
-	
+    
+    
     
 	//Change the default transition
 	scene.transition = async function() {
