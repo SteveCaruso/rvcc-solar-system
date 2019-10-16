@@ -83,6 +83,11 @@ Solar.loader.on('complete',function(loader,resources) {
         phobos.anchor.set(0.5);
         phobos.x = 150;
         phobos.y = 150;
+
+        phobos.interactive = true;
+        phobos.on('pointerdown', function() {
+            Solar.changeSceneTo("phobos");
+        });
     
     content.addChild(phobos);
     
