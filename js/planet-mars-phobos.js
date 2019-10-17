@@ -67,11 +67,11 @@ Solar.loader.on('complete',function(loader,resources) {
     
     //Create our copy of mars
     var planet = new PIXI.Sprite(resources.mars.texture);
-        planet.width = 200;
-        planet.height = 200;
+        planet.width = 1080;
+        planet.height = 1080;
         planet.anchor.set(0.5);
-		planet.x = 0;
-		planet.y = 0;
+		planet.x = 540;
+		planet.y = centerY;
 	
 	//Add our mars to the scene
     scene.addChildAt(planet,1);
@@ -83,7 +83,7 @@ Solar.loader.on('complete',function(loader,resources) {
         phobos.x = 150;
         phobos.y = 150;
     
-    content.addChild(phobos);
+    scene.addChild(phobos);
     
     var deimos = new PIXI.Sprite(resources.deimos.texture);
         deimos.width = 225;
@@ -92,7 +92,7 @@ Solar.loader.on('complete',function(loader,resources) {
         deimos.x = 1000;
         deimos.y = 400;
     
-    content.addChild(deimos);
+    scene.addChild(deimos);
 	
     
 	//Change the default transition
@@ -131,6 +131,12 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:.6,
             easing:Easing.easeInOut
         });
+        Animate.to(deimos,3000,{
+            x:1000,
+            y:-150,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
         await Animate.to(phobos,3000,{
             height:750,
             width:750,
@@ -166,9 +172,14 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:1,
             easing:Easing.easeInOut
         });
+        Animate.to(deimos,3000,{
+            x: 1000,
+            y: 400,
+            easing:Easing.easeInOut
+        });
         await Animate.to(phobos,3000,{
-            height:275,
-            width:275,
+            height:225,
+            width:225,
             x:150,
             y:150,
             easing:Easing.easeInOut
