@@ -66,7 +66,6 @@ Solar.loader.on('complete',function(loader,resources) {
     scene.addChild(backbutton);
     
     
-    
     //Create our copy of the saturn
     var planet = new PIXI.Sprite(resources.saturn.texture);
         planet.width = 200;
@@ -85,6 +84,12 @@ Solar.loader.on('complete',function(loader,resources) {
         titan.anchor.set(0.5);
         titan.x = 200;
         titan.y = 200;
+        //make it interactive
+        titan.interactive = true;
+        titan.on('pointerdown', function() {
+            Solar.changeSceneTo("titan");
+        });
+        
     
     content.addChild(titan)
     
