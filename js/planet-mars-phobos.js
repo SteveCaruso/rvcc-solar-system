@@ -147,7 +147,26 @@ Solar.loader.on('complete',function(loader,resources) {
         });
 
         //Fade in content
-        //Here later.
+        await Animate.to(content,1000,{alpha:1});
+
+        //Info box title
+        var title = new PIXI.Text("Phobos",titleStyle);
+        title.x = 1200;
+        title.y = 100;
+
+        //Add to content
+        content.addChild(title);
+            
+        //Info box text
+        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos, son \n of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around mars in\n  7 hours, 41 minutes \n\n",textStyle);
+            text.x = 1200;
+            text.y = 180;
+
+        //Add to content
+        content.addChild(text);
+
+        //Add the content container to the scene
+        scene.addChild(content);
 
         //Drift mars and phobos a bit
         Animate.to(phobos,10000,{
