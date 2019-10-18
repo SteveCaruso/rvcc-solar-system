@@ -2,7 +2,8 @@
 var phobosScreen = new Solar.Scene("phobos");
 
 //Queue up our files we'll need
-//None!
+Solar.loader
+	.add("probe","img/phobos-probe.jpg")			//phobos probe
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
@@ -158,7 +159,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.addChild(title);
             
         //Info box text
-        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos, son \n of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around mars in\n  7 hours, 41 minutes \n\n",textStyle);
+        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos, son \n of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around mars in\n  7 hours, 41 minutes \n\n• (Below) illustration of the Phobos probe",textStyle);
             text.x = 1200;
             text.y = 180;
 
@@ -167,6 +168,16 @@ Solar.loader.on('complete',function(loader,resources) {
 
         //Add the content container to the scene
         scene.addChild(content);
+
+        //Add a picture of the phobos probe
+        var probe = new PIXI.Sprite(resources.probe.texture);
+            probe.width = 370;
+            probe.height = 314;
+            probe.anchor.set(0);
+            probe.x = 1325;
+            probe.y = 755;
+
+        content.addChild(probe);
 
         //Drift mars and phobos a bit
         Animate.to(phobos,10000,{
@@ -215,6 +226,9 @@ Solar.loader.on('complete',function(loader,resources) {
 
         //Remove old scene
         app.stage.removeChild(scene);
+
+        //remove content
+        content.alpha = 0;
 
         Solar.startScene('mars');
     }
