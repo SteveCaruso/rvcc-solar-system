@@ -36,20 +36,20 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("saturn",titleStyle);
+    var title = new PIXI.Text("Titan",titleStyle);
         title.x = 1200;
         title.y = 100;
     
     //Add to content
-    //content.addChild(title);
+    content.addChild(title);
             
-    //Info box text
-    var text = new PIXI.Text("• Day: 10.7 Earth Days \n\n• Year: 29 Earth Years \n\n• Size: 74,897 miles in diameter \n\n• Distance from Sun: 886 million miles \n\n• Avg. Temperature:\n  about -288 degrees \n\n• Atmosphere: Hydrogen, Helium \n\n• The rings are mostly made of\n  ice and rock \n\n• Moons: 62 (Titan in Display)",textStyle);
-        text.x = 1200;
-        text.y = 180;
+   //Info box text
+   var textTitan = new PIXI.Text("• Size: Saturn's largest moon and the second largest moon in the solar system. It is bigger than planet Mercury. \n\n• Orbit: Titan takes 16 days to orbit Saturn and to rotate once. \n\n • Surface: Titan is an icy moon with a surface of rock-hard water ice, but it also likely has a liquid water ocean beneath its surface. \n\n• Atmosphere: Mostly nitrogen like Earth’s.",textStyle);
+   textTitan.x = 1200;
+   textTitan.y = 180;
     
     //Add to content
-    //content.addChild(text);
+    content.addChild(textTitan);
     
     //Add the content container to the scene
     scene.addChild(content);
@@ -109,7 +109,7 @@ Solar.loader.on('complete',function(loader,resources) {
         scrim.alpha = .75;
 
         //Shrink panel
-        await Animate.to(infobox,500,{height:700});
+        await Animate.to(infobox,500,{height:870});
 
         //Move planet and moon
         Animate.to(planet,3000,{
@@ -128,6 +128,9 @@ Solar.loader.on('complete',function(loader,resources) {
             easing:Easing.easeInOut
         });
 
+        //info about Titan
+        await Animate.to(content,1000,{alpha:1,easing:Easing.easeInOut});
+
         //Fade in content
         //Here later.
 
@@ -144,6 +147,8 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
         
         //Move them back!
+        await Animate.to(content,500,{alpha:0,easing:Easing.easeInOut});
+
         Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
