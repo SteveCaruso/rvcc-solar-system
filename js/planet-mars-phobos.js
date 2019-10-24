@@ -193,6 +193,8 @@ Solar.loader.on('complete',function(loader,resources) {
         
         //Move them back!
         Animate.to(infobox,500,{height:1020});
+
+        Animate.to(content,1000,{alpha:0,easing:Easing.easeInOut});
         
         Animate.to(planet,3000,{
             height:1080,
