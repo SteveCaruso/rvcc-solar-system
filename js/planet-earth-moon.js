@@ -36,20 +36,20 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("Earth",titleStyle);
+    var title = new PIXI.Text("The Moon",titleStyle);
         title.x = 1200;
         title.y = 100;
     
     //Add to content
-    //content.addChild(title);
+    content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 23.9 Hours \n\n• Year: 365.25 Days\n\n• Size: 7,918 miles in diameter\n\n• Distance from sun: 93 million miles\n\n• Avg. Temperature: 57 degrees\n\n• Atmosphere: mostly Nitrogen, Oxygen,\n  Argon\n\n• Moons: 1 moon",textStyle);
+    var text = new PIXI.Text("Lorem Friggin' Ipsum",textStyle);
         text.x = 1200;
         text.y = 180;
     
     //Add to content
-    //content.addChild(text);
+    content.addChild(text);
     
     //Add the content container to the scene
     scene.addChild(content);
@@ -131,7 +131,10 @@ Solar.loader.on('complete',function(loader,resources) {
         });
 
         //Fade in content
-        //Here later.
+        Animate.to(content,1000,{
+            alpha:1,
+            easing:Easing.easeInOut
+        });
 
         //Drift the earth and moon a bit
         Animate.to(moon,10000,{
@@ -145,7 +148,13 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the transition out.
 	scene.transitionOut = async function() {
         
-        //Move them back!
+        //Fade out content
+        await Animate.to(content,1000,{
+            alpha:0,
+            easing:Easing.easeInOut
+        });
+
+        //Fix panel
         Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
@@ -163,9 +172,6 @@ Solar.loader.on('complete',function(loader,resources) {
             y:150,
             easing:Easing.easeInOut
         });
-
-        //Fix panel
-        Animate.to(infobox,500,{height:1020});
 
         //Fix scrim
         scrim.alpha = 0;
@@ -189,7 +195,15 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
+
+        //Set it to false to prevent mashing
+        backbutton.interactive = false;
+
+        //Transition out
         await scene.transitionOut();
+
+        //Re-enable button
+        backbutton.interactive = true;
 	});
 	
 });

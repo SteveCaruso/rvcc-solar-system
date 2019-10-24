@@ -92,6 +92,12 @@ Solar.loader.on('complete',function(loader,resources) {
         jmoonEuropa.anchor.set(0.5);
         jmoonEuropa.x = 350;
         jmoonEuropa.y = 250;
+
+        // Make it interactive
+        jmoonEuropa.interactive = true;
+        jmoonEuropa.on('pointerdown', function() {
+            Solar.changeSceneTo("europa");
+        });
     
     content.addChild(jmoonEuropa);
     
