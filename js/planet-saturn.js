@@ -84,10 +84,18 @@ Solar.loader.on('complete',function(loader,resources) {
         titan.anchor.set(0.5);
         titan.x = 200;
         titan.y = 200;
-        //make it interactive
-        titan.interactive = true;
+        
+        titan.interactive = false;
         titan.on('pointerdown', function() {
+            //Make it inactive so no mashing
+            titan.interactive = false;
+            //Start scene change
             Solar.changeSceneTo("titan");
+
+            //After cooldown period, re-enable interaction
+            setTimeout(() => {
+                titan.interactive = true;
+            },3000);
         });
         
     
@@ -134,7 +142,8 @@ Solar.loader.on('complete',function(loader,resources) {
         
             await Animate.to(backbutton,500,{alpha:1});
             backbutton.interactive = true;
-            
+            titan.interactive = true;
+
             //Remove the previous scene from the stage and reset it
             app.stage.removeChild(solarSystem);
             solarSystem.alpha = 1;
@@ -152,7 +161,8 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
 		
         backbutton.interactive = false;
-        
+        titan.interactive = false;
+
         //While the real saturn is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();
         
