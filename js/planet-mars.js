@@ -86,7 +86,16 @@ Solar.loader.on('complete',function(loader,resources) {
 
         phobos.interactive = true;
         phobos.on('pointerdown', function() {
+            //Make it inactive so no mashing
+            phobos.interactive = false;
+
+            //Start scene change
             Solar.changeSceneTo("phobos");
+
+            //After cooldown period, re-enable interaction
+            setTimeout(() => {
+                phobos.interactive = true;
+            },3000);
         });
     
     content.addChild(phobos);
@@ -143,6 +152,7 @@ Solar.loader.on('complete',function(loader,resources) {
         
             await Animate.to(backbutton,500,{alpha:1});
             backbutton.interactive = true;
+            phobos.interactive = true;
             
             //Remove the previous scene from the stage and reset it
             app.stage.removeChild(solarSystem);
@@ -161,6 +171,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
 		
         backbutton.interactive = false;
+        phobos.interactive = false;
         
         //While the real mars is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();
