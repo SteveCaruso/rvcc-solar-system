@@ -211,6 +211,12 @@ Solar.loader.on('complete',function(loader,resources) {
     backbutton.interactive = false;
 	backbutton.on('pointerdown', function() {
 		Solar.changeSceneTo('idle');
+    });
+    
+    //Make Deimos interactive
+    deimos.interactive = true;
+	deimos.on('pointerdown', function() {
+		Solar.changeSceneTo('deimos');
 	});
 	
 	
