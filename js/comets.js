@@ -5,136 +5,143 @@
  * I call BS.
  * - The Professor
  *
+ * creating merge conflicts does not count as a "contribution," professor
+ * - peng
+ *
  * (also the comet particles get hidden behind milkyway.jpg but
  * that can get fixed later)
  */
 
-var cometContainer=new PIXI.Container();
+var cometContainer = new PIXI.Container();
 solarSystem.addChild(cometContainer);
 
-var resources=null;
+var resources = null;
 
-/*
- * seconds between appearences
- */
-const COMET_PERIODS=[
-    30, 60, 120, 600
-]
+const COMET_PERIODS = [
+    6, 12, 18, 24, 30
+];
+const COMET_TRAVEL_TIME = [
+    36, 72, 144, 160
+];
 
-/*
- * time it takes to cross the screen (the tails are less satisfying with slower
- * transit times)
- */
-const COMET_TRAVEL_TIME=[
-    12, 16, 20
-]
+const COMET_TAIL_DENSITY = 32;
+const COMET_RADIUS = app.view.width * 2;
+const COMET_OFFSET = 2.5;
 
-const COMET_RADIUS=16;
-
-//Queue up our files we'll need
 Solar.loader.add("particle","img/particles/particle.png");
 
-//When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete', function(loader, loadedResources) {
-    resources=loadedResources;
-    setTimeout(function(){
+    resources = loadedResources;
+    setTimeout(function() {
         spawnComet();
     }, 1000);
 });
 
 function spawnComet(){
-    var roll=Math.random();
+    /*
+     * Problem: need a start and an end point for the comets, but they're not allowed to
+     *      spawn (or despawn) while on the screen
+     * Solution: you could ask the computer to pick points around the boundary of the screen
+     *      but honestly that's a lot of work and it's really ugly code, so we can also just
+     *      pick points that are a fixed distance away (the math department would like me to
+     *      describe it as "points on a circle that cirucmscribes the canvas")
+     * Second problem: when you click on the sun on the idle screen all hell breaks loose
+     *      because the origins of the containers are all over the place and I offer my
+     *      condolences to whichever future class is burdened with the task of cleaning it up
+     * Second solution: make all of the comets spawn so astonishingly far away from the origin
+     *      that moving the container origins by a thousand or so pixels in any direction has
+     *      no noticeable effect. This has the unfortunte side effect of some / most of the
+     *      comets never actually passing through the visible part of the PIXI canvas, so you're
+     *      going to need to spawn way more of them than you want to see. If the viable radius
+     *      is (2 * 1920) the amount of area in the spawn circle that's actually visible on the
+     *      canvas is about 4.4% ((1920 * 1080) / (4 * 1920 * 1920 * pi)) which should give you
+     *      an idea of how infrequently you'll actually be seeing the things.
+     * Third problem: comets, like everything else, orbit in ellipses and typically do not
+     *      plunge headlong into the Sun just to show it who's boss
+     * Third solution: make it someone else's problem ¯\_(ツ)_/¯
+     */
     
-    var minx=-COMET_RADIUS;
-    var maxx=app.view.width+COMET_RADIUS;
-    var miny=-COMET_RADIUS;
-    var maxy=app.view.height+COMET_RADIUS;
+    let angle = Math.random() * Math.PI * 2;
+    let x = COMET_RADIUS * Math.cos(angle);
+    let y = COMET_RADIUS * Math.sin(angle);
+    let destAngle = Math.random() * Math.PI * 2;
+    let xto = COMET_RADIUS * Math.cos(destAngle);
+    let yto = COMET_RADIUS * Math.sin(destAngle);
     
-    var x=minx;
-    var y=miny;
-    var xto=maxx;
-    var yto=maxy;
-    
-    // right to left
-    if (roll<0.25){
-        x=maxx;
-        xto=minx;
-        y=randomRange(miny, maxy);
-        yto=randomRange(miny, maxy);
-    // left to right
-    } else if (roll<0.5){
-        y=randomRange(miny, maxy);
-        yto=randomRange(miny, maxy);
-    // top to bottom
-    } else if (roll<0.75){
-        x=randomRange(minx, maxx);
-        xto=randomRange(minx, maxx);
-    // bottom to top
-    } else {
-        y=maxy;
-        yto=miny;
-        x=randomRange(minx, maxx);
-        xto=randomRange(minx, maxx);
-    }
-    
-    // do it again
     setTimeout(function(){
         spawnComet();
-    }, randomElementFromArray(COMET_PERIODS)*1000/10);
+    }, randomElementFromArray(COMET_PERIODS) * 1000 / 10);
     
     return new Comet(x, y, xto, yto);
 }
 
 class Comet {
     constructor(x, y, xto, yto){
-        this.sprite=new PIXI.Sprite(resources.particle.texture);
-        this.sprite.x=x;
-        this.sprite.y=y;
-        this.sprite.scale.set(0.5);
-        this.sprite.alpha=randomRange(0.15, 0.25);
-        this.sprite.comet=this;
-        this.sprite.root=true;
+        /*
+         * before all of the images were added to the comet container individually, but this
+         * was actually really stupid and slow(er) and makes it really annoying if you want to
+         * do things such as "rotate the comet to make the tail point away from the sun." which
+         * SOMEONE gave me a very long lecture about but weren't interested in changing
+         * themselves ლ(ಠ益ಠლ)
+         */
+        this.container = new PIXI.Container();
+        this.container.x = x;
+        this.container.y = y;
+        this.container.scale.set(0.5);
         
-        this.travelTime=randomElementFromArray(COMET_TRAVEL_TIME);
+        cometContainer.addChild(this.container);
         
-        cometContainer.addChild(this.sprite);
+        this.sprite = new PIXI.Sprite(resources.particle.texture);
+        this.sprite.alpha = randomRange(0.75, 0.85);
+        this.sprite.x = -COMET_OFFSET;
+        // Also the head is blue now, that's neat.
+        this.sprite.tint = 0x66ffff;
+        this.container.addChild(this.sprite);
         
-        Animate.to(this.sprite, this.travelTime*1000, {
+        let date = new Date();
+        
+        for (let i = 0; i < COMET_TAIL_DENSITY; i++) {
+            // and you all said algebra wasn't useful for anything
+            let f = (COMET_TAIL_DENSITY - i + 1) / COMET_TAIL_DENSITY;
+            let particle = new PIXI.Sprite(resources.particle.texture);
+            particle.x = i * COMET_OFFSET * 2;
+            particle.y = randomRange(-COMET_OFFSET, COMET_OFFSET);
+            particle.alpha = randomRange(0.15, 0.25) * f * f;
+            // If you don't know what this does, I'm not telling you
+            if (date.getMonth() == 3 && date.getDate() == 1) {
+                particle.scale.set(1 / (f * f * f * f * f * f * f));
+            } else {
+                particle.scale.set(1 / (f * f));
+            }
+            this.container.addChild(particle);
+        }
+        
+        Animate.to(this.container, this.container.travelTime*1000, {
             x: xto,
             y: yto,
             easing: Easing.linear
         }).then(_ => {
-            cometContainer.removeChild(this.sprite);
-            this.sprite.destroy();
+            cometContainer.removeChild(this.container);
+            this.container.destroy();
         });
     }
 }
 
-app.ticker.add(function(delta){
-    cometContainer.children.forEach(function(element){
-        // if you dont check if element is root you'll have one of those
-        // fork bomb things and your computer will be very upset with you
-        if (element.root){
-            var particle=new PIXI.Sprite(resources.particle.texture);
-            particle.x=element.x;
-            particle.y=element.y;
-            particle.alpha=randomRange(0.15, 0.25);
-            particle.scale.set(0.5);
-            particle.root=false;
-            particle.comet=element.comet;
-            cometContainer.addChild(particle);
-
-            Animate.to(particle, 1000, {
-                alpha: 0,
-                easing: Easing.linear
-            }).then(_ => {
-                cometContainer.removeChild(particle);
-                particle.destroy();
-            });
-            
-            // really wanted to make comets follow the sun's gravitational well
-            // but it's 2 am on the day this is due and i really dont feel like
-            // taking apart animate.js to see how it works anyway
-        }
+app.ticker.add(function(delta) {
+    /*
+     * seriously, how is the actual delta useful to anyone? the solution to frame
+     * independence is not "account for lag to make sure everything is tied to the
+     * frame rate exactly," PIXI. Gawd.
+     */
+    let dt = delta / app.ticker.FPS;
+    
+    cometContainer.children.forEach(function(element) {
+        let dx = element.x - theSun.x;
+        let dy = element.y - theSun.y;
+        /*
+         * Whenever I want people to think I know what I'm talking about I pull out
+         * one of the two and a quarter trigonometry facts I remember from high school
+         */
+        element.rotation = Math.atan2(dy, dx);
     });
 });

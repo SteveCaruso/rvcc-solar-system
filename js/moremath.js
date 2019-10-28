@@ -13,3 +13,7 @@ function randomRange(x1, x2){
 function distance(x1, y1, x2, y2){
     return Math.hypot(Math.pow(x2-x1, 2)+Math.pow(y2-y2, 2));
 }
+
+function lerp(a, b, f) {
+    return (1 - f) * a + f * b;
+}
