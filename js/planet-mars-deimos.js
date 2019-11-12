@@ -36,15 +36,15 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("Earth",titleStyle);
+    var title = new PIXI.Text("Deimos",titleStyle);
         title.x = 1200;
         title.y = 100;
     
     //Add to content
-    //content.addChild(title);
+    content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Deimos: \n\n• Day: 30.3 Hours \n\n• Greek Mythology: Deimos is the son of Ares \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
+    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -107,7 +107,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Remove old scene
         app.stage.removeChild(Solar.currentScene);
 
-        //Fix scrim
+        //Fix scrm
         scrim.alpha = .75;
 
         //Shrink panel
@@ -123,28 +123,35 @@ Solar.loader.on('complete',function(loader,resources) {
             easing:Easing.easeInOut
         });
         await Animate.to(deimos,3000,{
-            height:275,
-            width:275,
+            height:400,
+            width:400,
             x:540,
             y:centerY,
             alpha: 1,
             easing:Easing.easeInOut
         });
 
-        await Animate.to(content,1000,{alpha:1,easing:Easing.easeInOut});
         //Fade in content
         //Here later.
 
-        //Drift the mars and deimos a bit
-        Animate.to(deimos,10000,{
+        Animate.to(content,10000,{
+            x:600,
+            alpha:0,
+            easing:Easing.easeInOut
+        });
+
+         Animate.to(deimos,10000,{
             x:600,
             easing:Easing.easeInOut
-
-
         });
-        
+
+		
+
+		
+    }
+
+        //Drift the mars and deimos a bit
        
-	}
 	
 
 	//Change the transition out.
@@ -195,9 +202,6 @@ Solar.loader.on('complete',function(loader,resources) {
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
         await scene.transitionOut();
-
-
-        
 	});
 	
 });
