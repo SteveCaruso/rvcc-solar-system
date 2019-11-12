@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
+    var text = new PIXI.Text("• Deimos: Son of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n\n• Smooth surface and has two craters \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
         text.x = 1200;
         text.y = 180;
     
