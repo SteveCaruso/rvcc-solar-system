@@ -38,7 +38,7 @@ Solar.loader.on('complete',function(loader,resources) {
     //Info box title
     var title = new PIXI.Text("Deimos",titleStyle);
         title.x = 1200;
-        title.y = 100;
+        title.y = 180;
     
     //Add to content
     content.addChild(title);
@@ -158,7 +158,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
         
         //Move them back!
-        Animate.to(infobox,500,{height:700});
+        Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
             height:1080,
