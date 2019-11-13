@@ -97,6 +97,11 @@ Solar.loader.on('complete',function(loader,resources) {
         deimos.anchor.set(0.5);
         deimos.x = 1000;
         deimos.y = 400;
+
+        deimos.interactive = true;
+        deimos.on('pointerdown', function() {
+            Solar.changeSceneTo("deimos");
+        });
     
     content.addChild(deimos);
 	

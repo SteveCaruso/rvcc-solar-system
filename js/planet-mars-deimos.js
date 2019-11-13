@@ -24,7 +24,7 @@ Solar.loader.on('complete',function(loader,resources) {
     var infobox = new PIXI.Sprite(resources.infobox.texture);
         infobox.width = 750;
         infobox.height = 1020;
-        infobox.x = 2000;
+        infobox.x = 1150;
         infobox.y = 50;
     
     scene.addChild(infobox);
@@ -81,7 +81,7 @@ Solar.loader.on('complete',function(loader,resources) {
         deimos.height = 275;
         deimos.anchor.set(0.5);
         deimos.x = 1000;
-       deimos.y = 400;
+        deimos.y = 400;
     
     scene.addChild(deimos);
 	
