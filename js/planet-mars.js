@@ -78,8 +78,8 @@ Solar.loader.on('complete',function(loader,resources) {
     scene.addChildAt(planet,1);
     
     var phobos = new PIXI.Sprite(resources.phobos.texture);
-        phobos.width = 225;
-        phobos.height = 225;
+        phobos.width = 300;
+        phobos.height = 300;
         phobos.anchor.set(0.5);
         phobos.x = 150;
         phobos.y = 150;
@@ -92,8 +92,8 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(phobos);
     
     var deimos = new PIXI.Sprite(resources.deimos.texture);
-        deimos.width = 225;
-        deimos.height = 225;
+        deimos.width = 275;
+        deimos.height = 275;
         deimos.anchor.set(0.5);
         deimos.x = 1000;
         deimos.y = 400;
