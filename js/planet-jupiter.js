@@ -118,6 +118,12 @@ Solar.loader.on('complete', function (loader, resources) {
         jmoonCallisto.y = 450;
     
     content.addChild(jmoonCallisto);
+
+        // Make it interactive
+        jmoonCallisto.interactive = true;
+        jmoonCallisto.on('pointerdown', function() {
+            Solar.changeSceneTo("callisto");
+        });
     
     
     
