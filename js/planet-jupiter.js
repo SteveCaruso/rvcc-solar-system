@@ -231,6 +231,11 @@ Solar.loader.on('complete',function(loader,resources) {
 	backbutton.on('pointerdown', function() {
 		Solar.changeSceneTo('idle');
 	});
-	
+    
+    //When done, head back
+    jmoonGanymede.interactive = true;
+    jmoonGanymede.on('pointerdown', function() {
+        Solar.changeSceneTo('ganymede');
+    });
 	
 });
