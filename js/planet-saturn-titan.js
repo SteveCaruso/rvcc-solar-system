@@ -1,6 +1,8 @@
 //Create our scene
 var titanScreen = new Solar.Scene("titan");
 
+//here you load the images that you will use on the info box
+//images have to be in the same folde as planets ...\rvcc-solar-system\img
 Solar.loader.add("titan_c","img/titan_c.jpg");
 Solar.loader.add("titan_outline","img/titan_outline.jpg");
 
@@ -54,6 +56,8 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(textTitan);
 
     //Add images 
+    //these have to be loaded before hand top of this page (scroll up)
+
     var img1 = new PIXI.Sprite(resources.titan_c.texture);   
     
         img1.width = 216;
@@ -138,7 +142,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Fix scrim
         scrim.alpha = .75;
 
-        //Shrink panel
+        //Resize panel
         await Animate.to(infobox,500,{height:1060});
 
         //Move planet and moon
