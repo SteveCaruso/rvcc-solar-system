@@ -225,6 +225,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	backbutton.on('pointerdown', function() {
 		Solar.changeSceneTo('idle');
 	});
-	
+	jmoonIo.interactive = true;
+    jmoonIo.on('pointerdown', function() {
+		Solar.changeSceneTo("io");
+	});
 	
 });
