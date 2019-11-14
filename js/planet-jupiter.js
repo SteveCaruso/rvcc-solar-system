@@ -4,7 +4,7 @@ var jupiterScreen = new Solar.Scene("jupiter");
 //Queue up our files we'll need
 
 //When things are loaded, do the stuff necessary to make it work
-Solar.loader.on('complete',function(loader,resources) {
+Solar.loader.on('complete', function (loader, resources) {
     
     //Namespace
     var scene = jupiterScreen;
@@ -218,12 +218,20 @@ Solar.loader.on('complete',function(loader,resources) {
 	targetPlanet.interactive = true;
     targetPlanet.on('pointerdown', function() {
 		Solar.changeSceneTo("jupiter");
+    
 	});
 	
 	//When done, head back
     backbutton.interactive = false;
 	backbutton.on('pointerdown', function() {
 		Solar.changeSceneTo('idle');
+    });
+    
+    //make callisto clicky
+    jmoonCallisto.interactive = true;
+	jmoonCallisto.on('pointerdown', function() {
+		Solar.changeSceneTo('callisto');
+    content.alpha = 1;
 	});
 	
 	
