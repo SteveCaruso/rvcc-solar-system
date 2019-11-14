@@ -88,9 +88,13 @@ Solar.loader.on('complete',function(loader,resources) {
         phobos.on('pointerdown', function() {
             Solar.changeSceneTo("phobos");
         });
+
+       
     
     content.addChild(phobos);
+        
     
+
     var deimos = new PIXI.Sprite(resources.deimos.texture);
         deimos.width = 275;
         deimos.height = 275;
@@ -153,7 +157,9 @@ Solar.loader.on('complete',function(loader,resources) {
             app.stage.removeChild(solarSystem);
             solarSystem.alpha = 1;
             
-            
+            await Animate.to(phobos,3000,{alpha:1,x:50,y:2150,easing:Easing.easeInOut});
+
+            await Animate.to(phobos,3000,{alpha:1,x:150,y:150,easing:Easing.easeInOut});
 			
 		//}
 		//Otherwise we do something boring
@@ -178,6 +184,10 @@ Solar.loader.on('complete',function(loader,resources) {
         
         await Animate.to(infobox,1500,{x:2000,y:50,easing:Easing.easeInOut});
         
+        await Animate.to(phobos).transitionOut(200);
+
+    
+
         //Animate solar system back in
         solarSystem.alpha = 0;
         app.stage.addChildAt(solarSystem,1);
@@ -195,8 +205,8 @@ Solar.loader.on('complete',function(loader,resources) {
         await Animate.to(scene,1000,{ alpha:0,
                                             easing:Easing.easeInOut});
         
-        
-        
+         
+         
         //Remove it from the stage
         app.stage.removeChild(scene);
         
