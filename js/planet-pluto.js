@@ -78,11 +78,15 @@ Solar.loader.on('complete',function(loader,resources) {
 	
     //Pluto's moons
     var charon = new PIXI.Sprite(resources.charon.texture);
-        charon.width = 450;
-        charon.height = 450;
+        charon.width = 350;
+        charon.height = 350;
         charon.anchor.set(0.5);
         charon.x = 200;
         charon.y = 200;
+        charon.interactive = true;
+        charon.on('pointerdown', function() {
+            Solar.changeSceneTo("charon");
+        });
     
     content.addChildAt(charon,content.children.length-1);
     
