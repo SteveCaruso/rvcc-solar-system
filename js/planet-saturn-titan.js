@@ -1,6 +1,9 @@
 //Create our scene
 var titanScreen = new Solar.Scene("titan");
 
+Solar.loader.add("titan_c","img/titan_c.jpg");
+Solar.loader.add("titan_outline","img/titan_outline.jpg");
+
 //Queue up our files we'll need
 //None!
 
@@ -30,27 +33,54 @@ Solar.loader.on('complete',function(loader,resources) {
     scene.addChild(infobox);
     
     
-    
     //Content container
     var content = new PIXI.Container();
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("saturn",titleStyle);
+    var title = new PIXI.Text("Titan",titleStyle);
         title.x = 1200;
         title.y = 100;
     
     //Add to content
-    //content.addChild(title);
+    content.addChild(title);
             
-    //Info box text
-    var text = new PIXI.Text("• Day: 10.7 Earth Days \n\n• Year: 29 Earth Years \n\n• Size: 74,897 miles in diameter \n\n• Distance from Sun: 886 million miles \n\n• Avg. Temperature:\n  about -288 degrees \n\n• Atmosphere: Hydrogen, Helium \n\n• The rings are mostly made of\n  ice and rock \n\n• Moons: 62 (Titan in Display)",textStyle);
-        text.x = 1200;
-        text.y = 180;
-    
+   //Info box text
+   var textTitan = new PIXI.Text("• Size: Saturn's largest moon and the second largest moon in the solar system. It is bigger than Mercury. \n\n• Orbit: 16 days. \n\n • Surface: Rock-hard water ice. It likely has an ocean beneath its surface. \n\n• Atmosphere: Mostly nitrogen like Earth’s.\n\n Potentially habitable, and no space suit needed just an oxygen mask.",textStyle);
+   textTitan.x = 1200;
+   textTitan.y = 180;
+
     //Add to content
-    //content.addChild(text);
+    content.addChild(textTitan);
+
+    //Add images 
+    var img1 = new PIXI.Sprite(resources.titan_c.texture);   
     
+        img1.width = 216;
+        img1.height = 162;
+        //img1.anchor.set(0.5);
+        img1.x= 1275;
+        img1.y= 835;
+        //img1.filters = [new PIXI.filters.DropShadowFilter()]
+        img1.interactive = true;
+        //img1.on('pointerdown', imageCenter());
+        
+    content.addChild(img1);
+    
+    var img2 = new PIXI.Sprite(resources.titan_outline.texture);   
+    
+        img2.width = 216;
+        img2.height = 162;
+        img2.x= 1565;
+        img2.y= 835;
+
+        //make it interactive
+       //img2.interactive = true;
+        //img2.on('pointerdown', imageCenter());
+        content.addChild(img2);
+
+
+
     //Add the content container to the scene
     scene.addChild(content);
     
@@ -109,7 +139,7 @@ Solar.loader.on('complete',function(loader,resources) {
         scrim.alpha = .75;
 
         //Shrink panel
-        await Animate.to(infobox,500,{height:700});
+        await Animate.to(infobox,500,{height:1060});
 
         //Move planet and moon
         Animate.to(planet,3000,{
@@ -128,6 +158,9 @@ Solar.loader.on('complete',function(loader,resources) {
             easing:Easing.easeInOut
         });
 
+        //info about Titan
+        await Animate.to(content,1000,{alpha:1,easing:Easing.easeInOut});
+
         //Fade in content
         //Here later.
 
@@ -144,6 +177,8 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
         
         //Move them back!
+        await Animate.to(content,500,{alpha:0,easing:Easing.easeInOut});
+
         Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
@@ -188,7 +223,21 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
+        //Set it to false to prevent mashing
+        backbutton.interactive = false;
+
+        //Transition out
         await scene.transitionOut();
+  
+        //Re-enable button
+        backbutton.interactive = true;
 	});
-	
+    
+    
+    function imageCenter() {
+        img1.width = 800;
+        img1.height = 600;
+        img1.x=  app.view.width/2;
+        img1.y = app.view.height/2;
+    }
 });
