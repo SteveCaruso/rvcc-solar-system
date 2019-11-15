@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Deimos: Son of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n\n• Smooth surface and has two craters \n\n•  Deimos rises in the east and sets in the west every 2.7 days \n\n• Visited by a number of aircrafts \n Orbital Period: 1.3 days \n  Vapor \n\n• Discovered by: Asaph Hall",textStyle);
+    var text = new PIXI.Text("• Deimos: on of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n\n• Smooth surface and has two craters \n\n•  Deimos rises in the east and sets in the west every 2.7 days \n\n• Visited by a number of aircrafts \n Orbital Period: 1.3 days \n  Vapor \n\n",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -66,6 +66,7 @@ Solar.loader.on('complete',function(loader,resources) {
     
     
     //Create our copy of the Mars
+    
     var planet = new PIXI.Sprite(resources.mars.texture);
         planet.width = 1080;
         planet.height = 1080;
@@ -82,6 +83,7 @@ Solar.loader.on('complete',function(loader,resources) {
         deimos.anchor.set(0.5);
         deimos.x = 1000;
         deimos.y = 400;
+
     
     scene.addChild(deimos);
 	
@@ -110,11 +112,10 @@ Solar.loader.on('complete',function(loader,resources) {
         //Fix scrm
         scrim.alpha = .75;
 
-        //Shrink panel
-        await Animate.to(infobox,500,{height:750});
+        
 
         //Move planet and moon
-        await Animate.to(planet,3000,{
+         Animate.to(planet,3000,{
             height:2000,
             width:2000,
             x:0,
@@ -125,8 +126,8 @@ Solar.loader.on('complete',function(loader,resources) {
 
         
         await Animate.to(deimos,3000,{
-            height:400,
-            width:400,
+            height:500,
+            width:500,
             x:540,
             y:centerY,
             alpha: 1,
@@ -139,12 +140,12 @@ Solar.loader.on('complete',function(loader,resources) {
         
 
 
-        Animate.to(content,3000,{
+         Animate.to(content,3000,{
             alpha:1,
             easing:Easing.easeInOut
         });
 
-         Animate.to(deimos,3000,{
+         Animate.to(deimos,10000,{
             x:600,
             easing:Easing.easeInOut
         });
@@ -197,9 +198,9 @@ Solar.loader.on('complete',function(loader,resources) {
     
     /*
 	//Set the event listeners
-	targetPlanet.interactive = true;
+	targetPlanet.interactive = false;
     targetPlanet.on('pointerdown', function() {
-		Solar.changeSceneTo("earth");
+		Solar.changeSceneTo("deimos");
 	});
 	*/
 	//When done, head back
@@ -207,5 +208,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	backbutton.on('pointerdown', async function() {
         await scene.transitionOut();
 	});
-	
+    
+    
+
+
+   
 });
