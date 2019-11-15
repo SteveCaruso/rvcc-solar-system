@@ -112,6 +112,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Fix scrm
         scrim.alpha = .75;
 
+    
         
 
         //Move planet and moon
@@ -126,8 +127,8 @@ Solar.loader.on('complete',function(loader,resources) {
 
         
         await Animate.to(deimos,3000,{
-            height:500,
-            width:500,
+            height:700,
+            width:700,
             x:540,
             y:centerY,
             alpha: 1,
@@ -206,7 +207,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
+        backbutton.interactive = false;
         await scene.transitionOut();
+        backbutton.interactive = true;
 	});
     
     

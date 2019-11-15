@@ -233,7 +233,10 @@ Solar.loader.on('complete',function(loader,resources) {
     //Make Deimos interactive
     deimos.interactive = true;
 	deimos.on('pointerdown', function() {
-		Solar.changeSceneTo('deimos');
+     deimos.interactive = false;
+         Solar.changeSceneTo('deimos');
+         deimos.interactive = true;
+        
 	});
 	
 	
