@@ -251,5 +251,10 @@ Solar.loader.on('complete', function (loader, resources) {
     jmoonGanymede.on('pointerdown', function() {
         Solar.changeSceneTo('ganymede');
     });
+    
+	jmoonIo.interactive = true;
+    jmoonIo.on('pointerdown', function() {
+		Solar.changeSceneTo("io");
+	});
 	
 });
