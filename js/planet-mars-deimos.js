@@ -112,11 +112,11 @@ Solar.loader.on('complete',function(loader,resources) {
         //Fix scrm
         scrim.alpha = .75;
 
-<<<<<<< Updated upstream
+
     
-=======
+
         //Shrink panel
->>>>>>> Stashed changes
+
         
 
         //Move planet and moon
