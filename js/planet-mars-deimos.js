@@ -210,11 +210,11 @@ Solar.loader.on('complete',function(loader,resources) {
 	*/
 	//When done, head back
     backbutton.interactive = true;
-<<<<<<< Updated upstream
+
 	backbutton.on('pointerdown', async function() {
-=======
+
     backbutton.on('pointerdown', async function() {
->>>>>>> Stashed changes
+        
         backbutton.interactive = false;
         await scene.transitionOut();
         backbutton.interactive = true;
