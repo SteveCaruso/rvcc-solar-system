@@ -107,8 +107,8 @@ Solar.loader.on('complete',function(loader,resources) {
        
         
     var deimos = new PIXI.Sprite(resources.deimos.texture);
-        deimos.width = 225;
-        deimos.height = 225;
+        deimos.width = 275;
+        deimos.height = 275;
         deimos.anchor.set(0.5);
         deimos.x = 1000;
         deimos.y = 400;
@@ -244,7 +244,9 @@ Solar.loader.on('complete',function(loader,resources) {
     //Make Deimos interactive
     deimos.interactive = true;
 	deimos.on('pointerdown', function() {
-		Solar.changeSceneTo('deimos');
+        deimos.interactive = false;
+        Solar.changeSceneTo('deimos');
+        deimos.interactive = true;
 	});
 	
 	
