@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 42.5 Hours \n\n• Year: 4,300 Days\n\n• Size: 1,131.9 miles in diameter\n\n• Distance from sun: 484 million miles\n\n• Avg. Temperature: -202 degrees\n\n• Atmosphere: sulfur dioxide gas",textStyle);
+    var text = new PIXI.Text("• Io is named after a nymph loved by the Greek god Zeus \n\n• Size: 1,131.9 miles in diameter\n\n• Full Orbit: 4,300 Days\n\n• Io day length: 42 hours\n\n• Io is the most volcanically active body in the solar system\n\n• Io is the fourth largest moon in the solar system",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -92,7 +92,7 @@ Solar.loader.on('complete',function(loader,resources) {
         jmoonEuropa.x = 350;
         jmoonEuropa.y = 250;
     
-    content.addChild(jmoonEuropa);
+    scene.addChild(jmoonEuropa);
     
     var jmoonGanymede = new PIXI.Sprite(resources.jMoonGanymede.texture);
         jmoonGanymede.width = 200;
@@ -101,7 +101,7 @@ Solar.loader.on('complete',function(loader,resources) {
         jmoonGanymede.x = 650;
         jmoonGanymede.y = 225;
     
-    content.addChild(jmoonGanymede);
+    scene.addChild(jmoonGanymede);
     
     var jmoonCallisto = new PIXI.Sprite(resources.jMoonCallisto.texture);
         jmoonCallisto.width = 190;
@@ -110,7 +110,7 @@ Solar.loader.on('complete',function(loader,resources) {
         jmoonCallisto.x = 950;
         jmoonCallisto.y = 450;
     
-    content.addChild(jmoonCallisto);
+    scene.addChild(jmoonCallisto);
 	
     
 	//Change the default transition
@@ -138,7 +138,7 @@ Solar.loader.on('complete',function(loader,resources) {
         scrim.alpha = .75;
 
         //Shrink panel
-        await Animate.to(infobox,500,{height:700});
+        //await Animate.to(infobox,500,{height:700});
 
         //Move planet and moon
         Animate.to(planet,3000,{
@@ -194,7 +194,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
         
         //Move them back!
-        Animate.to(infobox,500,{height:1020});
+        //Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
             height:1080,
@@ -237,7 +237,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
+        backbutton.interactive = false;
         await scene.transitionOut();
+        backbutton.interactive = true;
 	});
 	
 });
