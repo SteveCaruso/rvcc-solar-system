@@ -4,7 +4,7 @@ var jupiterScreen = new Solar.Scene("jupiter");
 //Queue up our files we'll need
 
 //When things are loaded, do the stuff necessary to make it work
-Solar.loader.on('complete',function(loader,resources) {
+Solar.loader.on('complete', function (loader, resources) {
     
     //Namespace
     var scene = jupiterScreen;
@@ -92,6 +92,12 @@ Solar.loader.on('complete',function(loader,resources) {
         jmoonEuropa.anchor.set(0.5);
         jmoonEuropa.x = 350;
         jmoonEuropa.y = 250;
+
+        // Make it interactive
+        jmoonEuropa.interactive = true;
+        jmoonEuropa.on('pointerdown', function() {
+            Solar.changeSceneTo("europa");
+        });
     
     content.addChild(jmoonEuropa);
     
@@ -112,6 +118,12 @@ Solar.loader.on('complete',function(loader,resources) {
         jmoonCallisto.y = 450;
     
     content.addChild(jmoonCallisto);
+
+        // Make it interactive
+        jmoonCallisto.interactive = true;
+        jmoonCallisto.on('pointerdown', function() {
+            Solar.changeSceneTo("callisto");
+        });
     
     
     
@@ -218,16 +230,32 @@ Solar.loader.on('complete',function(loader,resources) {
 	targetPlanet.interactive = true;
     targetPlanet.on('pointerdown', function() {
 		Solar.changeSceneTo("jupiter");
+    
 	});
 	
 	//When done, head back
     backbutton.interactive = false;
 	backbutton.on('pointerdown', function() {
 		Solar.changeSceneTo('idle');
+    });
+    
+    //make callisto clicky
+    jmoonCallisto.interactive = true;
+	jmoonCallisto.on('pointerdown', function() {
+		Solar.changeSceneTo('callisto');
+    content.alpha = 1;
 	});
+    
+    //When done, head back
+    jmoonGanymede.interactive = true;
+    jmoonGanymede.on('pointerdown', function() {
+        Solar.changeSceneTo('ganymede');
+    });
+    
 	jmoonIo.interactive = true;
     jmoonIo.on('pointerdown', function() {
 		Solar.changeSceneTo("io");
 	});
+
 	
 });

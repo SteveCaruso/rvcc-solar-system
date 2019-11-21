@@ -83,9 +83,20 @@ Solar.loader.on('complete',function(loader,resources) {
         moon.x = 150;
         moon.y = 150;
 
-        moon.interactive = true;
+        moon.interactive = false;
         moon.on('pointerdown', function() {
+
+            //Make it inactive so no mashing
+            moon.interactive = false;
+
+            //Start scene change
             Solar.changeSceneTo("moon");
+
+            //After cooldown period, re-enable interaction
+            setTimeout(() => {
+                moon.interactive = true;
+            },3000);
+        
         });
     
     content.addChild(moon);
@@ -134,6 +145,7 @@ Solar.loader.on('complete',function(loader,resources) {
         
             await Animate.to(backbutton,500,{alpha:1});
             backbutton.interactive = true;
+            moon.interactive = true;
             
             //Remove the previous scene from the stage and reset it
             app.stage.removeChild(solarSystem);
@@ -152,6 +164,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
 		
         backbutton.interactive = false;
+        moon.interactive = false;
         
         //While the real earth is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();

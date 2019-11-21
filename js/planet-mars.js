@@ -83,15 +83,40 @@ Solar.loader.on('complete',function(loader,resources) {
         phobos.anchor.set(0.5);
         phobos.x = 150;
         phobos.y = 150;
+
+        phobos.interactive = true;
+        phobos.on('pointerdown', function() {
+            //Make it inactive so no mashing
+            phobos.interactive = false;
+
+            //Start scene change
+            Solar.changeSceneTo("phobos");
+
+            //After cooldown period, re-enable interaction
+            setTimeout(() => {
+                phobos.interactive = true;
+            },3000);
+        });
+
+       
     
     content.addChild(phobos);
+        
     
+
+       
+        
     var deimos = new PIXI.Sprite(resources.deimos.texture);
         deimos.width = 225;
         deimos.height = 225;
         deimos.anchor.set(0.5);
         deimos.x = 1000;
         deimos.y = 400;
+
+        deimos.interactive = true;
+        deimos.on('pointerdown', function() {
+            Solar.changeSceneTo("deimos");
+        });
     
     content.addChild(deimos);
 	
@@ -130,6 +155,9 @@ Solar.loader.on('complete',function(loader,resources) {
                                             easing:Easing.easeInOut
                                      });
             
+             
+        
+
             Animate.to(solarSystem,3000,{easing:Easing.easeInOut,
                                               alpha:0});
             await Animate.to(infobox,3000,{x:1150,y:50,easing:Easing.easeInOut});
@@ -137,14 +165,16 @@ Solar.loader.on('complete',function(loader,resources) {
             await Animate.to(content,1000,{alpha:1,easing:Easing.easeInOut});
         
             await Animate.to(backbutton,500,{alpha:1});
+
+
             backbutton.interactive = true;
+            phobos.interactive = true;
             
             //Remove the previous scene from the stage and reset it
             app.stage.removeChild(solarSystem);
             solarSystem.alpha = 1;
             
-            
-			
+        
 		//}
 		//Otherwise we do something boring
 		
@@ -156,6 +186,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	scene.transitionOut = async function() {
 		
         backbutton.interactive = false;
+        phobos.interactive = false;
         
         //While the real mars is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();
@@ -168,6 +199,8 @@ Solar.loader.on('complete',function(loader,resources) {
         
         await Animate.to(infobox,1500,{x:2000,y:50,easing:Easing.easeInOut});
         
+    
+
         //Animate solar system back in
         solarSystem.alpha = 0;
         app.stage.addChildAt(solarSystem,1);
@@ -185,8 +218,8 @@ Solar.loader.on('complete',function(loader,resources) {
         await Animate.to(scene,1000,{ alpha:0,
                                             easing:Easing.easeInOut});
         
-        
-        
+         
+         
         //Remove it from the stage
         app.stage.removeChild(scene);
         
@@ -206,6 +239,12 @@ Solar.loader.on('complete',function(loader,resources) {
     backbutton.interactive = false;
 	backbutton.on('pointerdown', function() {
 		Solar.changeSceneTo('idle');
+    });
+    
+    //Make Deimos interactive
+    deimos.interactive = true;
+	deimos.on('pointerdown', function() {
+		Solar.changeSceneTo('deimos');
 	});
 	
 	

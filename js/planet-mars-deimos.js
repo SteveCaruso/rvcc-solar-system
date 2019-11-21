@@ -1,5 +1,5 @@
 //Create our scene
-var moonScreen = new Solar.Scene("moon");
+var deimosScreen = new Solar.Scene("deimos");
 
 //Queue up our files we'll need
 //None!
@@ -8,8 +8,8 @@ var moonScreen = new Solar.Scene("moon");
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = moonScreen;
-    var targetPlanet = earth;
+    var scene = deimosScreen;
+    var targetPlanet = mars;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();
@@ -36,7 +36,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("The Moon",titleStyle);
+    var title = new PIXI.Text("Deimos",titleStyle);
         title.x = 1200;
         title.y = 100;
     
@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Lorem Friggin' Ipsum",textStyle);
+    var text = new PIXI.Text("• Deimos: Son of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n\n• Smooth surface and has two craters \n\n•  Deimos rises in the east and sets in the west every 2.7 days \n\n• Visited by a number of aircrafts \n Orbital Period: 1.3 days \n  Vapor \n\n• Discovered by: Asaph Hall",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -65,25 +65,25 @@ Solar.loader.on('complete',function(loader,resources) {
     
     
     
-    //Create our copy of the earth
-    var planet = new PIXI.Sprite(resources.earth.texture);
+    //Create our copy of the Mars
+    var planet = new PIXI.Sprite(resources.mars.texture);
         planet.width = 1080;
         planet.height = 1080;
         planet.anchor.set(0.5);
 		planet.x = 540;
 		planet.y = centerY;
 	
-	//Add our Earth to the scene
+	//Add our Mars to the scene
     scene.addChildAt(planet,1);
     
-    var moon = new PIXI.Sprite(resources.moon.texture);
-        moon.width = 275;
-        moon.height = 275;
-        moon.anchor.set(0.5);
-        moon.x = 150;
-        moon.y = 150;
+    var deimos = new PIXI.Sprite(resources.deimos.texture);
+        deimos.width = 275;
+        deimos.height = 275;
+        deimos.anchor.set(0.5);
+        deimos.x = 1000;
+        deimos.y = 400;
     
-    scene.addChild(moon);
+    scene.addChild(deimos);
 	
     
 	//Change the default transition
@@ -107,14 +107,14 @@ Solar.loader.on('complete',function(loader,resources) {
         //Remove old scene
         app.stage.removeChild(Solar.currentScene);
 
-        //Fix scrim
+        //Fix scrm
         scrim.alpha = .75;
 
         //Shrink panel
-        await Animate.to(infobox,500,{height:700});
+        await Animate.to(infobox,500,{height:750});
 
         //Move planet and moon
-        Animate.to(planet,3000,{
+        await Animate.to(planet,3000,{
             height:2000,
             width:2000,
             x:0,
@@ -122,39 +122,46 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:.6,
             easing:Easing.easeInOut
         });
-        await Animate.to(moon,3000,{
-            height:750,
-            width:750,
+
+        
+        await Animate.to(deimos,3000,{
+            height:400,
+            width:400,
             x:540,
             y:centerY,
+            alpha: 1,
             easing:Easing.easeInOut
         });
 
         //Fade in content
-        Animate.to(content,1000,{
+        //Here later.
+        
+        
+
+
+        Animate.to(content,3000,{
             alpha:1,
             easing:Easing.easeInOut
         });
 
-        //Drift the earth and moon a bit
-        Animate.to(moon,10000,{
+         Animate.to(deimos,3000,{
             x:600,
             easing:Easing.easeInOut
         });
+
 		
-	}
+
+		
+    }
+
+        //Drift the mars and deimos a bit
+       
 	
 
 	//Change the transition out.
 	scene.transitionOut = async function() {
         
-        //Fade out content
-        await Animate.to(content,1000,{
-            alpha:0,
-            easing:Easing.easeInOut
-        });
-
-        //Fix panel
+        //Move them back!
         Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
@@ -165,13 +172,16 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:1,
             easing:Easing.easeInOut
         });
-        await Animate.to(moon,3000,{
+        await Animate.to(deimos,3000,{
             height:275,
             width:275,
-            x:150,
-            y:150,
+            x:1000,
+            y:400,
             easing:Easing.easeInOut
         });
+
+        //Fix panel
+        Animate.to(infobox,500,{height:1020});
 
         //Fix scrim
         scrim.alpha = 0;
@@ -182,7 +192,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Remove old scene
         app.stage.removeChild(scene);
 
-        Solar.startScene('earth');
+        Solar.startScene('mars');
     }
     
     /*
@@ -195,15 +205,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
-
-        //Set it to false to prevent mashing
-        backbutton.interactive = false;
-
-        //Transition out
         await scene.transitionOut();
-
-        //Re-enable button
-        backbutton.interactive = true;
 	});
 	
 });

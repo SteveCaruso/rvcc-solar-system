@@ -1,5 +1,10 @@
 //Create our scene
-var moonScreen = new Solar.Scene("moon");
+var titanScreen = new Solar.Scene("titan");
+
+//here you load the images that you will use on the info box
+//images have to be in the same folde as planets ...\rvcc-solar-system\img
+Solar.loader.add("titan_c","img/titan_c.jpg");
+Solar.loader.add("titan_outline","img/titan_outline.jpg");
 
 //Queue up our files we'll need
 //None!
@@ -8,8 +13,8 @@ var moonScreen = new Solar.Scene("moon");
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = moonScreen;
-    var targetPlanet = earth;
+    var scene = titanScreen;
+    var targetPlanet = saturn;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();
@@ -30,27 +35,56 @@ Solar.loader.on('complete',function(loader,resources) {
     scene.addChild(infobox);
     
     
-    
     //Content container
     var content = new PIXI.Container();
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("The Moon",titleStyle);
+    var title = new PIXI.Text("Titan",titleStyle);
         title.x = 1200;
         title.y = 100;
     
     //Add to content
     content.addChild(title);
             
-    //Info box text
-    var text = new PIXI.Text("Lorem Friggin' Ipsum",textStyle);
-        text.x = 1200;
-        text.y = 180;
-    
+   //Info box text
+   var textTitan = new PIXI.Text("• Size: Saturn's largest moon and the second largest moon in the solar system. It is bigger than Mercury. \n\n• Orbit: 16 days. \n\n • Surface: Rock-hard water ice. It likely has an ocean beneath its surface. \n\n• Atmosphere: Mostly nitrogen like Earth’s.\n\n Potentially habitable, and no space suit needed just an oxygen mask.",textStyle);
+   textTitan.x = 1200;
+   textTitan.y = 180;
+
     //Add to content
-    content.addChild(text);
+    content.addChild(textTitan);
+
+    //Add images 
+    //these have to be loaded before hand top of this page (scroll up)
+
+    var img1 = new PIXI.Sprite(resources.titan_c.texture);   
     
+        img1.width = 216;
+        img1.height = 162;
+        //img1.anchor.set(0.5);
+        img1.x= 1275;
+        img1.y= 835;
+        //img1.filters = [new PIXI.filters.DropShadowFilter()]
+        img1.interactive = true;
+        //img1.on('pointerdown', imageCenter());
+        
+    content.addChild(img1);
+    
+    var img2 = new PIXI.Sprite(resources.titan_outline.texture);   
+    
+        img2.width = 216;
+        img2.height = 162;
+        img2.x= 1565;
+        img2.y= 835;
+
+        //make it interactive
+       //img2.interactive = true;
+        //img2.on('pointerdown', imageCenter());
+        content.addChild(img2);
+
+
+
     //Add the content container to the scene
     scene.addChild(content);
     
@@ -64,26 +98,24 @@ Solar.loader.on('complete',function(loader,resources) {
     scene.addChild(backbutton);
     
     
-    
-    //Create our copy of the earth
-    var planet = new PIXI.Sprite(resources.earth.texture);
-        planet.width = 1080;
+    //Create our copy of the Saturn
+    var planet = new PIXI.Sprite(resources.saturn.texture);
+        planet.width = 2160;
         planet.height = 1080;
         planet.anchor.set(0.5);
 		planet.x = 540;
 		planet.y = centerY;
 	
-	//Add our Earth to the scene
+	//Add our Saturn to the scene
     scene.addChildAt(planet,1);
-    
-    var moon = new PIXI.Sprite(resources.moon.texture);
-        moon.width = 275;
-        moon.height = 275;
-        moon.anchor.set(0.5);
-        moon.x = 150;
-        moon.y = 150;
-    
-    scene.addChild(moon);
+    var titan = new PIXI.Sprite(resources.titan.texture);
+        titan.width = 400;
+        titan.height = 400;
+        titan.anchor.set(0.5);
+        titan.x = 200;
+        titan.y = 200;
+   
+    scene.addChild(titan);
 	
     
 	//Change the default transition
@@ -96,7 +128,7 @@ Solar.loader.on('complete',function(loader,resources) {
         scene.alpha = 1;
 
         //Set infopanel to transparent
-        infobox.alpha = 0;
+       //infobox.alpha = 0;
 
         //Add to stage
         app.stage.addChild(scene);
@@ -110,19 +142,19 @@ Solar.loader.on('complete',function(loader,resources) {
         //Fix scrim
         scrim.alpha = .75;
 
-        //Shrink panel
-        await Animate.to(infobox,500,{height:700});
+        //Resize panel
+        await Animate.to(infobox,500,{height:1060});
 
         //Move planet and moon
         Animate.to(planet,3000,{
             height:2000,
-            width:2000,
+            width:4000,
             x:0,
             y:0,
             alpha:.6,
             easing:Easing.easeInOut
         });
-        await Animate.to(moon,3000,{
+        await Animate.to(titan,3000,{
             height:750,
             width:750,
             x:540,
@@ -130,14 +162,14 @@ Solar.loader.on('complete',function(loader,resources) {
             easing:Easing.easeInOut
         });
 
-        //Fade in content
-        Animate.to(content,1000,{
-            alpha:1,
-            easing:Easing.easeInOut
-        });
+        //info about Titan
+        await Animate.to(content,1000,{alpha:1,easing:Easing.easeInOut});
 
-        //Drift the earth and moon a bit
-        Animate.to(moon,10000,{
+        //Fade in content
+        //Here later.
+
+        //Drift the saturn and titan a bit
+        Animate.to(titan,10000,{
             x:600,
             easing:Easing.easeInOut
         });
@@ -148,30 +180,30 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the transition out.
 	scene.transitionOut = async function() {
         
-        //Fade out content
-        await Animate.to(content,1000,{
-            alpha:0,
+        //Move them back!
+        await Animate.to(content,500,{alpha:0,easing:Easing.easeInOut});
+
+        Animate.to(infobox,500,{height:1020});
+        
+        Animate.to(planet,3000,{
+            height:1080,
+            width:2160,
+            x:540,
+            y:centerY,
+            alpha:1,
+            easing:Easing.easeInOut
+        }); 
+        
+        await Animate.to(titan,3000,{
+            height:400,
+            width:400,
+            x:200,
+            y:200,
             easing:Easing.easeInOut
         });
 
         //Fix panel
         Animate.to(infobox,500,{height:1020});
-        
-        Animate.to(planet,3000,{
-            height:1080,
-            width:1080,
-            x:540,
-            y:centerY,
-            alpha:1,
-            easing:Easing.easeInOut
-        });
-        await Animate.to(moon,3000,{
-            height:275,
-            width:275,
-            x:150,
-            y:150,
-            easing:Easing.easeInOut
-        });
 
         //Fix scrim
         scrim.alpha = 0;
@@ -182,7 +214,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Remove old scene
         app.stage.removeChild(scene);
 
-        Solar.startScene('earth');
+        Solar.startScene('saturn');
     }
     
     /*
@@ -195,15 +227,21 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
-
         //Set it to false to prevent mashing
         backbutton.interactive = false;
 
         //Transition out
         await scene.transitionOut();
-
+  
         //Re-enable button
         backbutton.interactive = true;
 	});
-	
+    
+    
+    function imageCenter() {
+        img1.width = 800;
+        img1.height = 600;
+        img1.x=  app.view.width/2;
+        img1.y = app.view.height/2;
+    }
 });

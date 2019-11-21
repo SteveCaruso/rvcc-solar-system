@@ -1,5 +1,5 @@
 //Create our scene
-var moonScreen = new Solar.Scene("moon");
+var ganymedeScreen = new Solar.Scene("ganymede");
 
 //Queue up our files we'll need
 //None!
@@ -8,7 +8,7 @@ var moonScreen = new Solar.Scene("moon");
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = moonScreen;
+    var scene = ganymedeScreen;
     var targetPlanet = earth;
     
     //Create a transparent scrim that will be used to fade out the solar system
@@ -35,21 +35,21 @@ Solar.loader.on('complete',function(loader,resources) {
     var content = new PIXI.Container();
         content.alpha = 0;
     
-    //Info box title
-    var title = new PIXI.Text("The Moon",titleStyle);
+    //Info box title 
+    var title = new PIXI.Text("Ganymede",titleStyle);
         title.x = 1200;
         title.y = 100;
     
     //Add to content
     content.addChild(title);
             
-    //Info box text
-    var text = new PIXI.Text("Lorem Friggin' Ipsum",textStyle);
-        text.x = 1200;
-        text.y = 180;
+    //Info box text; insert the rest of information
+    var textGany = new PIXI.Text("Ganymede\n\n•INSERT INFO HERE", textStyle);
+        textGany.x = 1200;
+        textGany.y = 180;
     
     //Add to content
-    content.addChild(text);
+    content.addChild(textGany);
     
     //Add the content container to the scene
     scene.addChild(content);
@@ -64,27 +64,25 @@ Solar.loader.on('complete',function(loader,resources) {
     scene.addChild(backbutton);
     
     
-    
-    //Create our copy of the earth
-    var planet = new PIXI.Sprite(resources.earth.texture);
+    //Create our copy of jupiter
+    var planet = new PIXI.Sprite(resources.jupiter.texture);
         planet.width = 1080;
         planet.height = 1080;
         planet.anchor.set(0.5);
 		planet.x = 540;
 		planet.y = centerY;
 	
-	//Add our Earth to the scene
+	//Add our Jupiter to the scene
     scene.addChildAt(planet,1);
-    
-    var moon = new PIXI.Sprite(resources.moon.texture);
-        moon.width = 275;
-        moon.height = 275;
+    var moon = new PIXI.Sprite(resources.jMoonGanymede.texture);
+        moon.width = 200; 
+        moon.height = 200; 
         moon.anchor.set(0.5);
-        moon.x = 150;
-        moon.y = 150;
+        moon.x = 650;
+        moon.y = 225;
     
     scene.addChild(moon);
-	
+
     
 	//Change the default transition
 	scene.transition = async function() {
@@ -104,7 +102,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Fade in
         await Animate.to(infobox,500,{alpha:1});
 
-        //Remove old scene
+        //Remove old scene    
         app.stage.removeChild(Solar.currentScene);
 
         //Fix scrim
@@ -112,6 +110,7 @@ Solar.loader.on('complete',function(loader,resources) {
 
         //Shrink panel
         await Animate.to(infobox,500,{height:700});
+
 
         //Move planet and moon
         Animate.to(planet,3000,{
@@ -122,6 +121,7 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:.6,
             easing:Easing.easeInOut
         });
+
         await Animate.to(moon,3000,{
             height:750,
             width:750,
@@ -131,30 +131,22 @@ Solar.loader.on('complete',function(loader,resources) {
         });
 
         //Fade in content
-        Animate.to(content,1000,{
-            alpha:1,
-            easing:Easing.easeInOut
-        });
+        //Here later.
 
-        //Drift the earth and moon a bit
+        //Drift jupiter and moon a bit
         Animate.to(moon,10000,{
             x:600,
             easing:Easing.easeInOut
         });
 		
 	}
-	
+    
+    
 
 	//Change the transition out.
 	scene.transitionOut = async function() {
         
-        //Fade out content
-        await Animate.to(content,1000,{
-            alpha:0,
-            easing:Easing.easeInOut
-        });
-
-        //Fix panel
+        //Move them back!
         Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
@@ -166,12 +158,15 @@ Solar.loader.on('complete',function(loader,resources) {
             easing:Easing.easeInOut
         });
         await Animate.to(moon,3000,{
-            height:275,
-            width:275,
-            x:150,
-            y:150,
+            height:200,
+            width:200,
+            x:650,
+            y:225,
             easing:Easing.easeInOut
         });
+
+        //Fix panel
+        Animate.to(infobox,500,{height:1020});
 
         //Fix scrim
         scrim.alpha = 0;
@@ -182,7 +177,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Remove old scene
         app.stage.removeChild(scene);
 
-        Solar.startScene('earth');
+        Solar.startScene('jupiter');
     }
     
     /*
@@ -195,15 +190,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
-
-        //Set it to false to prevent mashing
-        backbutton.interactive = false;
-
-        //Transition out
         await scene.transitionOut();
-
-        //Re-enable button
-        backbutton.interactive = true;
 	});
 	
 });

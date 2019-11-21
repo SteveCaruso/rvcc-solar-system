@@ -1,15 +1,16 @@
 //Create our scene
-var moonScreen = new Solar.Scene("moon");
+var charonScreen = new Solar.Scene("charon");
 
 //Queue up our files we'll need
-//None!
+Solar.loader.add("charonPluto",'img/charonPluto.jpg');
+Solar.loader.add("plutoVearth",'img/plutoVearth.jpg');
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = moonScreen;
-    var targetPlanet = earth;
+    var scene = charonScreen;
+    var targetPlanet = pluto;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();
@@ -36,7 +37,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("The Moon",titleStyle);
+    var title = new PIXI.Text("Charon",titleStyle);
         title.x = 1200;
         title.y = 100;
     
@@ -44,12 +45,34 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Lorem Friggin' Ipsum",textStyle);
+    var text = new PIXI.Text("• Was found by Jim Christy in 1978, by accident. \n\n • Charon's orbit around Pluto takes 6.4 Earth days. \n\n • Got its name after a mythological ferryman who carried souls across the river Acheron, one of the five mythical rivers that surrounded Pluto's underworld.",textStyle);
         text.x = 1200;
         text.y = 180;
     
     //Add to content
     content.addChild(text);
+
+    //Add photo to container
+    var charonPluto = new PIXI.Sprite(resources.charonPluto.texture);
+        charonPluto.width = 300;
+        charonPluto.height = 300;
+        charonPluto.x = 1200;
+        charonPluto.y = 750;
+        charonPluto.alpha = 1;
+
+    //Add photo to content
+    content.addChild(charonPluto);    
+
+     //Add photo to container
+     var plutoVearth = new PIXI.Sprite(resources.plutoVearth.texture);
+     plutoVearth.width = 400;
+     plutoVearth.height = 300;
+     plutoVearth.x = 1500;
+     plutoVearth.y = 750;
+     plutoVearth.alpha = 1;
+
+    //Add photo to content
+    content.addChild(plutoVearth);   
     
     //Add the content container to the scene
     scene.addChild(content);
@@ -65,23 +88,24 @@ Solar.loader.on('complete',function(loader,resources) {
     
     
     
-    //Create our copy of the earth
-    var planet = new PIXI.Sprite(resources.earth.texture);
+    //Create our copy of pluto
+    var planet = new PIXI.Sprite(resources.pluto.texture);
         planet.width = 1080;
         planet.height = 1080;
         planet.anchor.set(0.5);
 		planet.x = 540;
 		planet.y = centerY;
 	
-	//Add our Earth to the scene
+	//Add our Pluto to the scene
     scene.addChildAt(planet,1);
     
-    var moon = new PIXI.Sprite(resources.moon.texture);
-        moon.width = 275;
-        moon.height = 275;
+    //create our copy of Charon
+    var moon = new PIXI.Sprite(resources.charon.texture);
+        moon.width = 350;
+        moon.height = 350;
         moon.anchor.set(0.5);
-        moon.x = 150;
-        moon.y = 150;
+        moon.x = 200;
+        moon.y = 200;
     
     scene.addChild(moon);
 	
@@ -115,26 +139,23 @@ Solar.loader.on('complete',function(loader,resources) {
 
         //Move planet and moon
         Animate.to(planet,3000,{
-            height:2000,
-            width:2000,
+            height:1500,
+            width:1500,
             x:0,
             y:0,
             alpha:.6,
             easing:Easing.easeInOut
         });
         await Animate.to(moon,3000,{
-            height:750,
-            width:750,
+            height:650,
+            width:650,
             x:540,
             y:centerY,
             easing:Easing.easeInOut
         });
 
         //Fade in content
-        Animate.to(content,1000,{
-            alpha:1,
-            easing:Easing.easeInOut
-        });
+        await Animate.to(content,1000,{alpha:1,easing:Easing.easeInOut});
 
         //Drift the earth and moon a bit
         Animate.to(moon,10000,{
@@ -148,15 +169,11 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the transition out.
 	scene.transitionOut = async function() {
         
-        //Fade out content
-        await Animate.to(content,1000,{
-            alpha:0,
-            easing:Easing.easeInOut
-        });
-
-        //Fix panel
+        //Move them back!
         Animate.to(infobox,500,{height:1020});
         
+        Animate.to(content,1000,{alpha:0,easing:Easing.easeInOut});
+
         Animate.to(planet,3000,{
             height:1080,
             width:1080,
@@ -166,12 +183,15 @@ Solar.loader.on('complete',function(loader,resources) {
             easing:Easing.easeInOut
         });
         await Animate.to(moon,3000,{
-            height:275,
-            width:275,
-            x:150,
-            y:150,
+            height:350,
+            width:350,
+            x:200,
+            y:200,
             easing:Easing.easeInOut
         });
+
+        //Fix panel
+        Animate.to(infobox,500,{height:1020});
 
         //Fix scrim
         scrim.alpha = 0;
@@ -182,7 +202,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Remove old scene
         app.stage.removeChild(scene);
 
-        Solar.startScene('earth');
+        Solar.startScene('pluto');
     }
     
     /*
@@ -195,15 +215,7 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
-
-        //Set it to false to prevent mashing
-        backbutton.interactive = false;
-
-        //Transition out
         await scene.transitionOut();
-
-        //Re-enable button
-        backbutton.interactive = true;
 	});
 	
 });

@@ -1,15 +1,16 @@
 //Create our scene
-var moonScreen = new Solar.Scene("moon");
+var phobosScreen = new Solar.Scene("phobos");
 
 //Queue up our files we'll need
-//None!
+Solar.loader
+	.add("probe","img/phobos-probe.jpg")			//phobos probe
 
 //When things are loaded, do the stuff necessary to make it work
 Solar.loader.on('complete',function(loader,resources) {
     
     //Namespace
-    var scene = moonScreen;
-    var targetPlanet = earth;
+    var scene = phobosScreen;
+    var targetPlanet = mars;
     
     //Create a transparent scrim that will be used to fade out the solar system
     var scrim = new PIXI.Graphics();
@@ -36,20 +37,20 @@ Solar.loader.on('complete',function(loader,resources) {
         content.alpha = 0;
     
     //Info box title
-    var title = new PIXI.Text("The Moon",titleStyle);
+    var title = new PIXI.Text("Mars",titleStyle);
         title.x = 1200;
         title.y = 100;
     
     //Add to content
-    content.addChild(title);
+    //content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("Lorem Friggin' Ipsum",textStyle);
+    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
         text.x = 1200;
         text.y = 180;
     
     //Add to content
-    content.addChild(text);
+    //content.addChild(text);
     
     //Add the content container to the scene
     scene.addChild(content);
@@ -65,25 +66,34 @@ Solar.loader.on('complete',function(loader,resources) {
     
     
     
-    //Create our copy of the earth
-    var planet = new PIXI.Sprite(resources.earth.texture);
+    //Create our copy of mars
+    var planet = new PIXI.Sprite(resources.mars.texture);
         planet.width = 1080;
         planet.height = 1080;
         planet.anchor.set(0.5);
 		planet.x = 540;
 		planet.y = centerY;
 	
-	//Add our Earth to the scene
+	//Add our mars to the scene
     scene.addChildAt(planet,1);
     
-    var moon = new PIXI.Sprite(resources.moon.texture);
-        moon.width = 275;
-        moon.height = 275;
-        moon.anchor.set(0.5);
-        moon.x = 150;
-        moon.y = 150;
+    var phobos = new PIXI.Sprite(resources.phobos.texture);
+        phobos.width = 225;
+        phobos.height = 225;
+        phobos.anchor.set(0.5);
+        phobos.x = 150;
+        phobos.y = 150;
     
-    scene.addChild(moon);
+    scene.addChild(phobos);
+    
+    var deimos = new PIXI.Sprite(resources.deimos.texture);
+        deimos.width = 225;
+        deimos.height = 225;
+        deimos.anchor.set(0.5);
+        deimos.x = 1000;
+        deimos.y = 400;
+    
+    scene.addChild(deimos);
 	
     
 	//Change the default transition
@@ -113,7 +123,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Shrink panel
         await Animate.to(infobox,500,{height:700});
 
-        //Move planet and moon
+        //Move planet and phobos
         Animate.to(planet,3000,{
             height:2000,
             width:2000,
@@ -122,22 +132,55 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:.6,
             easing:Easing.easeInOut
         });
-        await Animate.to(moon,3000,{
+        Animate.to(deimos,3000,{
+            x:1000,
+            y:-150,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        await Animate.to(phobos,3000,{
             height:750,
             width:750,
             x:540,
             y:centerY,
+            alpha: 1,
             easing:Easing.easeInOut
         });
 
         //Fade in content
-        Animate.to(content,1000,{
-            alpha:1,
-            easing:Easing.easeInOut
-        });
+        await Animate.to(content,1000,{alpha:1});
 
-        //Drift the earth and moon a bit
-        Animate.to(moon,10000,{
+        //Info box title
+        var title = new PIXI.Text("Phobos",titleStyle);
+        title.x = 1200;
+        title.y = 100;
+
+        //Add to content
+        content.addChild(title);
+            
+        //Info box text
+        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos, son \n of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around mars in\n  7 hours, 41 minutes \n\n• (Below) illustration of the Phobos probe",textStyle);
+            text.x = 1200;
+            text.y = 180;
+
+        //Add to content
+        content.addChild(text);
+
+        //Add the content container to the scene
+        scene.addChild(content);
+
+        //Add a picture of the phobos probe
+        var probe = new PIXI.Sprite(resources.probe.texture);
+            probe.width = 370;
+            probe.height = 314;
+            probe.anchor.set(0);
+            probe.x = 1325;
+            probe.y = 755;
+
+        content.addChild(probe);
+
+        //Drift mars and phobos a bit
+        Animate.to(phobos,10000,{
             x:600,
             easing:Easing.easeInOut
         });
@@ -148,14 +191,10 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Change the transition out.
 	scene.transitionOut = async function() {
         
-        //Fade out content
-        await Animate.to(content,1000,{
-            alpha:0,
-            easing:Easing.easeInOut
-        });
-
-        //Fix panel
+        //Move them back!
         Animate.to(infobox,500,{height:1020});
+
+        Animate.to(content,1000,{alpha:0,easing:Easing.easeInOut});
         
         Animate.to(planet,3000,{
             height:1080,
@@ -165,13 +204,21 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:1,
             easing:Easing.easeInOut
         });
-        await Animate.to(moon,3000,{
-            height:275,
-            width:275,
+        Animate.to(deimos,3000,{
+            x: 1000,
+            y: 400,
+            easing:Easing.easeInOut
+        });
+        await Animate.to(phobos,3000,{
+            height:225,
+            width:225,
             x:150,
             y:150,
             easing:Easing.easeInOut
         });
+
+        //Fix panel
+        Animate.to(infobox,500,{height:1020});
 
         //Fix scrim
         scrim.alpha = 0;
@@ -182,27 +229,24 @@ Solar.loader.on('complete',function(loader,resources) {
         //Remove old scene
         app.stage.removeChild(scene);
 
-        Solar.startScene('earth');
+        //remove content
+        content.alpha = 0;
+
+        Solar.startScene('mars');
     }
     
     /*
 	//Set the event listeners
 	targetPlanet.interactive = true;
     targetPlanet.on('pointerdown', function() {
-		Solar.changeSceneTo("earth");
+		Solar.changeSceneTo("mars");
 	});
 	*/
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
-
-        //Set it to false to prevent mashing
         backbutton.interactive = false;
-
-        //Transition out
         await scene.transitionOut();
-
-        //Re-enable button
         backbutton.interactive = true;
 	});
 	

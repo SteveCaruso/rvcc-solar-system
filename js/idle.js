@@ -700,7 +700,7 @@ Solar.loader.on('complete', function(loader, resources) {
 	},500);
     
     app.view.addEventListener('click', function() {
-        console.log("Clicked!");
+        //console.log("Clicked!");
         if (orbiting) {
             lineup();
         }
