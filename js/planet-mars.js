@@ -234,15 +234,14 @@ Solar.loader.on('complete',function(loader,resources) {
     
     deimos.interactive = true;
 	deimos.on('pointerdown', function() {
-<<<<<<< Updated upstream
+ 
      deimos.interactive = false;
          Solar.changeSceneTo('deimos');
          deimos.interactive = true;
-=======
         deimos.interactive = false;
         Solar.changeSceneTo('deimos');
         deimos.interactive = true;
->>>>>>> Stashed changes
+       
         
 	});
 	
