@@ -75,7 +75,15 @@ Solar.loader.on('complete',function(loader,resources) {
 	
 	//Add our Earth to the scene
     scene.addChildAt(planet,1);
+     var jmoonEuropa = new PIXI.Sprite(resources.jMoonEuropa.texture);
+        jmoonEuropa.width = 125;
+        jmoonEuropa.height = 125;
+        jmoonEuropa.anchor.set(0.5);
+        jmoonEuropa.x = 350;
+        jmoonEuropa.y = 250;
     
+    scene.addChild(jmoonEuropa);
+
     var moon = new PIXI.Sprite(resources.jMoonIo.texture);
         moon.width = 138;
         moon.height = 138;
@@ -84,15 +92,6 @@ Solar.loader.on('complete',function(loader,resources) {
         moon.y = 150;
     
     scene.addChild(moon);
-
-    var jmoonEuropa = new PIXI.Sprite(resources.jMoonEuropa.texture);
-        jmoonEuropa.width = 125;
-        jmoonEuropa.height = 125;
-        jmoonEuropa.anchor.set(0.5);
-        jmoonEuropa.x = 350;
-        jmoonEuropa.y = 250;
-    
-    scene.addChild(jmoonEuropa);
     
     var jmoonGanymede = new PIXI.Sprite(resources.jMoonGanymede.texture);
         jmoonGanymede.width = 200;
@@ -204,11 +203,32 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:1,
             easing:Easing.easeInOut
         });
-        await Animate.to(moon,3000,{
+        Animate.to(moon,3000,{
             height:138,
             width:138,
             x:150,
             y:150,
+            easing:Easing.easeInOut
+        });
+        Animate.to(jmoonEuropa,3000,{
+            width: 125,
+            height: 125,
+            x: 350,
+            y: 250,
+            easing:Easing.easeInOut
+        });
+        Animate.to(jmoonGanymede,3000,{
+            width: 200,
+            height: 200,
+            x: 650,
+            y: 225,
+            easing:Easing.easeInOut
+        });
+        await Animate.to(jmoonCallisto,3000,{
+            width: 190,
+            height: 190,
+            x: 950,
+            y: 450,
             easing:Easing.easeInOut
         });
 
