@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Deimos: Son of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n\n• Smooth surface and has two craters \n\n•  Deimos rises in the east and sets in the west every 2.7 days \n\n• Visited by a number of aircrafts \n Orbital Period: 1.3 days \n  Vapor \n",textStyle);
+    var text = new PIXI.Text("• Deimos: Son of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n\n• Smooth surface and has two craters \n\n•  Deimos rises in the east and sets in the west every 2.7 days \n\n• Visited by a number of aircrafts \n Orbital Period: 1.3 days  \n\n",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -76,16 +76,26 @@ Solar.loader.on('complete',function(loader,resources) {
 	//Add our Mars to the scene
     scene.addChildAt(planet,1);
     
+    
+
     var deimos = new PIXI.Sprite(resources.deimos.texture);
-        deimos.width = 275;
-        deimos.height = 275;
+        deimos.width = 225;
+        deimos.height = 225;
         deimos.anchor.set(0.5);
         deimos.x = 1000;
         deimos.y = 400;
     
     scene.addChild(deimos);
 	
+    var phobos = new PIXI.Sprite(resources.phobos.texture);
+        phobos.width = 225;
+        phobos.height = 225;
+        phobos.anchor.set(0.5);
+        phobos.x = 150;
+        phobos.y = 150;
     
+    scene.addChild(phobos);
+
 	//Change the default transition
 	scene.transition = async function() {
         
@@ -122,7 +132,13 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:.6,
             easing:Easing.easeInOut
         });
-
+        
+        Animate.to(phobos,3000,{
+            x:150,
+            y:-150,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
         
         await Animate.to(deimos,3000,{
             height:700,
@@ -172,9 +188,17 @@ Solar.loader.on('complete',function(loader,resources) {
             alpha:1,
             easing:Easing.easeInOut
         });
+
+        Animate.to(phobos,3000,{
+            x:150,
+            y:150,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+
         await Animate.to(deimos,3000,{
-            height:275,
-            width:275,
+            height:225,
+            width:225,
             x:1000,
             y:400,
             easing:Easing.easeInOut

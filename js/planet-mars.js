@@ -45,7 +45,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
+    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -107,8 +107,8 @@ Solar.loader.on('complete',function(loader,resources) {
        
         
     var deimos = new PIXI.Sprite(resources.deimos.texture);
-        deimos.width = 275;
-        deimos.height = 275;
+        deimos.width = 225;
+        deimos.height = 225;
         deimos.anchor.set(0.5);
         deimos.x = 1000;
         deimos.y = 400;
