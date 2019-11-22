@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 23.9 Hours \n\n• Year: 365.25 Days\n\n• Size: 7,918 miles in diameter\n\n• Distance from sun: 93 million miles\n\n• Avg. Temperature: 57 degrees\n\n• Atmosphere: mostly Nitrogen, Oxygen,\n  Argon\n\n• Moons: 1 moon",textStyle);
+    var text = new PIXI.Text("• Day: 23.9 Hours \n\n• Year: 365.25 Days\n\n• Size: 7,918 miles in diameter\n\n• Distance from sun: 93 million miles\n\n• Avg. Temperature: 57 degrees\n\n• Atmosphere: mostly Nitrogen, \n  Oxygen, Argon\n\n• Moons: 1 moon",textStyle);
         text.x = 1200;
         text.y = 180;
     

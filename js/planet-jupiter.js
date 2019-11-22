@@ -43,7 +43,7 @@ Solar.loader.on('complete', function (loader, resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: Just under 10 Earth hours\n\n• Year: 12 Earth Years\n\n• Distance from Sun: 484 million miles \n\n• Size: 86,882 miles in diameter \n\n• Temperatures depend more on the layer \n  of Jupiter's atmosphere: \n  -260 degrees to 1,340 degrees  \n\n• Moons: 79 as of 2018\n  Four largest moons, from left to right:\n  Io, Europa, Ganymede, and Callisto\n\n• The big red spot is actually a massive \n  storm that is about 10,159 miles across",textStyle);
+    var text = new PIXI.Text("• Day: Just under 10 Earth hours\n\n• Year: 12 Earth Years\n\n• Distance from Sun: 484 million miles \n\n• Size: 86,882 miles in diameter \n\n• Temperatures depend more on the \n  layer of Jupiter's atmosphere: -260 \n  degrees to 1,340 degrees  \n\n• Moons: 79 as of 2018\n  Four largest moons, from left to right:\n  Io, Europa, Ganymede, and Callisto\n\n• The big red spot is actually a massive \n  storm that is about 10,159 miles\n  across",textStyle);
         text.x = 1200;
         text.y = 180;
     

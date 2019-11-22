@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 243 Earth Days \n\n• Year: 225 Earth Days \n\n• Size: 7,521 miles is diameter \n\n• Distance from Sun: 67 million miles\n\n• Covered in high volcanic mountains\n  with hurricane like winds \n\n• Avg. Temperature: \n  about 900 degrees \n\n• Atmosphere: Carbon Dioxide, Nitrogen \n\n• Moons: None",textStyle);
+    var text = new PIXI.Text("• Day: 243 Earth Days \n\n• Year: 225 Earth Days \n\n• Size: 7,521 miles is diameter \n\n• Distance from Sun: 67 million miles\n\n• Covered in high volcanic mountains\n  with hurricane like winds \n\n• Avg. Temperature: \n  about 900 degrees \n\n• Atmosphere: Carbon Dioxide, \n  Nitrogen \n\n• Moons: None",textStyle);
         text.x = 1200;
         text.y = 180;
     
