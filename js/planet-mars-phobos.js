@@ -45,7 +45,7 @@ Solar.loader.on('complete',function(loader,resources) {
     //content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and\n  winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon,\n  Nitrogen, Low Oxygen, and Low Water\n  Vapor \n\n• Moons: Phobos, Deimos",textStyle);
+    var text = new PIXI.Text("• Day: 24.6 Hours \n\n• Year: 687 Earth Days \n\n• Size: 4,212 miles in diameter \n\n• Distance from Sun: 142 million miles \n\n• Rocky, volcanoes, impact craters, and winds \n\n• Avg. Temperature: -81 degrees \n\n• Atmosphere: Carbon Dioxide, Argon, Nitrogen, Low Oxygen, and Low Water Vapor \n\n• Moons: Phobos, Deimos",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -159,7 +159,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.addChild(title);
             
         //Info box text
-        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos, son \n of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around Mars in\n  7 hours, 41 minutes \n\n• (Below) illustration of the Phobos probe",textStyle);
+        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos,\n  son of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around Mars in\n  7 hours, 41 minutes \n\n• (Below) illustration of the Phobos \n  probe",textStyle);
             text.x = 1200;
             text.y = 180;
 
