@@ -1,2 +1,2 @@
-# rvcc-solar-system
-A solar system display for the RVCC Planetarium.
+# rvcc-solar-system [![Netlify Status](https://api.netlify.com/api/v1/badges/f3f37dbe-953c-4d3e-a745-618e20c283c5/deploy-status)](https://app.netlify.com/sites/rvcc-planetarium/deploys)
+A [solar system display](http://rvcc-planetarium.netlify.com) for the RVCC Planetarium, two years in the making.
