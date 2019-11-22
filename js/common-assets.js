@@ -16,7 +16,7 @@ var titleStyle = new PIXI.TextStyle({
 
 var textStyle = new PIXI.TextStyle({
     fontFamily:     "Ubuntu",//"Constantia (Headings)",
-    fontSize:       40,
+    fontSize:       38,
     fill:           0xffffff,
     wordWrap:       true,
     wordWrapWidth:  675
