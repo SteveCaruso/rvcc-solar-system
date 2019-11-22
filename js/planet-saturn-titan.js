@@ -48,7 +48,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
    //Info box text
-   var textTitan = new PIXI.Text("• Size: Saturn's largest moon and the second largest moon in the solar system. It is bigger than Mercury. \n\n• Orbit: 16 days. \n\n • Surface: Rock-hard water ice. It likely has an ocean beneath its surface. \n\n• Atmosphere: Mostly nitrogen like Earth’s.\n\n Potentially habitable, and no space suit needed just an oxygen mask.",textStyle);
+   var textTitan = new PIXI.Text("• Name origin: Titan's name comes from Greek mythology. The Titans were elder gods who ruled the universe before the Olympians came to power. \n\n• Orbit: 16 days. \n\n • Size: 1,600 miles in diameter. \n\n• Fun Fact: It is the only know moon with an atmosphere, mostly nitrogen. Also Titan is the most Earth-like place we know of.",textStyle);
    textTitan.x = 1200;
    textTitan.y = 180;
 
@@ -64,7 +64,7 @@ Solar.loader.on('complete',function(loader,resources) {
         img1.height = 162;
         //img1.anchor.set(0.5);
         img1.x= 1275;
-        img1.y= 835;
+        img1.y= 780;
         //img1.filters = [new PIXI.filters.DropShadowFilter()]
         img1.interactive = true;
         //img1.on('pointerdown', imageCenter());
@@ -76,7 +76,7 @@ Solar.loader.on('complete',function(loader,resources) {
         img2.width = 216;
         img2.height = 162;
         img2.x= 1565;
-        img2.y= 835;
+        img2.y= 780;
 
         //make it interactive
        //img2.interactive = true;
@@ -134,7 +134,7 @@ Solar.loader.on('complete',function(loader,resources) {
         app.stage.addChild(scene);
         
         //Fade in
-        await Animate.to(infobox,500,{alpha:1});
+        //await Animate.to(infobox,500,{alpha:1});
 
         //Remove old scene
         app.stage.removeChild(Solar.currentScene);
@@ -143,7 +143,7 @@ Solar.loader.on('complete',function(loader,resources) {
         scrim.alpha = .75;
 
         //Resize panel
-        await Animate.to(infobox,500,{height:1060});
+        await Animate.to(infobox,500,{height:1030});
 
         //Move planet and moon
         Animate.to(planet,3000,{

@@ -46,7 +46,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Day: 10.7 Earth Days \n\n• Year: 29 Earth Years \n\n• Size: 74,897 miles in diameter \n\n• Distance from Sun: 886 million miles \n\n• Avg. Temperature:\n  about -288 degrees \n\n• Atmosphere: Hydrogen, Helium \n\n• The rings are mostly made of\n  ice and rock \n\n• Moons: 62 (Titan in Display)",textStyle);
+    var text = new PIXI.Text("• Day: 10.7 Earth Days \n\n• Year: 29 Earth Years \n\n• Size: 74,897 miles in diameter \n\n• Distance from Sun: 886 million miles \n\n• Avg. Temperature:\n  about -288 degrees \n\n• Atmosphere: Hydrogen, Helium \n\n• The rings are mostly made of\n  ice and rock \n\n• Moons: 82 (Titan in Display)",textStyle);
         text.x = 1200;
         text.y = 180;
     
