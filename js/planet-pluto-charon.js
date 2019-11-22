@@ -45,7 +45,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Was found by Jim Christy in 1978, by accident. \n\n • Charon's orbit around Pluto takes 6.4 Earth days. \n\n • Got its name after a mythological ferryman who carried souls across the river Acheron, one of the five mythical rivers that surrounded Pluto's underworld.",textStyle);
+    var text = new PIXI.Text("• Named after a mythological ferryman who carried souls across the river Acheron, one of the five mythical rivers that surrounded Pluto's underworld  \n\n • Size: 750 miles in diameter \n\n • Makes a full orbit around Pluto in 6.4 days",textStyle);
         text.x = 1200;
         text.y = 180;
     
@@ -56,8 +56,8 @@ Solar.loader.on('complete',function(loader,resources) {
     var charonPluto = new PIXI.Sprite(resources.charonPluto.texture);
         charonPluto.width = 300;
         charonPluto.height = 300;
-        charonPluto.x = 1200;
-        charonPluto.y = 750;
+        charonPluto.x = 1180;
+        charonPluto.y = 680;
         charonPluto.alpha = 1;
 
     //Add photo to content
@@ -65,10 +65,10 @@ Solar.loader.on('complete',function(loader,resources) {
 
      //Add photo to container
      var plutoVearth = new PIXI.Sprite(resources.plutoVearth.texture);
-     plutoVearth.width = 400;
+     plutoVearth.width = 360;
      plutoVearth.height = 300;
      plutoVearth.x = 1500;
-     plutoVearth.y = 750;
+     plutoVearth.y = 680;
      plutoVearth.alpha = 1;
 
     //Add photo to content
@@ -135,7 +135,7 @@ Solar.loader.on('complete',function(loader,resources) {
         scrim.alpha = .75;
 
         //Shrink panel
-        await Animate.to(infobox,500,{height:700});
+        //await Animate.to(infobox,500,{height:700});
 
         //Move planet and moon
         Animate.to(planet,3000,{
@@ -215,7 +215,9 @@ Solar.loader.on('complete',function(loader,resources) {
 	//When done, head back
     backbutton.interactive = true;
 	backbutton.on('pointerdown', async function() {
-        await scene.transitionOut();
+    backbutton.interactive = false;
+    await scene.transitionOut();
+    backbutton.interactive = true;
 	});
 	
 });
