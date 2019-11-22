@@ -120,8 +120,8 @@ Solar.loader.on('complete',function(loader,resources) {
         //Fix scrim
         scrim.alpha = .75;
 
-        //Shrink panel
-        await Animate.to(infobox,500,{height:700});
+        // DO NOT shrink the panel haha
+        // await Animate.to(infobox,500,{height:700});
 
         //Move planet and phobos
         Animate.to(planet,3000,{
@@ -159,7 +159,7 @@ Solar.loader.on('complete',function(loader,resources) {
         content.addChild(title);
             
         //Info box text
-        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos, son \n of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around mars in\n  7 hours, 41 minutes \n\n• (Below) illustration of the Phobos probe",textStyle);
+        var text = new PIXI.Text("• Phobos means 'Fear' in Latin \n\n• Named after the Greek god Phobos, son \n of Ares and Aphrodite \n\n • Size: 14.0002 miles in diameter \n\n• Makes a full orbit around Mars in\n  7 hours, 41 minutes \n\n• (Below) illustration of the Phobos probe",textStyle);
             text.x = 1200;
             text.y = 180;
 
@@ -171,11 +171,11 @@ Solar.loader.on('complete',function(loader,resources) {
 
         //Add a picture of the phobos probe
         var probe = new PIXI.Sprite(resources.probe.texture);
-            probe.width = 370;
-            probe.height = 314;
+            probe.width = 300;
+            probe.height = 255;
             probe.anchor.set(0);
-            probe.x = 1325;
-            probe.y = 755;
+            probe.x = 1370;
+            probe.y = 720;
 
         content.addChild(probe);
 
@@ -217,8 +217,8 @@ Solar.loader.on('complete',function(loader,resources) {
             easing:Easing.easeInOut
         });
 
-        //Fix panel
-        Animate.to(infobox,500,{height:1020});
+        // Fix panel (redundant)
+        // Animate.to(infobox,500,{height:1020});
 
         //Fix scrim
         scrim.alpha = 0;

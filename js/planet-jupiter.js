@@ -256,5 +256,6 @@ Solar.loader.on('complete', function (loader, resources) {
     jmoonIo.on('pointerdown', function() {
 		Solar.changeSceneTo("io");
 	});
+
 	
 });
