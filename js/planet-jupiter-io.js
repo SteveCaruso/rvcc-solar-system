@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Io is named after a nymph loved by the Greek god Zeus \n\n• Size: 1,131.9 miles in diameter\n\n• Full Orbit: 4,300 Days\n\n• Io day length: 42 hours\n\n• Io is the most volcanically active body in the solar system\n\n• Io is the fourth largest moon in the solar system",textStyle);
+    var text = new PIXI.Text("• Io is named after a nymph loved by\n  the Greek god Zeus \n\n• Size: 1,131.9 miles in diameter\n\n• Full Orbit: 4,300 Days\n\n• Io day length: 42 hours\n\n• Io is the most volcanically active body\n  in the solar system\n\n• Io is the fourth largest moon in the\n  solar system",textStyle);
         text.x = 1200;
         text.y = 180;
     
