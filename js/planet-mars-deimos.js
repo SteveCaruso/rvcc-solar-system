@@ -180,6 +180,8 @@ Solar.loader.on('complete',function(loader,resources) {
         //Move them back!
         Animate.to(infobox,500,{height:1020});
         
+        Animate.to(content,1000,{alpha:0,easing:Easing.easeInOut});
+
         Animate.to(planet,3000,{
             height:1080,
             width:1080,
@@ -215,6 +217,8 @@ Solar.loader.on('complete',function(loader,resources) {
 
         //Remove old scene
         app.stage.removeChild(scene);
+
+      
 
         Solar.startScene('mars');
     }
