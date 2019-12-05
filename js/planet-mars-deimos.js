@@ -44,7 +44,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
     //Info box text
-    var text = new PIXI.Text("• Deimos: Son of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n\n• Smooth surface and has two craters \n\n•  Deimos rises in the east and sets in the west every 2.7 days \n\n• Visited by a number of aircrafts \n Orbital Period: 1.3 days  \n\n",textStyle);
+    var text = new PIXI.Text("• Deimos: Son of Ares the god of war \n\n• Orbit: Takes 30.3 hours to orbit around mars \n\n• Size: 12.4 km \n\n• Average Temperature: -40.15 degrees \n• Smooth surface and has two craters \n\n• Deimos rises in the east and sets in the west every 2.7 days \n\n• Visited by a number of aircrafts \n\n Orbital Period: 1.3 days  \n\n",textStyle);
         text.x = 1200;
         text.y = 180;
     
