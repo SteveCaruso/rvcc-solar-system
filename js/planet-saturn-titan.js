@@ -234,7 +234,6 @@ Solar.loader.on('complete',function(loader,resources) {
         backbutton.interactive = true;
 	});
     
-    
     function imageCenter() {
         img1.width = 800;
         img1.height = 600;
