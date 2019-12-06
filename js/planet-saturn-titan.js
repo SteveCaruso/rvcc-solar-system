@@ -175,7 +175,6 @@ Solar.loader.on('complete',function(loader,resources) {
         });
 		
 	}
-	
 
 	//Change the transition out.
 	scene.transitionOut = async function() {
