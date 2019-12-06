@@ -71,10 +71,24 @@ Solar.loader.on('complete',function(loader,resources) {
         planet.height = 200;
         planet.anchor.set(0.5);
 		planet.x = 0;
-		planet.y = 0;
-	
+        planet.y = 0;
+    
+        
 	//Add our sun to the scene
-    scene.addChildAt(planet,1);     
+    scene.addChildAt(planet,1);    
+          
+    
+    //Create our copy of the sun
+          var planet2 = new PIXI.Sprite(resources.sun.texture);
+          planet2.width = 1500;
+          planet2.height = 1500;
+          planet2.anchor.set(0.5);
+          planet2.x = 400;
+          planet2.y = 250;
+          planet2.alpha = .25;
+          var blur = new PIXI.filters.BlurFilter();
+              blur.blur = .6;
+          planet2.filters = [blur]; 
 	
     
 	//Change the default transition
@@ -104,14 +118,25 @@ Solar.loader.on('complete',function(loader,resources) {
             
             //Then let's animate the planet growing and filling the screen while we fade out
             //the solar system
-            Animate.to(planet,3000,{      x:400,
+            await Animate.to(planet,3000,{      x:400,
                                             y:250,
                                             width:1500,
                                             height:1500,
                                             easing:Easing.easeInOut
                                      });
-            
-             
+      
+
+            //Add our sun to the scene
+            scene.addChildAt(planet2,2); 
+
+            var speed = 1000;
+            var reach = 200;
+            Animate.loop(planet2,function(delta) {
+                                    var i = Math.abs(  Math.sin( ((delta/speed) % 4.935) / Math.PI ) );
+                                    planet2.width = 1500 + (i * reach);
+                                    planet2.height = 1500 + (i * reach);
+                                    planet2.alpha = .25 - (i*.25);
+            });
         
 
             Animate.to(solarSystem,3000,{easing:Easing.easeInOut,
@@ -139,19 +164,23 @@ Solar.loader.on('complete',function(loader,resources) {
 
 	//Change the transition out.
 	scene.transitionOut = async function() {
-		
+    
+
         backbutton.interactive = false;
         
         //While the real sun is on the stage, let's grab its coordinates
         var planetPos = targetPlanet.getGlobalPosition();
         
         Animate.to(backbutton,500,{alpha:0,
-                                   easing:Easing.easeInOut});
+                                   easing:Easing.easeInOut})
         
+        Animate.to(planet2,500,{alpha:0,easing:Easing.easeInOut});
+
         await Animate.to(content,500,{alpha:0,easing:Easing.easeInOut});
         
-        
         await Animate.to(infobox,1500,{x:2000,y:50,easing:Easing.easeInOut});
+
+        app.stage.removeChild(planet2);
         
     
 
@@ -167,7 +196,7 @@ Solar.loader.on('complete',function(loader,resources) {
                                             height:targetPlanet.height * targetPlanet.parent.scale.y,
                                             easing:Easing.easeInOut
                                      });
-        
+
         //Fade out the scene
         await Animate.to(scene,1000,{ alpha:0,
                                             easing:Easing.easeInOut});

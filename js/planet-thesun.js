@@ -103,12 +103,20 @@ Solar.loader.on('complete',function(loader,resources) {
             
             //Then let's animate the planet growing and filling the screen while we fade out
             //the solar system
-            Animate.to(planet,3000,{      x:540,
+            await Animate.to(planet,3000,{      x:540,
                                             y:centerY,
                                             width:1080,
                                             height:1080,
                                             easing:Easing.easeInOut
-                                     });
+            });
+            console.log("LOOP DAMN YOU");
+            Animate.loop(planet,function(delta) {
+                console.log(delta);
+                                    planet.width = 1080 + ( Math.sin(delta/1000) * 100 );
+                                    planet.height = 1080 + ( Math.cos(delta/1000) * 100 );
+	        });
+
+            
             
             Animate.to(solarSystem,3000,{easing:Easing.easeInOut,
                                               alpha:0});
