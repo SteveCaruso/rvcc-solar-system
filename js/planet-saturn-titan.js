@@ -48,7 +48,7 @@ Solar.loader.on('complete',function(loader,resources) {
     content.addChild(title);
             
    //Info box text
-   var textTitan = new PIXI.Text("• Name origin: Titan's name comes from Greek mythology. The Titans were elder gods who ruled the universe before the Olympians came to power. \n\n• Orbit: 16 days. \n\n • Size: 1,600 miles in diameter. \n\n• Fun Fact: It is the only know moon with an atmosphere, mostly nitrogen. Also Titan is the most Earth-like place we know of.",textStyle);
+   var textTitan = new PIXI.Text("• Name origin: Titan's name comes from Greek mythology. The Titans were elder gods who ruled the universe before the Olympians came to power. \n\n• Orbit: 16 days. \n\n • Size: 1,600 miles in diameter. \n\n• Fun Fact: It is the only known moon with an atmosphere, mostly nitrogen. Also Titan is the most Earth-like place we know of.",textStyle);
    textTitan.x = 1200;
    textTitan.y = 180;
 
@@ -143,7 +143,7 @@ Solar.loader.on('complete',function(loader,resources) {
         scrim.alpha = .75;
 
         //Resize panel
-        await Animate.to(infobox,500,{height:1030});
+        //await Animate.to(infobox,500,{height:1030});
 
         //Move planet and moon
         Animate.to(planet,3000,{
@@ -183,7 +183,7 @@ Solar.loader.on('complete',function(loader,resources) {
         //Move them back!
         await Animate.to(content,500,{alpha:0,easing:Easing.easeInOut});
 
-        Animate.to(infobox,500,{height:1020});
+        //Animate.to(infobox,500,{height:1020});
         
         Animate.to(planet,3000,{
             height:1080,
