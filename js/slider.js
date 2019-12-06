@@ -268,36 +268,45 @@ function addSlider(xorigin, yorigin, xoffscreen, yoffscreen, resources) {
     node6=new Node(64+5*192, 64, container, "White Dwarf", resources);
     node7=new Node(64+6*192, 64, container, "Heat Death", resources);
     
+    function handleMagicFixSlider(time) {
+        var defaultTime = 1000;
+        deactivateSlider();
+        setTimeout(activateSlider, time === undefined ? defaultTime : time);
+    }
+
     node1.onSelect = function() {
         Solar.changeSceneTo("bigbang");
-        //Solar.changeSceneDiscardCurrent("timeline: big bang", true);
+        handleMagicFixSlider();
     }
     
     node2.onSelect = function() {
         Solar.changeSceneTo("stellarDust");
-        //Solar.changeSceneDiscardCurrent("timeline: stellar dust", true);
+        handleMagicFixSlider(1300);
     }
     
     node3.onSelect = function() {
         Solar.changeSceneTo("accretion");
-        //Solar.changeSceneDiscardCurrent("timeline: disk", true);
+        handleMagicFixSlider();
     }
     
     node4.onSelect = function() {
         Solar.changeSceneTo("idle");
-        //Solar.changeSceneDiscardCurrent("idle", true);
+        handleMagicFixSlider();
     }
     
     node5.onSelect = function() {
         Solar.changeSceneTo("redGiant");
+        handleMagicFixSlider(1500);
     }
     
     node6.onSelect = function() {
         Solar.changeSceneTo("whiteDwarf");
+        handleMagicFixSlider();
     }
     
     node7.onSelect = function() {
         Solar.changeSceneTo("heatDeath");
+        handleMagicFixSlider();
     }
 
     node1.setNext(node2);
@@ -330,6 +339,8 @@ function activateSlider() {
     node5.picture.interactive = true;
     node6.picture.interactive = true;
     node7.picture.interactive = true;
+
+    slider.picture.interactive = true;
 }
 function deactivateSlider() {
     node1.picture.interactive = false;
@@ -339,6 +350,8 @@ function deactivateSlider() {
     node5.picture.interactive = false;
     node6.picture.interactive = false;
     node7.picture.interactive = false;
+
+    slider.picture.interactive = false;
 }
 
 async function hideSlider(delay){
