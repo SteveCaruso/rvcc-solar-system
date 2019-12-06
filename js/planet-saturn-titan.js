@@ -83,8 +83,6 @@ Solar.loader.on('complete',function(loader,resources) {
         //img2.on('pointerdown', imageCenter());
         content.addChild(img2);
 
-
-
     //Add the content container to the scene
     scene.addChild(content);
     
