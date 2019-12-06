@@ -171,7 +171,6 @@ Solar.loader.on('complete',function(loader,resources) {
             x:600,
             easing:Easing.easeInOut
         });
-		
 	}
 
 	//Change the transition out.
