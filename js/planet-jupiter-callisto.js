@@ -61,6 +61,10 @@ Solar.loader.on('complete', function (loader, resources) {
         backbutton.y = 960;
         backbutton.alpha = 1;
     scene.addChild(backbutton);
+    
+    
+    
+    //create our copy of jupiter
 
     var planet = new PIXI.Sprite(resources.jupiter.texture);
         planet.width = 1080;
@@ -68,8 +72,13 @@ Solar.loader.on('complete', function (loader, resources) {
         planet.anchor.set(0.5);
         planet.x = 540;
         planet.y = centerY;
+    
+    //add it to the scene
     scene.addChildAt(planet,1);
 
+    
+    //add the moons to the scene
+    
     var jmoonIo = new PIXI.Sprite(resources.jMoonIo.texture);
         jmoonIo.width = 138;
         jmoonIo.height = 138;
@@ -119,11 +128,6 @@ Solar.loader.on('complete', function (loader, resources) {
         
         //Fade in
         await Animate.to(infobox,500,{alpha:1});
-        
-        // Fade out old moons
-        Animate.to(jmoonGanymede,300,{alpha:0});
-        Animate.to(jmoonEuropa,300,{alpha:0});
-        Animate.to(jmoonIo,300,{alpha:0});
 
        //Remove old scene
         app.stage.removeChild(Solar.currentScene);
@@ -132,9 +136,7 @@ Solar.loader.on('complete', function (loader, resources) {
         scrim.alpha = .75;
 
         //Shrink panel
-        await Animate.to(infobox,500,{height:950});
-
-
+  
         //Move planet and moon
         Animate.to(planet,3000,{
             height:2000,
@@ -145,24 +147,51 @@ Solar.loader.on('complete', function (loader, resources) {
             easing:Easing.easeInOut
         });
         
-        await Animate.to(jmoonCallisto,3000,{
-            height:750,
-            width:750,
-            x:540,
+         Animate.to(jmoonIo,3000,{
+            x:150,
+            y:-150,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        
+        Animate.to(jmoonEuropa,3000,{
+            x:350,
+            y:-250,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        
+        Animate.to(jmoonGanymede,3000,{
+            x:650,
+            y:-225,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        
+         await Animate.to(jmoonCallisto,3000,{
+            height: 700,
+            width: 700,
+             x:540,
             y:centerY,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        
+                //Fade in content
+        //Here later.
+        
+
+       
+          Animate.to(content,1000,{
+            alpha:1,
             easing:Easing.easeInOut
         });
 
-        //Fade in content
-       
-         Animate.to(content,500,{alpha:1,easing:Easing.easeInOut});
-        
-
-        //Drift the earth and moon a bit
-        Animate.to(jmoonCallisto,10000,{
+         Animate.to(jmoonCallisto,3000,{
             x:600,
             easing:Easing.easeInOut
         });
+
 		
 	}
 	
@@ -171,22 +200,16 @@ Solar.loader.on('complete', function (loader, resources) {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
 	//Change the transition out.
 	scene.transitionOut = async function() {
         
         //Move them back!
-        await Animate.to(content,500,{alpha:0,easing:Easing.easeInOut});
         
-        Animate.to(infobox,500,{height:1020});
-        
+       
+          await Animate.to(content,1000,{
+            alpha:0,
+            easing:Easing.easeInOut
+        });
         Animate.to(planet,3000,{
             height:1080,
             width:1080,
@@ -195,6 +218,32 @@ Solar.loader.on('complete', function (loader, resources) {
             alpha:1,
             easing:Easing.easeInOut
         });
+        
+        
+        
+        
+        
+        
+        Animate.to(jmoonIo,3000,{
+            x:150,
+            y:150,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        Animate.to(jmoonEuropa,3000,{
+            x:350,
+            y:250,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        Animate.to(jmoonGanymede,3000,{
+            x:650,
+            y:225,
+            alpha: 1,
+            easing:Easing.easeInOut
+        });
+        
+        
         await Animate.to(jmoonCallisto,3000,{
             height:190,
             width:190,
@@ -203,10 +252,6 @@ Solar.loader.on('complete', function (loader, resources) {
             easing:Easing.easeInOut
         });
 
-        // Fade in old moons
-        await Animate.to(jmoonGanymede,300,{alpha:1});
-        await Animate.to(jmoonEuropa,300,{alpha:1});
-        await Animate.to(jmoonIo,300,{alpha:1});
         
         //Fix panel
         Animate.to(infobox,500,{height:1020});
