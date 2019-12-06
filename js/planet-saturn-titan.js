@@ -83,8 +83,6 @@ Solar.loader.on('complete',function(loader,resources) {
         //img2.on('pointerdown', imageCenter());
         content.addChild(img2);
 
-
-
     //Add the content container to the scene
     scene.addChild(content);
     
@@ -173,9 +171,7 @@ Solar.loader.on('complete',function(loader,resources) {
             x:600,
             easing:Easing.easeInOut
         });
-		
 	}
-	
 
 	//Change the transition out.
 	scene.transitionOut = async function() {
@@ -236,7 +232,6 @@ Solar.loader.on('complete',function(loader,resources) {
         //Re-enable button
         backbutton.interactive = true;
 	});
-    
     
     function imageCenter() {
         img1.width = 800;
